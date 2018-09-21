@@ -1,0 +1,13 @@
+.vscode-body pre code {
+  font-family: "Fira Code";
+}
+
+.vscode-body code {
+  font-family: "Fira Code";
+  font-size: 14px;
+}
+/*
+.vscode-body {
+  font-family: "Fira Code";
+}
+*/

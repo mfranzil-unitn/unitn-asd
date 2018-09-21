@@ -1,0 +1,131 @@
+2017.01.25 Orale algoritmi
+
+•	31 -> 30L (11:00)
+	1)	Grafo orientato ciclico
+	2)	Reti di flusso
+	3)	Master theorem + dimostrazione caso α=β
+
+•	31 -> 26 (11:20)
+	1)	Grafo orientato ciclico
+	2)	Reti di flusso
+	3)	Mfset
+	4)	Zaino 0-1(pd) + complex
+
+•	32 -> ritorna (11:40)
+	1)	Alberi minimi di copertura
+	2)	Mediana
+	3)	Catena moltiplicazione matrici
+
+•	26 -> 25 (12:00)
+	1)	Merge sort
+	2)	Componenti fortemente connesse grafo orientato + complex
+	3)	Inviluppo convesso + complex
+	4)	Funzioni hash
+•	(12:20) – (12:50) pranzo
+•	… -> ritorna (12:40)
+	1)	Grafo orientato ciclico
+	2)	Mfset
+	3)	Bellman-Ford
+	4)	Analisi ammortizzata
+	5)	Mediana
+
+•	21 -> 20 (13:00)
+	1)	Quicksort
+	2)	Algoritmo di Dijkstra
+	3)	Complex a confronto
+	4)	Insieme indipendente di intervalli pesati (HP)
+	5)	Tabelle hash, collisioni
+
+•	25 -> 25 (13:20)
+	1)	ABR, minimo, successore
+	2)	Alberi red black
+	3)	Ordinamento topologico
+	4)	Heapsort
+	5)	Heap, build heap
+
+•	19 -> 24 (13:40)
+	1)	Insertion sort
+	2)	Cammini minimi
+	3)	MFSet
+	4)	LCS
+
+•	29 -> 26 (14:20)
+	1)	Reti di flusso
+	2)	Master theorem
+	3)	Grafo orientato ciclico, archi in avanti, dt minore, ft!=0
+	4)	Karatsuba
+
+•	32 -> 26 (14:40)
+	1)	Grafo orientato ciclico
+	2)	Reti di flusso
+	3)	Master theorem
+	4)	Mediana
+
+•	30 -> 25 (15:00)
+	1)	Alberi minimi di copertura, Kruskal (MFSet, arco di peso minimo O(m*log n)) e Prim(parte da un nodo, coda O(m*log n))
+	2)	Mediana
+	3)	LCS
+	4)	Catena di moltiplicazione matrici
+	5)	Heapsort
+	6)	Inviluppo convesso
+
+•	29 -> 25 (15:20)
+	1)	Reti di flusso
+	2)	Mediana
+	3)	Insieme indipendente di intervalli (greedy)(sfilatino)
+	4)	Compressione di huffman
+	5)	Confronto tra complex
+
+•	-> 21 (15:40)
+	1)	Merge sort + complex
+	2)	Alberi red black (O(h))
+	3)	Componente fortemente connessa orientato
+	4)	Counting sort
+	5)	Complex a confronto
+
+•	28 -> 27 (16:00)
+	1)	Componenti fortemente connesse + complex
+	2)	LCS
+	3)	Analisi ammortizzata
+	4)	Cammini minimi multipla sorgente (Floyd, cammini k-vincolati, O(n^3))
+	5)	Catena di moltiplicazione di matrici (n^3)
+
+•	30 -> 28 (16:20)
+	1)	Reti di flusso
+	2)	Mediana
+	3)	Alberi di copertura minimi
+	4)	MFSet
+	5)	Grafo orientato ciclico
+
+•	20 -> 23 (16:40)
+	1)	Tabelle hash, come gestire le collisioni
+	2)	Bucket sort
+	3)	Quicksort
+	4)	Equazione di ricorrenza
+	5)	ABR
+
+•	… -> 30L (17:00)
+	1)	Master theorem, dimostrazione
+	2)	Mediana
+	3)	Cammini minimi multipla sorgente
+
+•	19 -> 18 (17:20)
+	1)	Insertion sort
+	2)	Heap sort
+	3)	Ordinamento topologico
+	4)	Componenti fortemente connesse
+
+•	 … -> 27 (17:40)
+	1)	Grafo orientato ciclico
+	2)	Reti di flusso
+	3)	Catena di moltiplicazione matrici
+	4)	Componenti fortemente connesse
+	5)	Intervalli indipendenti
+	6)	Confronto complex
+
+•	18 -> (18:00)
+	1)	Counting sort
+	2)	Algoritmo di Strassen (moltiplicazione di matrici)
+	3)	Funzioni hash
+	4)	Ordinamento topologico
+	5)	LCS
