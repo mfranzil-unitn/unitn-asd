@@ -1,4 +1,4 @@
-# Linguaggi di programmazione - modulo 1
+# Algoritmi e Strutture Dati
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/kinda-sfw.svg)](https://forthebadge.com)
