@@ -1,5 +1,6 @@
 # File personali
 *.pdf
+.vscode\
 Materiale\
 
 # Prerequisites
@@ -34,3 +35,4 @@ Materiale\
 *.exe
 *.out
 *.app
+
