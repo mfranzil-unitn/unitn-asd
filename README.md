@@ -1,5 +1,3 @@
-🌳 Study material for the "Programmazione 2 / Linguaggi di prog. mod. 1" exam - UniTN 
-
 # Linguaggi di programmazione - modulo 1
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)
