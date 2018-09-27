@@ -426,7 +426,7 @@ for h = mid downto i do
     A[j] = A[h]
     j = j - 1
 
-for j = first to k 􀀀 1 do
+for j = first to k - 1 do
     A[j] = B[j]
 ```
 
