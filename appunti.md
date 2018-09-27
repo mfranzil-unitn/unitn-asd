@@ -531,11 +531,13 @@ $$S = \left\{
 abbiamo:
 
 <center>
+
 | Livello | Dim.  | Costo chiam. | # chiamate | Costo livello |
 | ------- | ----- | ------------ | ---------- | ------------- |
 | $0$     | $n$   | $n^3$        | 1          | $n^3$         |
 | $1$     | $n/2$ | $(n/2)^3$    | $4$        | $4(n/2)^3$    |
 | ...     | ...   | ...          | ...        | ...           |
+
 </center>
 
 Una volta scritta la tabella si può tornare alla forma in sommatoria ed eventualmente gestire la complessità tramite un limite superiore o inferiore.
