@@ -489,6 +489,53 @@
                         </li>
                     </ul>
                 </li>
+                <li><a href="#25092018">25/09/2018</a>
+                    <ul>
+                        <li><a href="#algoritmi-di-ordinamento-cont">Algoritmi di ordinamento (cont.)</a>
+                            <ul>
+                                <li><a href="#merge-sort---mergesort">Merge Sort - <code>mergesort</code></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#propriet%C3%A0-della-notazione-asintotica">Proprietà della notazione asintotica</a></li>
+                        <li><a href="#notazioni-o-omega">Notazioni <span class="katex"><span class="katex-mathml"><math>
+                                            <semantics>
+                                                <mrow>
+                                                    <mi>o</mi>
+                                                    <mo separator="true">,</mo>
+                                                    <mtext> </mtext>
+                                                    <mi>ω</mi>
+                                                </mrow>
+                                                <annotation encoding="application/x-tex">o,\ \omega</annotation>
+                                            </semantics>
+                                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span
+                                                class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span
+                                                class="mord mathit">o</span><span class="mpunct">,</span><span class="mspace"
+                                                style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span
+                                                class="mord mathit" style="margin-right:0.03588em;">ω</span></span></span></span></a></li>
+                        <li><a href="#classificazione-delle-funzioni">Classificazione delle funzioni</a></li>
+                        <li><a href="#equazioni-di-ricorrenza">Equazioni di ricorrenza</a>
+                            <ul>
+                                <li><a href="#metodo-dellalbero-di-ricorsione--per-livelli">Metodo dell'albero di
+                                        ricorsione / per livelli</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#27092018">27/09/2018</a>
+                    <ul>
+                        <li><a href="#equazioni-di-ricorrenza-cont">Equazioni di ricorrenza (cont.)</a>
+                            <ul>
+                                <li><a href="#metodo-dellalbero-di-ricorsione--per-livelli-cont">Metodo dell'albero di
+                                        ricorsione / per livelli (cont.)</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#metodo-di-sostituzione--per-tentativi">Metodo di sostituzione / per tentativi</a>
+                            <ul>
+                                <li><a href="#esempio-completo">Esempio completo</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </ul>
@@ -624,7 +671,7 @@
     <hr>
     <h2 id="18092018">18/09/2018</h2>
     <h3 id="problemi-computazionali">Problemi computazionali</h3>
-    <p><strong>Problema computazionale</strong></p>
+    <p><strong>Problema computazionale</strong>:</p>
     <blockquote>
         <p>Rappresentato da una relazione matematica che associa gli elementi dei domini di input e output.</p>
     </blockquote>
@@ -949,7 +996,32 @@ s-65,47,-65,47z M834 80H400000v40H845z' /></svg></span></span></span><span
                             class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
                         class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
                             class="mord mathit">m</span></span></span></span></span></p>
-    <p>ovvero è un limite asintotico superiore.</p>
+    <p>ovvero è un limite asintotico superiore, e <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">f(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span> cresce al più
+        come <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">g(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
     <p><strong>Limite asintotico inferiore</strong>:</p>
     <p>Indichiamo con <span class="katex"><span class="katex-mathml"><math>
                     <semantics>
@@ -1024,7 +1096,32 @@ s-65,47,-65,47z M834 80H400000v40H845z' /></svg></span></span></span><span
                             class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
                         class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
                             class="mord mathit">m</span></span></span></span></span></p>
-    <p>ovvero è un limite asintotico inferiore.</p>
+    <p>ovvero è un limite asintotico inferiore, e <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">f(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span> cresce almeno
+        quanto <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">g(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
     <p><strong>Limite asintotico superiore e inferiore</strong>:</p>
     <p>Indichiamo con <span class="katex"><span class="katex-mathml"><math>
                     <semantics>
@@ -1127,7 +1224,32 @@ s-65,47,-65,47z M834 80H400000v40H845z' /></svg></span></span></span><span
                             class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
                         class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
                             class="mord mathit">m</span></span></span></span></span></p>
-    <p>ovvero, grazie al teorema dei Carabinieri, f(n) cresce esattamente come g(n).</p>
+    <p>ovvero, grazie al teorema dei Carabinieri, <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">f(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span> cresce
+        esattamente come <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">g(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
     <hr>
     <h2 id="20092018">20/09/2018</h2>
     <h3 id="analisi-di-algoritmi-cont">Analisi di algoritmi (cont.)</h3>
@@ -1756,6 +1878,2084 @@ m1 = (a + b) * (c + d)
                 </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
                         class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
                         class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
+    <h2 id="25092018">25/09/2018</h2>
+    <h3 id="algoritmi-di-ordinamento-cont">Algoritmi di ordinamento (cont.)</h3>
+    <h4 id="merge-sort---mergesort">Merge Sort - <code>mergesort</code></h4>
+    <p>Dato un vettore di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>n</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">n</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">n</span></span></span></span> interi, andiamo a usare la tecnica divide et
+        impera per ordinare il vettore. Usiamo come appoggio il metodo <code>merge()</code> che dato in input un
+        vettore di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>n</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">n</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">n</span></span></span></span> interi contenente due sottovettori di interi
+        già ordinati, fornisce in output un vettore ordinato tramite un vettore di appoggio B.</p>
+    <blockquote>
+        <p>Nell'implementazione del programma, abbiamo un singolo vettore d'appoggio <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>B</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">B</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>
+            lungo <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>n</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">n</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span>
+            che viene utilizzato durante tutta l'esecuzione del programma.</p>
+    </blockquote>
+    <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> A[], <span class="hljs-keyword">int</span> first, <span class="hljs-keyword">int</span> last, <span class="hljs-keyword">int</span> mid)</span>
+</span></div></code></pre>
+    <pre class="hljs"><code><div>int i, j, k, h
+i = first
+j = mid + <span class="hljs-number">1</span>
+k = first
+
+<span class="hljs-keyword">while</span> i &lt;= mid <span class="hljs-keyword">and</span> j &lt;= last <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> A[i] &lt;= A[j] <span class="hljs-keyword">then</span>
+        B[k] = A[i]
+        i = i + <span class="hljs-number">1</span>
+    <span class="hljs-keyword">else</span>
+        B[k] = A[j]
+        j = j + <span class="hljs-number">1</span>
+    k = k + <span class="hljs-number">1</span>
+
+j = last
+
+<span class="hljs-keyword">for</span> h = mid downto i <span class="hljs-keyword">do</span>
+    A[j] = A[h]
+    j = j - <span class="hljs-number">1</span>
+
+<span class="hljs-keyword">for</span> j = first to k 􀀀 <span class="hljs-number">1</span> <span class="hljs-keyword">do</span>
+    A[j] = B[j]
+</div></code></pre>
+    <p><code>merge()</code> ha un costo computazionale di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>O</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">O(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span>. Il resto
+        dell'algoritmo si basa appunto sulla tecnica divide-et-impera ricorsiva; il caso base è dato da vettori di
+        lunghezza 1.</p>
+    <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> A[], <span class="hljs-keyword">int</span> first, <span class="hljs-keyword">int</span> last)</span>
+</span></div></code></pre>
+    <pre class="hljs"><code><div><span class="hljs-keyword">if</span> first &lt; last <span class="hljs-keyword">then</span>
+    int mid = floor((first + last)/<span class="hljs-number">2</span>)
+    mergeSort(A, first, mid)
+    mergeSort(A, mid + <span class="hljs-number">1</span>, last)
+    merge(A, first, last, mid)
+</div></code></pre>
+    <p>Per l'analisi della complessità, l'labero di suddivisioni sarà alto <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>k</mi>
+                            <mo>=</mo>
+                            <mi>log</mi>
+                            <mo>⁡</mo>
+                            <mi>n</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">k = \log n</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                        class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mord mathit">n</span></span></span></span>. L'equazione di ricorrenza si presenta simile
+        agli altri algoritmi divide-et-impera:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>S</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mo fence="true">{</mo>
+                                    <mtable>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mi>c</mi>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>=</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mn>2</mn>
+                                                        <mi>T</mi>
+                                                        <mo>(</mo>
+                                                        <mi>n</mi>
+                                                        <mi mathvariant="normal">/</mi>
+                                                        <mn>2</mn>
+                                                        <mo>)</mo>
+                                                        <mo>+</mo>
+                                                        <mi>d</mi>
+                                                        <mi>n</mi>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>&gt;</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+                                </mrow>
+                            </mrow>
+                            <annotation encoding="application/x-tex">S = \left\{
+                                \begin{array}{lc}
+                                c &amp; n = 1 \\
+                                2T(n/2) + dn &amp; n&gt; 1
+                                \end{array}\right.</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span
+                                class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">{</span></span><span
+                                class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">c</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord">2</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                                                                class="mopen">(</span><span class="mord mathit">n</span><span
+                                                                class="mord">/</span><span class="mord">2</span><span
+                                                                class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mord mathit">d</span><span class="mord mathit">n</span></span></span></span><span
+                                                    class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                    style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span
+                                                class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+    <h3 id="propriet%C3%A0-della-notazione-asintotica">Proprietà della notazione asintotica</h3>
+    <p>Torniamo ora sulle proprietà della notazione asintotica viste in precedenza. Definiamo <strong>algoritmo ottimo</strong>
+        un algoritmo $$\Theta(f(n))$ ovvero un algoritmo che si comporta allo stesso modo a prescindere dall'input.</p>
+    <p><strong>Costo delle epressioni polinomiali</strong>:</p>
+    <blockquote>
+        <p>Data <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">f(n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>
+            funzione polinomiale, si dimostra che <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mi mathvariant="normal">Θ</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>k</mi>
+                                </msup>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">f(n) = \Theta(n^k)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span
+                            class="mopen">(</span><span class="mord"><span class="mord mathit">n</span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span
+                                                style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight"
+                                                        style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span></span></span></span></p>
+    </blockquote>
+    <p><strong>Dualità</strong>:</p>
+    <blockquote>
+        <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                            <semantics>
+                                <mrow>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo>⇔</mo>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi mathvariant="normal">Ω</mi>
+                                    <mo>(</mo>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(n) = O(g(n)) \Leftrightarrow g(n) =
+                                    \Omega(f(n))
+                                </annotation>
+                            </semantics>
+                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                                style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit"
+                                style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                                class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">⇔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                                class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord">Ω</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span></span></span></span></span></p>
+    </blockquote>
+    <p><strong>Eliminazioni delle costanti</strong>:</p>
+    <blockquote>
+        <p>Le costanti non sono considerate nella notazione asintotica e scritture come <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">f(n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>
+            e <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>a</mi>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">af(n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">a</span><span
+                            class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mclose">)</span></span></span></span> sono
+            equivalenti a <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <mi>g</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">O(g(n))</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                            class="mclose">)</span></span></span></span>.</p>
+    </blockquote>
+    <p><strong>Sommatoria</strong>:</p>
+    <blockquote>
+        <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <msub>
+                                        <mi>g</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo separator="true">,</mo>
+                                    <mtext> </mtext>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <msub>
+                                        <mi>g</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mspace linebreak="newline"></mspace>
+                                    <mo>⇒</mo>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>+</mo>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>max</mi>
+                                    <mo>⁡</mo>
+                                    <mo>(</mo>
+                                    <mi>g</mi>
+                                    <mn>1</mn>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo separator="true">,</mo>
+                                    <mi>g</mi>
+                                    <mn>2</mn>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f_1(n) = O(g_1(n)),\ f_2(n) = O(g_2(n)) \\
+                                    \Rightarrow f_1(n) + f_2(n) = O(\max(g1(n), g2(n)))
+                                </annotation>
+                            </semantics>
+                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                                style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathit"
+                                    style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span
+                                            class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.03588em;">g</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                                class="mspace"> </span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                                style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.03588em;">g</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="mspace newline"></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span
+                                class="mrel">⇒</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                                style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span
+                                class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">max</span><span
+                                class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span
+                                class="mord">1</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                                class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                                class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord">2</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
+        <p>La stessa proprietà vale anche per <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">Ω</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Omega(n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
+    </blockquote>
+    <p><strong>Cicli annidati</strong>:</p>
+    <blockquote>
+        <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <msub>
+                                        <mi>g</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo separator="true">,</mo>
+                                    <mtext> </mtext>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <msub>
+                                        <mi>g</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mspace linebreak="newline"></mspace>
+                                    <mo>⇒</mo>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>⋅</mo>
+                                    <msub>
+                                        <mi>f</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>g</mi>
+                                    <mn>1</mn>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>⋅</mo>
+                                    <mi>g</mi>
+                                    <mn>2</mn>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f_1(n) = O(g_1(n)),\ f_2(n) = O(g_2(n)) \\
+                                    \Rightarrow f_1(n) \cdot f_2(n) = O(g1(n) \cdot g2(n))
+                                </annotation>
+                            </semantics>
+                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                                style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathit"
+                                    style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span
+                                            class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.03588em;">g</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                                class="mspace"> </span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                                style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.03588em;">g</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="mspace newline"></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span
+                                class="mrel">⇒</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                    class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"
+                                                style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">1</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span
+                                class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span
+                                    class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span
+                                        class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span
+                                                    style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span
+                                                        class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                            class="mord mtight">2</span></span></span></span><span
+                                                class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                style="height:0.15em;"><span></span></span></span></span></span></span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit"
+                                style="margin-right:0.03588em;">g</span><span class="mord">1</span><span class="mopen">(</span><span
+                                class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord">2</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span></span></span></span></span></p>
+        <p>La stessa proprietà vale anche per <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">Ω</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Omega(n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mclose">)</span></span></span></span>.</p>
+    </blockquote>
+    <p><strong>Simmetria</strong>:</p>
+    <blockquote>
+        <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                            <semantics>
+                                <mrow>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi mathvariant="normal">Θ</mi>
+                                    <mo>(</mo>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo>⇔</mo>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi mathvariant="normal">Θ</mi>
+                                    <mo>(</mo>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(n) = \Theta(g(n)) \Leftrightarrow g(n) =
+                                    \Theta(f(n))
+                                </annotation>
+                            </semantics>
+                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                                style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span
+                                class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">⇔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                                class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord">Θ</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mclose">)</span></span></span></span></span></p>
+    </blockquote>
+    <p><strong>Transitività</strong>:</p>
+    <blockquote>
+        <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                            <semantics>
+                                <mrow>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo separator="true">,</mo>
+                                    <mtext> </mtext>
+                                    <mi>g</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>h</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                    <mo>⇔</mo>
+                                    <mi>f</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>=</mo>
+                                    <mi>O</mi>
+                                    <mo>(</mo>
+                                    <mi>h</mi>
+                                    <mo>(</mo>
+                                    <mi>n</mi>
+                                    <mo>)</mo>
+                                    <mo>)</mo>
+                                </mrow>
+                                <annotation encoding="application/x-tex">f(n) = O(g(n)),\ g(n) = O(h(n))
+                                    \Leftrightarrow f(n) = O(h(n))
+                                </annotation>
+                            </semantics>
+                        </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                                style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span
+                                class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                                class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                                class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                                style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit"
+                                style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                                class="mclose">)</span><span class="mclose">)</span><span class="mpunct">,</span><span
+                                class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span
+                                class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                                class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                                class="mord mathit">h</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                                class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">⇔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span
+                                class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                                class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                                class="mord mathit">h</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                                class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
+    </blockquote>
+    <p>Vedi slide per ulteriori proprietà di logaritmi e esponenziali.</p>
+    <h3 id="notazioni-o-omega">Notazioni <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>o</mi>
+                            <mo separator="true">,</mo>
+                            <mtext> </mtext>
+                            <mi>ω</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">o,\ \omega</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span
+                        class="mord mathit">o</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mspace"> </span><span class="mord mathit" style="margin-right:0.03588em;">ω</span></span></span></span></h3>
+    <p>Sia <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">g(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span> una funzione di
+        costo; indichiamo con <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>o</mi>
+                            <mo>(</mo>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">o(g(n))</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit">o</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span
+                        class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                        class="mclose">)</span></span></span></span> l'insieme delle funzioni f(n) tali per cui</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>c</mi>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>m</mi>
+                                <mo>:</mo>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>&lt;</mo>
+                                <mi>c</mi>
+                                <mi>g</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>n</mi>
+                                <mo>≥</mo>
+                                <mi>m</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\forall c, \exists m : f(n) &lt; cg(n), \forall n
+                                \ge m
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">∀</span><span
+                            class="mord mathit">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord">∃</span><span class="mord mathit">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mclose">)</span><span class="mpunct">,</span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∀</span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">m</span></span></span></span></span></p>
+    <p>Sia <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">g(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span> una funzione di
+        costo; indichiamo con <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>ω</mi>
+                            <mo>(</mo>
+                            <mi>g</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\omega(g(n))</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.03588em;">ω</span><span class="mopen">(</span><span
+                        class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>
+        l'insieme delle funzioni f(n) tali per cui</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>c</mi>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>m</mi>
+                                <mo>:</mo>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>&gt;</mo>
+                                <mi>c</mi>
+                                <mi>g</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>n</mi>
+                                <mo>≥</mo>
+                                <mi>m</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\forall c, \exists m : f(n) &gt; cg(n), \forall n
+                                \ge m
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">∀</span><span
+                            class="mord mathit">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord">∃</span><span class="mord mathit">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mclose">)</span><span class="mpunct">,</span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∀</span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">m</span></span></span></span></span></p>
+    <h3 id="classificazione-delle-funzioni">Classificazione delle funzioni</h3>
+    <p>Possiamo ora trarre un ordinamento delle principali espressioni viste fin'ora:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>r</mi>
+                                <mo>&lt;</mo>
+                                <mi>s</mi>
+                                <mo separator="true">,</mo>
+                                <mtext> </mtext>
+                                <mi>h</mi>
+                                <mo>&lt;</mo>
+                                <mi>k</mi>
+                                <mo separator="true">,</mo>
+                                <mtext> </mtext>
+                                <mi>a</mi>
+                                <mo>&lt;</mo>
+                                <mi>b</mi>
+                                <mo>:</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\forall r &lt; s,\ h &lt; k, \ a &lt; b:
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span
+                            class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                            class="mord mathit">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mspace"> </span><span class="mord mathit">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                            class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mpunct">,</span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span
+                            class="mord mathit">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                            class="mord mathit">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span></span></span></span></span></p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>log</mi>
+                                    <mo>⁡</mo>
+                                    <mi>r</mi>
+                                </msup>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>log</mi>
+                                    <mo>⁡</mo>
+                                    <mi>s</mi>
+                                </msup>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>h</mi>
+                                </msup>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>h</mi>
+                                </msup>
+                                <msup>
+                                    <mi>log</mi>
+                                    <mo>⁡</mo>
+                                    <mi>r</mi>
+                                </msup>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mspace linebreak="newline"></mspace>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>h</mi>
+                                </msup>
+                                <mi>l</mi>
+                                <mi>o</mi>
+                                <msup>
+                                    <mi>g</mi>
+                                    <mi>s</mi>
+                                </msup>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>k</mi>
+                                </msup>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>a</mi>
+                                    <mi>n</mi>
+                                </msup>
+                                <mo>)</mo>
+                                <mo>⊂</mo>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>b</mi>
+                                    <mi>n</mi>
+                                </msup>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">O(1) \subset O(\log^r n) \subset O(\log^s n)
+                                \subset O(n^h) \subset O(n^h \log^r n)\\ \subset O(n^h log^s n) \subset O(n^k) \subset
+                                O(a^n) \subset O(b^n)
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span
+                                class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.748732em;"><span
+                                                style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut"
+                                                    style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop"><span
+                                class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.748732em;"><span
+                                                style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut"
+                                                    style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mathit mtight">s</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span
+                            class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">h</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span
+                            class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">h</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span
+                                class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.748732em;"><span
+                                                style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut"
+                                                    style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="mspace newline"></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span
+                            class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">h</span></span></span></span></span></span></span></span><span
+                            class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">o</span><span
+                            class="mord"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">s</span></span></span></span></span></span></span></span><span
+                            class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span
+                            class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight"
+                                                        style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                class="mord mathit">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span
+                                            class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span
+                                                    class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mathit mtight">n</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span
+                                class="mord mathit">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span
+                                            class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span
+                                                    class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mathit mtight">n</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span></span></span></span></span></p>
+    <h3 id="equazioni-di-ricorrenza">Equazioni di ricorrenza</h3>
+    <p>Si ottengono calcolando la complessità di un algoritmo ricorsivo. L'obiettivo è ottenere una <em>forma chiusa</em>
+        che rappresenti la complessità. Utilizzeremo le equazioni di ricorrenza anche per risolvere problemi.</p>
+    <p><strong>Problema</strong>:</p>
+    <blockquote>
+        <p>Un bambino scende una scala composta da n scalini. Ad ogni passo,
+            può decidere di fare 1, 2, 3, 4 scalini alla volta. Determinare in quanti
+            modi diversi può scendere le scale.</p>
+    </blockquote>
+    <p>Una possibile soluzione può essere una funzione ricorsiva che conta a ogni passo il numero di modi possibili,
+        con due casi base, uno quando si hanno terminato gli scalini (con un modo possibile) e uno quando si
+        &quot;sfora&quot; (con zero modi).</p>
+    <p>Distinguiamo ora tre metodi per le risolvere le ricorrenze.</p>
+    <h4 id="metodo-dellalbero-di-ricorsione--per-livelli">Metodo dell'albero di ricorsione / per livelli</h4>
+    <p>Si &quot;srotola&quot; la ricorrenza in un albero come già visto prima. Una volta arrivati al caso base, si
+        valutano i costi delle chiamate comprimendoli in una sommatoria per poi usare passaggi algebrici (segue).</p>
+    <h2 id="27092018">27/09/2018</h2>
+    <h3 id="equazioni-di-ricorrenza-cont">Equazioni di ricorrenza (cont.)</h3>
+    <h4 id="metodo-dellalbero-di-ricorsione--per-livelli-cont">Metodo dell'albero di ricorsione / per livelli (cont.)</h4>
+    <p>(cont.) Bisogna fare estrema attenzione ai fattori moltiplicativi associati alle chiamate ricorsive in quanto si
+        ripercuotono su tutta la chiamata. All'arrivo del caso base (<span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(1)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">1</span><span class="mclose">)</span></span></span></span>) si ottengono
+        generalmente <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>log</mi>
+                            <mo>⁡</mo>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\log (n) + 1</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                        class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>
+        elementi di cui l'ultima conterrà <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(1)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">1</span><span class="mclose">)</span></span></span></span>, e le altre si potranno
+        condensare, ad esempio, in una serie matematica.</p>
+    <p>Un metodo alternativo, usato per casi più complicati, è cercare di visualizzare graficamente l'albero delle
+        chiamate oppure utilizzare una tabella; ad esempio per un'equazione di ricorrenze del tipo</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>S</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mo fence="true">{</mo>
+                                    <mtable>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mn>1</mn>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>≤</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mn>4</mn>
+                                                        <mi>T</mi>
+                                                        <mo>(</mo>
+                                                        <mi>n</mi>
+                                                        <mi mathvariant="normal">/</mi>
+                                                        <mn>2</mn>
+                                                        <mo>)</mo>
+                                                        <mo>+</mo>
+                                                        <msup>
+                                                            <mi>n</mi>
+                                                            <mn>3</mn>
+                                                        </msup>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>&gt;</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+                                </mrow>
+                            </mrow>
+                            <annotation encoding="application/x-tex">S = \left\{
+                                \begin{array}{lc}
+                                1 &amp; n \le 1 \\
+                                4T(n/2) + n^3 &amp; n&gt; 1
+                                \end{array}\right.</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span
+                                class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">{</span></span><span
+                                class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord">4</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                                                                class="mopen">(</span><span class="mord mathit">n</span><span
+                                                                class="mord">/</span><span class="mord">2</span><span
+                                                                class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mord"><span class="mord mathit">n</span><span
+                                                                    class="msupsub"><span class="vlist-t"><span class="vlist-r"><span
+                                                                                class="vlist" style="height:0.8141079999999999em;"><span
+                                                                                    style="top:-3.063em;margin-right:0.05em;"><span
+                                                                                        class="pstrut" style="height:2.7em;"></span><span
+                                                                                        class="sizing reset-size6 size3 mtight"><span
+                                                                                            class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span><span
+                                                    class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                                    style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span
+                                                class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+    <p>abbiamo:</p>
+    <center>
+        | Livello | Dim. | Costo chiam. | # chiamate | Costo livello |
+        | ------- | ----- | ------------ | ---------- | ------------- |
+        | $0$ | $n$ | $n^3$ | 1 | $n^3$ |
+        | $1$ | $n/2$ | $(n/2)^3$ | $4$ | $4(n/2)^3$ |
+        | ... | ... | ... | ... | ... |
+    </center>
+    <p>Una volta scritta la tabella si può tornare alla forma in sommatoria ed eventualmente gestire la complessità
+        tramite un limite superiore o inferiore.</p>
+    <h3 id="metodo-di-sostituzione--per-tentativi">Metodo di sostituzione / per tentativi</h3>
+    <p>Si cercare di &quot;indovinare&quot; la complessità dell'algoritmo e si procede con una dimostrazione induttiva
+        per verificare quanto detto.</p>
+    <blockquote>
+        <p>Reminder: Le equazioni del tioo <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>c</mi>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mo>⋅</mo>
+                                <mo>⋅</mo>
+                                <mo>⋅</mo>
+                                <mo>)</mo>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>α</mi>
+                                </msup>
+                            </mrow>
+                            <annotation encoding="application/x-tex">cT(\cdot \cdot \cdot) + n^{\alpha}</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                            class="mord">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">⋅</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span
+                                                    class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.0037em;">α</span></span></span></span></span></span></span></span></span></span></span></span>
+            sono sempre <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">Ω</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mi>α</mi>
+                                </msup>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Omega(n^{\alpha})</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span
+                            class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span
+                                                    class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.0037em;">α</span></span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span></span></span></span></p>
+    </blockquote>
+    <p>A volte le assunzioni, pur risultando valide, possono fallire sotto certi aspetti (ad esempio un termine di
+        ordine inferiore che rende invalida una disequazione). In tali casi è opportuno effettuare una dimostrazione
+        sottraendo il termine di ordine superiore nell'ipotesi, ad esempio:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>c</mi>
+                                <mo>&gt;</mo>
+                                <mn>0</mn>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>m</mi>
+                                <mo>≥</mo>
+                                <mn>0</mn>
+                                <mo>:</mo>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <mi>n</mi>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>n</mi>
+                                <mo>≥</mo>
+                                <mi>m</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\exists c &gt; 0, \exists m \ge 0 : T(n) \le cn,
+                                \forall n \ge m
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∃</span><span
+                            class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                            class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord">∃</span><span class="mord mathit">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span
+                            class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                            class="mord mathit">c</span><span class="mord mathit">n</span><span class="mpunct">,</span><span
+                            class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∀</span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">m</span></span></span></span></span></p>
+    <p>Ipotesi possibili:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>k</mi>
+                                <mo>&lt;</mo>
+                                <mi>n</mi>
+                                <mo>:</mo>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mi>k</mi>
+                                <mo>)</mo>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <mi>k</mi>
+                                <mspace width="2em" />
+                                <mtext> </mtext>
+                                <mspace width="1em" />
+                                <mtext>fallisce</mtext>
+                                <mspace linebreak="newline"></mspace>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>k</mi>
+                                <mo>&lt;</mo>
+                                <mi>n</mi>
+                                <mo>:</mo>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mi>k</mi>
+                                <mo>)</mo>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <mi>k</mi>
+                                <mo>−</mo>
+                                <mi>b</mi>
+                                <mspace width="2em" />
+                                <mtext> funziona</mtext>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\forall k &lt; n : T(k) \le ck \qquad\
+                                \quad\text{fallisce}\\
+                                \forall k &lt; n : T(k) \le ck - b \qquad \text{ funziona}</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∀</span><span
+                            class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathit"
+                            style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut"
+                            style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:2em;"></span><span
+                            class="mspace"> </span><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span
+                                class="mord">fallisce</span></span></span><span class="mspace newline"></span><span
+                        class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span
+                            class="mord">∀</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathit"
+                            style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut"
+                            style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                            class="mord mathit">b</span><span class="mspace" style="margin-right:2em;"></span><span
+                            class="mord text"><span class="mord"> funziona</span></span></span></span></span></span></p>
+    <p>Altre volte, invece, si possono presentare problemi con il caso base <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>0</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(0)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">0</span><span class="mclose">)</span></span></span></span> (ovvero che la
+        dimostrazione fallisce). Grazie all'arbitrarietà di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>m</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">m</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">m</span></span></span></span>, possiamo andare a dimostrare i vari casi
+        base (<span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                            <mo separator="true">,</mo>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>2</mn>
+                            <mo>)</mo>
+                            <mi mathvariant="normal">.</mi>
+                            <mi mathvariant="normal">.</mi>
+                            <mi mathvariant="normal">.</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(1), T(2)...</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">1</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace"
+                        style="margin-right:0.16666666666666666em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                        class="mopen">(</span><span class="mord">2</span><span class="mclose">)</span><span class="mord">.</span><span
+                        class="mord">.</span><span class="mord">.</span></span></span></span>) che dipendono ancora da
+        <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>0</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(0)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">0</span><span class="mclose">)</span></span></span></span> finché non si
+        esauriscono. Si ottengono quindi diversi <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>c</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">c</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">c</span></span></span></span> dalla quale poi si sceglie il <span class="katex"><span
+                class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>max</mi>
+                            <mo>⁡</mo>
+                            <mo>(</mo>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\max()</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mop">max</span><span class="mopen">(</span><span class="mclose">)</span></span></span></span>.</p>
+    <p>Bisogna infine fare attenzione ad ipotizzare soluzioni troppo strette.</p>
+    <h4 id="esempio-completo">Esempio completo</h4>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>S</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mo fence="true">{</mo>
+                                    <mtable>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mn>9</mn>
+                                                        <mi>T</mi>
+                                                        <mo>(</mo>
+                                                        <mo>⌊</mo>
+                                                        <mi>n</mi>
+                                                        <mi mathvariant="normal">/</mi>
+                                                        <mn>3</mn>
+                                                        <mo>⌋</mo>
+                                                        <mo>)</mo>
+                                                        <mo>+</mo>
+                                                        <mi>n</mi>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>&gt;</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mn>1</mn>
+                                                </mstyle>
+                                            </mtd>
+                                            <mtd>
+                                                <mstyle scriptlevel="0" displaystyle="false">
+                                                    <mrow>
+                                                        <mi>n</mi>
+                                                        <mo>≤</mo>
+                                                        <mn>1</mn>
+                                                    </mrow>
+                                                </mstyle>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+                                </mrow>
+                            </mrow>
+                            <annotation encoding="application/x-tex">S = \left\{
+                                \begin{array}{lc}
+                                9T(\lfloor n/3\rfloor ) + n &amp; n&gt; 1 \\
+                                1 &amp; n \le 1
+                                \end{array}\right.</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span
+                                class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">{</span></span><span
+                                class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord">9</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                                                                class="mopen">(</span><span class="mopen">⌊</span><span
+                                                                class="mord mathit">n</span><span class="mord">/</span><span
+                                                                class="mord">3</span><span class="mclose">⌋</span><span
+                                                                class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                                                                class="mord mathit">n</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span
+                                                class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span
+                                        class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span
+                                                    class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span><span style="top:-2.4099999999999997em;"><span
+                                                            class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                                class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                                                                class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span
+                                                class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span
+                                        class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+    <p>Proviamo con <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                            <mo>=</mo>
+                            <mi>O</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mi>n</mi>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(n) = O(n^2)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                        class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                    class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                        class="mclose">)</span></span></span></span>.</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mo>⇐</mo>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>c</mi>
+                                <mo>&gt;</mo>
+                                <mn>0</mn>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∃</mi>
+                                <mi>m</mi>
+                                <mo>≥</mo>
+                                <mn>0</mn>
+                                <mo>:</mo>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo separator="true">,</mo>
+                                <mi mathvariant="normal">∀</mi>
+                                <mi>n</mi>
+                                <mo>≥</mo>
+                                <mi>m</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Leftarrow \exists c &gt; 0, \exists m \ge 0 :
+                                T(n) \le cn^2, \forall n \ge m
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">⇐</span><span class="mspace"
+                            style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut"
+                            style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord">∃</span><span
+                            class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                            class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord">∃</span><span class="mord mathit">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span
+                            class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                            style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathit">n</span><span
+                            class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.0585479999999998em;vertical-align:-0.19444em;"></span><span
+                            class="mord mathit">c</span><span class="mord"><span class="mord mathit">n</span><span
+                                class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                            class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord">∀</span><span class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">m</span></span></span></span></span></p>
+    <p><strong>Ipotesi induttiva</strong>: <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi mathvariant="normal">∃</mi>
+                            <mi>c</mi>
+                            <mo>&gt;</mo>
+                            <mn>0</mn>
+                            <mo>:</mo>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mi>k</mi>
+                            <mo>)</mo>
+                            <mo>≤</mo>
+                            <mi>c</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mi>k</mi>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>−</mo>
+                            <mi>k</mi>
+                            <mo>)</mo>
+                            <mo separator="true">,</mo>
+                            <mi mathvariant="normal">∀</mi>
+                            <mi>k</mi>
+                            <mo>&lt;</mo>
+                            <mi>n</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\exists c &gt; 0 : T(k) \le c(k^2 - k), \forall k &lt;
+                            n</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span
+                        class="mord">∃</span><span class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span
+                        class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span
+                        class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                        class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                        class="mopen">(</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span
+                        class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit">c</span><span class="mopen">(</span><span class="mord"><span class="mord mathit"
+                            style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span
+                                    class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                        class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span
+                        class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                        class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span
+                        class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mord">∀</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span
+                        class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span
+                        class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                        class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span></span></span></span>
+        (sottraiamo il termine di ordine 1 per far funzionare la dimostrazione).</p>
+    <p><strong>Passo induttivo</strong>: Dimostriamo ora:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>9</mn>
+                                <mi>T</mi>
+                                <mo>(</mo>
+                                <mo>⌊</mo>
+                                <mi>n</mi>
+                                <mi mathvariant="normal">/</mi>
+                                <mn>3</mn>
+                                <mo>⌋</mo>
+                                <mo>)</mo>
+                                <mo>+</mo>
+                                <mi>n</mi>
+                                <mspace linebreak="newline"></mspace>
+                                <mo>≤</mo>
+                                <mn>9</mn>
+                                <mi>c</mi>
+                                <mo>(</mo>
+                                <mo>⌊</mo>
+                                <mi>n</mi>
+                                <mi mathvariant="normal">/</mi>
+                                <mn>3</mn>
+                                <msup>
+                                    <mo>⌋</mo>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>−</mo>
+                                <mo>⌊</mo>
+                                <mi>n</mi>
+                                <mi mathvariant="normal">/</mi>
+                                <mn>3</mn>
+                                <mo>⌋</mo>
+                                <mo>)</mo>
+                                <mo>+</mo>
+                                <mi>n</mi>
+                                <mspace linebreak="newline"></mspace>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>−</mo>
+                                <mn>3</mn>
+                                <mi>c</mi>
+                                <mi>n</mi>
+                                <mo>+</mo>
+                                <mi>n</mi>
+                                <mspace linebreak="newline"></mspace>
+                                <mo>≤</mo>
+                                <mi>c</mi>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>−</mo>
+                                <mi>c</mi>
+                                <mi>n</mi>
+                                <mo>⇔</mo>
+                                <mi>c</mi>
+                                <mo>≤</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                            </mrow>
+                            <annotation encoding="application/x-tex">T(n) = 9T(\lfloor n/3\rfloor) + n \\
+                                \le 9c(\lfloor n/3\rfloor ^2 - \lfloor n/3 \rfloor) + n \\
+                                \le cn^2 - 3cn + n \\ \le cn^2 - cn \Leftrightarrow c \le \frac{1}{2} </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">9</span><span
+                            class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                            class="mopen">⌊</span><span class="mord mathit">n</span><span class="mord">/</span><span
+                            class="mord">3</span><span class="mclose">⌋</span><span class="mclose">)</span><span class="mspace"
+                            style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace"
+                            style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut"
+                            style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">n</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="mspace newline"></span><span
+                        class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span
+                            class="mord">9</span><span class="mord mathit">c</span><span class="mopen">(</span><span
+                            class="mopen">⌊</span><span class="mord mathit">n</span><span class="mord">/</span><span
+                            class="mord">3</span><span class="mclose"><span class="mclose">⌋</span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                            class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span
+                            class="mord mathit">n</span><span class="mord">/</span><span class="mord">3</span><span
+                            class="mclose">⌋</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span
+                            class="mord mathit">c</span><span class="mord"><span class="mord mathit">n</span><span
+                                class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                            class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span
+                            class="mord mathit">c</span><span class="mord mathit">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span
+                            class="mord mathit">c</span><span class="mord"><span class="mord mathit">n</span><span
+                                class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span
+                            class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
+                            class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">c</span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">⇔</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span
+                            class="mord mathit">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span
+                            class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span
+                                        class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                        class="mord">2</span></span></span><span style="top:-3.23em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="frac-line"
+                                                    style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                        class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span
+                                        class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span
+                                class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+    <p><strong>Passo base</strong>:
+        <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(1)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">1</span><span class="mclose">)</span></span></span></span> risulta falso, si
+        prosegue fino a <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mn>5</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">T(5)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
+                        class="mord">5</span><span class="mclose">)</span></span></span></span>.</p>
 
 </body>
 

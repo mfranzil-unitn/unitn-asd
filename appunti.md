@@ -560,7 +560,7 @@ Bisogna infine fare attenzione ad ipotizzare soluzioni troppo strette.
 
 $$S = \left\{
 \begin{array}{lc}
-    9T(floor(n/3)) + n & n> 1 \\
+    9T(\lfloor n/3\rfloor ) + n & n> 1 \\
     1 & n \le 1
 \end{array}\right.$$
 
@@ -570,9 +570,10 @@ $$\Leftarrow \exists c > 0, \exists m \ge 0 : T(n) \le cn^2, \forall n \ge m$$
 **Ipotesi induttiva**: $\exists c > 0 : T(k) \le c(k^2 - k), \forall k < n$ (sottraiamo il termine di ordine 1 per far funzionare la dimostrazione).
 
 **Passo induttivo**: Dimostriamo ora:
-$$T(n) = 9T(floor(n/3)) + n \\
-\le 9c(floor(n/3)^2 - floor(n/3)) + n  \\
-\le cn^2 - 3cn + n \\ \le cn^2 - cn \Leftrightarrow c \le \frac{1}{2} $$.
+$$
+T(n) = 9T(\lfloor n/3\rfloor) + n \\
+\le 9c(\lfloor n/3\rfloor ^2 - \lfloor n/3 \rfloor) + n  \\
+\le cn^2 - 3cn + n \\ \le cn^2 - cn \Leftrightarrow c \le \frac{1}{2} $$
 
 **Passo base**:
 $T(1)$ risulta falso, si prosegue fino a $T(5)$.
