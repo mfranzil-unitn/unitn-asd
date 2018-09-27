@@ -28,6 +28,19 @@
             - [Tipologie di analisi](#tipologie-di-analisi)
             - [Selection Sort - `selectionsort`](#selection-sort---selectionsort)
             - [Insertion Sort - `insertionsort`](#insertion-sort---insertionsort)
+    - [25/09/2018](#25092018)
+        - [Algoritmi di ordinamento (cont.)](#algoritmi-di-ordinamento-cont)
+            - [Merge Sort - `mergesort`](#merge-sort---mergesort)
+        - [Proprietà della notazione asintotica](#propriet%C3%A0-della-notazione-asintotica)
+        - [Notazioni $o,\ \omega$](#notazioni-o-omega)
+        - [Classificazione delle funzioni](#classificazione-delle-funzioni)
+        - [Equazioni di ricorrenza](#equazioni-di-ricorrenza)
+            - [Metodo dell'albero di ricorsione / per livelli](#metodo-dellalbero-di-ricorsione--per-livelli)
+    - [27/09/2018](#27092018)
+        - [Equazioni di ricorrenza (cont.)](#equazioni-di-ricorrenza-cont)
+            - [Metodo dell'albero di ricorsione / per livelli (cont.)](#metodo-dellalbero-di-ricorsione--per-livelli-cont)
+        - [Metodo di sostituzione / per tentativi](#metodo-di-sostituzione--per-tentativi)
+            - [Esempio completo](#esempio-completo)
 
 ## 13/09/2018
 
@@ -113,7 +126,7 @@ Vedi slide per versione 4 con restituzione di coppia di indici.
 
 ### Problemi computazionali
 
-__Problema computazionale__
+__Problema computazionale__:
 > Rappresentato da una relazione matematica che associa gli elementi dei domini di input e output.
 
 __Algoritmo__:
@@ -233,19 +246,20 @@ __Limite asintotico superiore__:
 
 Indichiamo con $O(g(n))$ l'insieme delle funzioni f(n) tali per cui
 $$\exists c > 0, \exists m \ge 0 : f(n) \le c g(n), \forall n \ge m$$
-ovvero è un limite asintotico superiore.
+ovvero è un limite asintotico superiore, e $f(n)$ cresce al più come $g(n)$.
 
 __Limite asintotico inferiore__:
 
 Indichiamo con $\Omega(g(n))$ l'insieme delle funzioni f(n) tali per cui
 $$\exists c > 0, \exists m \ge 0 : f(n) \ge c g(n), \forall n \ge m$$
-ovvero è un limite asintotico inferiore.
+ovvero è un limite asintotico inferiore, e $f(n)$ cresce almeno quanto $g(n)$.
+
 
 __Limite asintotico superiore e inferiore__:
 
 Indichiamo con $\Theta(g(n))$ l'insieme delle funzioni f(n) tali per cui
 $$\exists c > 0, \exists m \ge 0 :c_1 g(n) \le f(n) \le c_2 g(n), \forall n \ge m$$
-ovvero, grazie al teorema dei Carabinieri, f(n) cresce esattamente come g(n).
+ovvero, grazie al teorema dei Carabinieri, $f(n)$ cresce esattamente come $g(n)$.
 
 ----
 
@@ -376,3 +390,189 @@ for i = 2 to n do
 ```
 
 Questo algoritmo costa in media e nel caso pessimo $O(n^2)$, ma nei casi migliori si avvicina a $O(n)$.
+
+## 25/09/2018
+
+### Algoritmi di ordinamento (cont.)
+
+#### Merge Sort - `mergesort`
+
+Dato un vettore di $n$ interi, andiamo a usare la tecnica divide et impera per ordinare il vettore. Usiamo come appoggio il metodo `merge()` che dato in input un vettore di $n$ interi contenente due sottovettori di interi già ordinati, fornisce in output un vettore ordinato tramite un vettore di appoggio B.
+
+> Nell'implementazione del programma, abbiamo un singolo vettore d'appoggio $B$ lungo $n$ che viene utilizzato durante tutta l'esecuzione del programma.
+
+```c++
+void merge(int A[], int first, int last, int mid)
+```
+
+```Coffee
+int i, j, k, h
+i = first
+j = mid + 1
+k = first
+
+while i <= mid and j <= last do
+    if A[i] <= A[j] then
+        B[k] = A[i]
+        i = i + 1
+    else
+        B[k] = A[j]
+        j = j + 1
+    k = k + 1
+
+j = last
+
+for h = mid downto i do
+    A[j] = A[h]
+    j = j - 1
+
+for j = first to k 􀀀 1 do
+    A[j] = B[j]
+```
+
+`merge()` ha un costo computazionale di $O(n)$. Il resto dell'algoritmo si basa appunto sulla tecnica divide-et-impera ricorsiva; il caso base è dato da vettori di lunghezza 1.
+
+```c++
+void mergeSort(int A[], int first, int last)
+```
+
+```Coffee
+if first < last then
+    int mid = floor((first + last)/2)
+    mergeSort(A, first, mid)
+    mergeSort(A, mid + 1, last)
+    merge(A, first, last, mid)
+```
+
+Per l'analisi della complessità, l'labero di suddivisioni sarà alto $k = \log n$. L'equazione di ricorrenza si presenta simile agli altri algoritmi divide-et-impera:
+
+$$S = \left\{
+\begin{array}{lc}
+    c & n = 1 \\
+    2T(n/2) + dn & n> 1
+\end{array}\right.$$
+
+### Proprietà della notazione asintotica
+
+Torniamo ora sulle proprietà della notazione asintotica viste in precedenza. Definiamo __algoritmo ottimo__ un algoritmo $$\Theta(f(n))$ ovvero un algoritmo che si comporta allo stesso modo a prescindere dall'input.
+
+**Costo delle epressioni polinomiali**:
+> Data $f(n)$ funzione polinomiale, si dimostra che $f(n) = \Theta(n^k)$
+
+**Dualità**:
+> $$f(n) = O(g(n)) \Leftrightarrow g(n) = \Omega(f(n))$$
+
+**Eliminazioni delle costanti**:
+> Le costanti non sono considerate nella notazione asintotica e scritture come $f(n)$ e $af(n)$ sono equivalenti a $O(g(n))$.
+
+**Sommatoria**:
+> $$f_1(n) = O(g_1(n)),\ f_2(n) = O(g_2(n)) \\ \Rightarrow f_1(n) + f_2(n) = O(\max(g1(n), g2(n)))$$
+> La stessa proprietà vale anche per $\Omega(n)$.
+
+**Cicli annidati**:
+> $$f_1(n) = O(g_1(n)),\ f_2(n) = O(g_2(n)) \\ \Rightarrow f_1(n) \cdot f_2(n) = O(g1(n) \cdot g2(n))$$
+> La stessa proprietà vale anche per $\Omega(n)$.
+
+**Simmetria**:
+> $$f(n) = \Theta(g(n)) \Leftrightarrow g(n) = \Theta(f(n))$$
+
+**Transitività**:
+> $$f(n) = O(g(n)),\ g(n) = O(h(n)) \Leftrightarrow f(n) = O(h(n))$$
+
+Vedi slide per ulteriori proprietà di logaritmi e esponenziali.
+
+### Notazioni $o,\ \omega$
+
+Sia $g(n)$ una funzione di costo; indichiamo con $o(g(n))$ l'insieme delle funzioni f(n) tali per cui
+$$\forall c, \exists m : f(n) < cg(n), \forall n \ge m$$
+
+Sia $g(n)$ una funzione di costo; indichiamo con $\omega(g(n))$ l'insieme delle funzioni f(n) tali per cui
+$$\forall c, \exists m : f(n) > cg(n), \forall n \ge m$$
+
+### Classificazione delle funzioni
+
+Possiamo ora trarre un ordinamento delle principali espressioni viste fin'ora:
+$$\forall r < s,\ h < k, \ a < b:$$
+$$O(1) \subset O(\log^r n) \subset O(\log^s n) \subset O(n^h) \subset O(n^h \log^r n)\\ \subset O(n^h log^s n) \subset O(n^k) \subset O(a^n) \subset O(b^n)$$
+
+### Equazioni di ricorrenza
+
+Si ottengono calcolando la complessità di un algoritmo ricorsivo. L'obiettivo è ottenere una *forma chiusa* che rappresenti la complessità. Utilizzeremo le equazioni di ricorrenza anche per risolvere problemi.
+
+__Problema__:
+> Un bambino scende una scala composta da n scalini. Ad ogni passo,
+può decidere di fare 1, 2, 3, 4 scalini alla volta. Determinare in quanti
+modi diversi può scendere le scale.
+
+Una possibile soluzione può essere una funzione ricorsiva che conta a ogni passo il numero di modi possibili, con due casi base, uno quando si hanno terminato gli scalini (con un modo possibile) e uno quando si "sfora" (con zero modi).
+
+Distinguiamo ora tre metodi per le risolvere le ricorrenze.
+
+#### Metodo dell'albero di ricorsione / per livelli
+
+Si "srotola" la ricorrenza in un albero come già visto prima. Una volta arrivati al caso base, si valutano i costi delle chiamate comprimendoli in una sommatoria per poi usare passaggi algebrici (segue).
+
+## 27/09/2018
+
+### Equazioni di ricorrenza (cont.)
+
+#### Metodo dell'albero di ricorsione / per livelli (cont.)
+
+(cont.) Bisogna fare estrema attenzione ai fattori moltiplicativi associati alle chiamate ricorsive in quanto si ripercuotono su tutta la chiamata. All'arrivo del caso base ($T(1)$) si ottengono generalmente $\log (n) + 1$ elementi di cui l'ultima conterrà $T(1)$, e le altre si potranno condensare, ad esempio, in una serie matematica.
+
+Un metodo alternativo, usato per casi più complicati, è cercare di visualizzare graficamente l'albero delle chiamate oppure utilizzare una tabella; ad esempio per un'equazione di ricorrenze del tipo
+
+$$S = \left\{
+\begin{array}{lc}
+    1 & n \le 1 \\
+    4T(n/2) + n^3 & n> 1
+\end{array}\right.$$
+
+abbiamo:
+
+<center>
+| Livello | Dim.  | Costo chiam. | # chiamate | Costo livello |
+| ------- | ----- | ------------ | ---------- | ------------- |
+| $0$     | $n$   | $n^3$        | 1          | $n^3$         |
+| $1$     | $n/2$ | $(n/2)^3$    | $4$        | $4(n/2)^3$    |
+| ...     | ...   | ...          | ...        | ...           |
+</center>
+
+Una volta scritta la tabella si può tornare alla forma in sommatoria ed eventualmente gestire la complessità tramite un limite superiore o inferiore.
+
+### Metodo di sostituzione / per tentativi
+
+Si cercare di "indovinare" la complessità dell'algoritmo e si procede con una dimostrazione induttiva per verificare quanto detto.
+
+> Reminder: Le equazioni del tioo $cT(\cdot \cdot \cdot) + n^{\alpha}$ sono sempre $\Omega(n^{\alpha})$
+
+A volte le assunzioni, pur risultando valide, possono fallire sotto certi aspetti (ad esempio un termine di ordine inferiore che rende invalida una disequazione). In tali casi è opportuno effettuare una dimostrazione sottraendo il termine di ordine superiore nell'ipotesi, ad esempio:
+$$\exists c > 0, \exists m \ge 0 : T(n) \le cn, \forall n \ge m$$
+Ipotesi possibili:
+$$\forall k < n : T(k) \le ck \qquad\ \quad\text{fallisce}\\
+  \forall k < n : T(k) \le ck - b \qquad \text{ funziona}$$
+
+Altre volte, invece, si possono presentare problemi con il caso base $T(0)$ (ovvero che la dimostrazione fallisce). Grazie all'arbitrarietà di $m$, possiamo andare a dimostrare i vari casi base ($T(1), T(2)...$) che dipendono ancora da $T(0)$ finché non si esauriscono. Si ottengono quindi diversi $c$ dalla quale poi si sceglie il $\max()$.
+
+Bisogna infine fare attenzione ad ipotizzare soluzioni troppo strette.
+
+#### Esempio completo
+
+$$S = \left\{
+\begin{array}{lc}
+    9T(floor(n/3)) + n & n> 1 \\
+    1 & n \le 1
+\end{array}\right.$$
+
+Proviamo con $T(n) = O(n^2)$.
+$$\Leftarrow \exists c > 0, \exists m \ge 0 : T(n) \le cn^2, \forall n \ge m$$
+
+**Ipotesi induttiva**: $\exists c > 0 : T(k) \le c(k^2 - k), \forall k < n$ (sottraiamo il termine di ordine 1 per far funzionare la dimostrazione).
+
+**Passo induttivo**: Dimostriamo ora:
+$$T(n) = 9T(floor(n/3)) + n \\
+\le 9c(floor(n/3)^2 - floor(n/3)) + n  \\
+\le cn^2 - 3cn + n \\ \le cn^2 - cn \Leftrightarrow c \le \frac{1}{2} $$.
+
+**Passo base**:
+$T(1)$ risulta falso, si prosegue fino a $T(5)$.
