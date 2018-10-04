@@ -41,6 +41,16 @@
             - [Metodo dell'albero di ricorsione / per livelli (cont.)](#metodo-dellalbero-di-ricorsione--per-livelli-cont)
         - [Metodo di sostituzione / per tentativi](#metodo-di-sostituzione--per-tentativi)
             - [Esempio completo](#esempio-completo)
+    - [02/10/2018](#02102018)
+    - [04/10/2018](#04102018)
+        - [Metodo dell'esperto / delle ricorrenze comuni](#metodo-dellesperto--delle-ricorrenze-comuni)
+        - [Strutture dati](#strutture-dati)
+            - [Sequenza](#sequenza)
+            - [Insieme](#insieme)
+            - [Dizionario](#dizionario)
+            - [Alberi e grafi (introduzione)](#alberi-e-grafi-introduzione)
+            - [Lista](#lista)
+            - [Pile e code](#pile-e-code)
 
 ## 13/09/2018
 
@@ -446,7 +456,7 @@ if first < last then
 
 Per l'analisi della complessità, l'labero di suddivisioni sarà alto $k = \log n$. L'equazione di ricorrenza si presenta simile agli altri algoritmi divide-et-impera:
 
-$$S = \left\{
+$$T(n) = \left\{
 \begin{array}{lc}
     c & n = 1 \\
     2T(n/2) + dn & n> 1
@@ -522,7 +532,7 @@ Si "srotola" la ricorrenza in un albero come già visto prima. Una volta arrivat
 
 Un metodo alternativo, usato per casi più complicati, è cercare di visualizzare graficamente l'albero delle chiamate oppure utilizzare una tabella; ad esempio per un'equazione di ricorrenze del tipo
 
-$$S = \left\{
+$$T(n) = \left\{
 \begin{array}{lc}
     1 & n \le 1 \\
     4T(n/2) + n^3 & n> 1
@@ -540,7 +550,7 @@ abbiamo:
 
 </center>
 
-Una volta scritta la tabella si può tornare alla forma in sommatoria ed eventualmente gestire la complessità tramite un limite superiore o inferiore.
+Una volta scritta la tabella si può tornare alla forma in sommatoria ed eventualmente gestire la complessità tramite un limite superiore o inferiore. Per ottenere la sommatoria non si fa altro che sommare tutti i termini presenti nella colonna *costo livello*.
 
 ### Metodo di sostituzione / per tentativi
 
@@ -579,3 +589,129 @@ T(n) = 9T(\lfloor n/3\rfloor) + n \\
 
 **Passo base**:
 $T(1)$ risulta falso, si prosegue fino a $T(5)$.
+
+## 02/10/2018
+
+Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
+
+## 04/10/2018
+
+### Metodo dell'esperto / delle ricorrenze comuni
+
+> Siano $a, b$ costanti $\in \mathbb{Z}$ tali che $a \ge 1, b \ge 2$, $c, \beta$ costanti $\in \mathbb{R}$ tali che $c \ge 0, \beta \ge 0$. Sia $T(n)$ una funzione di ricorrenza del tipo:
+
+$$T(n) = \left\{
+\begin{array}{lc}
+    aT(n/b) + cn^{\beta} & n> 1 \\
+    d & n \le 1
+\end{array}\right.$$
+
+> Allora, posto $\alpha = \log{a}/ \log{b} = \log_b{a}$,
+
+$$T(n) = \left\{
+\begin{array}{lc}
+    \Theta (n^{\alpha}) & \alpha > \beta \\
+    \Theta (n^{\alpha}\log{n}) & \alpha = \beta \\
+    \Theta (n^{\beta}) & \alpha < \beta
+\end{array}\right.$$
+
+Assumiamo che $n$ sia una potenza intera di $b$ per semplificare i calcoli (ciò non influisce comunque sul risultato a meno di una costante moltiplicativa che ignoriamo nella notazione asintotica). Inoltre assumiamo che la dimensione dell'input sia pari a $n = b^k$. Vedi slide per lo srotolamento dell'albero di ricorrenza.
+
+Si ottiene al termine dell'albero una formula del tipo:
+$$T(n)\ = \ da^k + cb^{k\beta} \sum^{k-1}_{i = 0} \frac{a^i}{b^{i\beta}}$$
+
+Tramite opportuni passaggi algebrici otteniamo che $a^k = n^\alpha, \ a = \beta^{\alpha}, \ q = b^{\alpha - \beta}$. Otteniamo:
+
+$$T(n)\ = \ dn^{\alpha} + cb^{k\beta} \sum^{k-1}_{i = 0} q^i$$
+
+Possiamo distinguere tre casi a seconda del valore di q. Vedi slide per dimostrazioni sui singoli casi. Possiamo infine estendere il teorema precedente in questa maniera:
+
+> Sia $a \ge 1, b > 1, f(n)$ asintoticamente positiva e sia:
+
+$$T(n) = \left\{
+\begin{array}{lc}
+    aT(n/b) + f(n) & n> 1 \\
+    d & n \le 1
+\end{array}\right.$$
+
+> Allora, sono dati tre casi::
+
+| Caso | Risultato |
+| ---- | --------------- |
+| (1)  | $\exists \epsilon > 0: f(n) = O(n^{\log_b{a - \epsilon}}) \qquad \Longrightarrow \qquad T(n) = \Theta(n^{log_b{a}})$ |
+| (2)  | $f(n) = \Theta(n^{log_b{a}}) \qquad \Longrightarrow \qquad T(n) = \Theta(f(n) \log n)$|
+| (3)  | $\exists \epsilon > 0 : f(n) = \Omega(n^{log_b{a+\epsilon}})\\ \wedge \exists c : 0 < c < 1, \exists m > 0:\text{} \\ af(n/b) \le cf(n), \forall n \ge m \qquad \Longrightarrow \qquad T(n) = \Theta(f(n))$ |
+
+> Siano $a_1, a_2, ... a_h$ costanti intere non negative con $h$ costante positiva, $c$ e $\beta$ costanti reali tati che $c > 0, \beta \ge 0$, e sia $T(n)$ definita da:
+
+$$T(n) = \left\{
+\begin{array}{lc}
+    \sum_{1\le i \le h} a_i T(n-i) + cn^{\beta} & n> m \\
+    \Theta(1) & n \le m \le h
+\end{array}\right.$$
+
+> Posto $a = \sum_{1\le i \le h} a_i$ vale:
+>
+> (1) $T(n)$ è $\Theta(n^{\beta + 1})$, se $a = 1$,
+> 
+> (2) $T(n)$ è $\Theta(a^n n^{\beta})$, se $a \ge 2$.
+
+### Strutture dati
+
+__Dato__: un valore che una variabile puà assumere
+
+__Tipo di dato astratto__: Un modello matematico, dato da una collezione di valori e un insieme di operazioni ammesse su questi valori
+
+__Strutture di dati__: Le strutture di dati sono collezioni di dati, caratterizzate da una specifica organizzazione. Sono divise in lineari / non lineari (con presenza di una sequenza); statiche / dinamiche (ovvero a seconda della variazione di dimensione e del contenuto) e infine omogenee / disomogenee (a seconda dei dati contenuti, se sono uguali o meno)
+
+#### Sequenza
+
+Una struttura dati dinamica e lineare rappresentante una sequenza ordinata di valori, dove un valore può comparire una o più volte. Nei linguaggi di programmazione può essere implementata tramite un *vettore* o tramite una *lista*.
+
+Sono ammesse le seguenti operazioni:
+
+- Aggiunta o rimozione di elementi in testa, coda o tramite indice
+- Controllo se la sequenza è vuota o piena
+- Accesso tramite indice oppure alla testa/coda
+
+#### Insieme
+
+Una struttura dati dinamica e *non* lineare che memorizza una collezione non ordinata di elementi che appaiono al massimo una volta.
+
+Sono ammesse le seguenti operazioni:
+
+- Operazioni di inserimento, cancellazione e verifica
+- Ordinamento
+- Operazioni insiemistiche di unione e intersezione, etc...
+- Iteratori
+
+#### Dizionario
+
+Una struttura dati implementante una relazione $\mathbf{R}: D \rightarrow C$ detta associazione chiave-valore.
+
+Sono ammesse le seguenti operazioni:
+
+- Inserimento e rimozione di valori tramite chiave (con eventuale sovrascrittura)
+- Accesso ai valori tramite chiave (o nil)
+
+I concetti di sequenza, insieme e dizionario sono collegati e infatti nei vari linguaggi di programmazione si tende a confondere le varie implementazioni e i vari nomi. Bisogna tuttavia fare attenzione al tipo di struttura del linguaggio usata per implementare un certo TDA. Ad esempio, un dizionario implementato come HashMap avrà complessità $O(1)$ nella ricerca dicotomica e $O(n)$ nella ricerca del minimo, un dizionario implementato come albero avrà invece $O(\log n)$ per la ricerca e $O(1)$ per il minimo.
+
+#### Alberi e grafi (introduzione)
+
+Un __albero__ ordinato è dato da un insieme finito di elementi detti __nodi__. Uno di questi è designato come __radice__. I rimanenti sono detti __sottoalberi__ e possono essere partizionati.
+
+Un __grafo__ è una struttura dati composta da un insieme di elementi detti __nodi__ e un insieme di coppie di nodi detti __archi__.
+
+Tutte le operazioni ruotano intorno alla possibilità di effettuare visite.
+
+#### Lista
+
+Una sequenza di nodi contenenti dati e 1-2 puntatori agli elementi successivi e precedenti. I dati non devono essere necessariamente contigui in memoria e ogni operazione ha costo $O(1)$. Le liste possono essere implementate in maniera monodirezionale (un singolo puntatore al successivo), bidirezionale (doppio puntatore, es. LinkedList), bidirezionale circolare (con puntatori tra ultimo e primo) e con sentinella (nodo con NULL usato come inizio della lista)
+
+#### Pile e code
+
+Una __pila__ è una struttura dati dinamica e lineare la cui politica di cancellazione e inserimento elementi segue __LIFO__ (Last In, First Out).
+
+Una __coda__ è simile alla __pila__ ma implementa invece la politica __FIFO__ (First In, First Out).
+
+Entrambi i tipi di dato possono essere implementati tramite liste bidirezionali o vettori circolari.
