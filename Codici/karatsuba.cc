@@ -132,7 +132,7 @@ vector<bool> sum(vector<bool> a, vector<bool> b) {
         } else {
             carry = 0;
         }
-        result.insert(result.begin(), (bool) sum);
+        result.insert(result.begin(), (bool)sum);
     }
 
     result.insert(result.begin(), (bool)carry);

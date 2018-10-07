@@ -45,10 +45,12 @@
     - [04/10/2018](#04102018)
         - [Metodo dell'esperto / delle ricorrenze comuni](#metodo-dellesperto--delle-ricorrenze-comuni)
         - [Strutture dati](#strutture-dati)
+        - [Esempi di tipi di dato astratti](#esempi-di-tipi-di-dato-astratti)
             - [Sequenza](#sequenza)
             - [Insieme](#insieme)
             - [Dizionario](#dizionario)
             - [Alberi e grafi (introduzione)](#alberi-e-grafi-introduzione)
+        - [Strutture dati elementari](#strutture-dati-elementari)
             - [Lista](#lista)
             - [Pile e code](#pile-e-code)
 
@@ -664,6 +666,8 @@ __Tipo di dato astratto__: Un modello matematico, dato da una collezione di valo
 
 __Strutture di dati__: Le strutture di dati sono collezioni di dati, caratterizzate da una specifica organizzazione. Sono divise in lineari / non lineari (con presenza di una sequenza); statiche / dinamiche (ovvero a seconda della variazione di dimensione e del contenuto) e infine omogenee / disomogenee (a seconda dei dati contenuti, se sono uguali o meno)
 
+### Esempi di tipi di dato astratti
+
 #### Sequenza
 
 Una struttura dati dinamica e lineare rappresentante una sequenza ordinata di valori, dove un valore può comparire una o più volte. Nei linguaggi di programmazione può essere implementata tramite un *vettore* o tramite una *lista*.
@@ -703,6 +707,8 @@ Un __albero__ ordinato è dato da un insieme finito di elementi detti __nodi__. 
 Un __grafo__ è una struttura dati composta da un insieme di elementi detti __nodi__ e un insieme di coppie di nodi detti __archi__.
 
 Tutte le operazioni ruotano intorno alla possibilità di effettuare visite.
+
+### Strutture dati elementari
 
 #### Lista
 
