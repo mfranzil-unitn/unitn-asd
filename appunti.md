@@ -44,8 +44,11 @@
     - [02/10/2018](#02102018)
     - [04/10/2018](#04102018)
         - [Metodo dell'esperto / delle ricorrenze comuni](#metodo-dellesperto--delle-ricorrenze-comuni)
+            - [Master Theorem - versione base](#master-theorem---versione-base)
+            - [Master Theorem - Versione estesa](#master-theorem---versione-estesa)
+            - [Master Theorem per ricorrenze lineari di ordine costante](#master-theorem-per-ricorrenze-lineari-di-ordine-costante)
         - [Strutture dati](#strutture-dati)
-        - [Esempi di tipi di dato astratti](#esempi-di-tipi-di-dato-astratti)
+        - [Tipi di dato astratti](#tipi-di-dato-astratti)
             - [Sequenza](#sequenza)
             - [Insieme](#insieme)
             - [Dizionario](#dizionario)
@@ -600,6 +603,8 @@ Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
 
 ### Metodo dell'esperto / delle ricorrenze comuni
 
+#### Master Theorem - versione base
+
 > Siano $a, b$ costanti $\in \mathbb{Z}$ tali che $a \ge 1, b \ge 2$, $c, \beta$ costanti $\in \mathbb{R}$ tali che $c \ge 0, \beta \ge 0$. Sia $T(n)$ una funzione di ricorrenza del tipo:
 
 $$T(n) = \left\{
@@ -626,7 +631,11 @@ Tramite opportuni passaggi algebrici otteniamo che $a^k = n^\alpha, \ a = \beta^
 
 $$T(n)\ = \ dn^{\alpha} + cb^{k\beta} \sum^{k-1}_{i = 0} q^i$$
 
-Possiamo distinguere tre casi a seconda del valore di q. Vedi slide per dimostrazioni sui singoli casi. Possiamo infine estendere il teorema precedente in questa maniera:
+Possiamo distinguere tre casi a seconda del valore di q. Vedi slide per dimostrazioni sui singoli casi. 
+
+#### Master Theorem - Versione estesa
+
+Possiamo infine estendere il teorema precedente in questa maniera:
 
 > Sia $a \ge 1, b > 1, f(n)$ asintoticamente positiva e sia:
 
@@ -636,13 +645,15 @@ $$T(n) = \left\{
     d & n \le 1
 \end{array}\right.$$
 
-> Allora, sono dati tre casi::
+> Allora, sono dati tre casi:
 
-| Caso | Risultato |
-| ---- | --------------- |
-| (1)  | $\exists \epsilon > 0: f(n) = O(n^{\log_b{a - \epsilon}}) \qquad \Longrightarrow \qquad T(n) = \Theta(n^{log_b{a}})$ |
-| (2)  | $f(n) = \Theta(n^{log_b{a}}) \qquad \Longrightarrow \qquad T(n) = \Theta(f(n) \log n)$|
-| (3)  | $\exists \epsilon > 0 : f(n) = \Omega(n^{log_b{a+\epsilon}})\\ \wedge \exists c : 0 < c < 1, \exists m > 0:\text{} \\ af(n/b) \le cf(n), \forall n \ge m \qquad \Longrightarrow \qquad T(n) = \Theta(f(n))$ |
+| Caso | Condizione                                                                                                                                                 |                                  | Risultato                      |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------ |
+| (1)  | $\exists \epsilon > 0: f(n) = O(n^{\log_b{a - \epsilon}})$                                                                                                 | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(n^{log_b{a}})$ |
+| (2)  | $f(n) = \Theta(n^{log_b{a}})$                                                                                                                              | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(f(n) \log n)$  |
+| (3)  | $\exists \epsilon > 0 : f(n) = \Omega(n^{log_b{a+\epsilon}})\\ \wedge \exists c : 0 < c < 1, \exists m > 0:\text{} \\ af(n/b) \le cf(n), \forall n \ge m$  | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(f(n))$          |
+
+#### Master Theorem per ricorrenze lineari di ordine costante
 
 > Siano $a_1, a_2, ... a_h$ costanti intere non negative con $h$ costante positiva, $c$ e $\beta$ costanti reali tati che $c > 0, \beta \ge 0$, e sia $T(n)$ definita da:
 
@@ -666,7 +677,7 @@ __Tipo di dato astratto__: Un modello matematico, dato da una collezione di valo
 
 __Strutture di dati__: Le strutture di dati sono collezioni di dati, caratterizzate da una specifica organizzazione. Sono divise in lineari / non lineari (con presenza di una sequenza); statiche / dinamiche (ovvero a seconda della variazione di dimensione e del contenuto) e infine omogenee / disomogenee (a seconda dei dati contenuti, se sono uguali o meno)
 
-### Esempi di tipi di dato astratti
+### Tipi di dato astratti
 
 #### Sequenza
 
@@ -712,11 +723,12 @@ Tutte le operazioni ruotano intorno alla possibilità di effettuare visite.
 
 #### Lista
 
-Una sequenza di nodi contenenti dati e 1-2 puntatori agli elementi successivi e precedenti. I dati non devono essere necessariamente contigui in memoria e ogni operazione ha costo $O(1)$. Le liste possono essere implementate in maniera monodirezionale (un singolo puntatore al successivo), bidirezionale (doppio puntatore, es. LinkedList), bidirezionale circolare (con puntatori tra ultimo e primo) e con sentinella (nodo con NULL usato come inizio della lista)
+Una sequenza di nodi contenenti dati e 1-2 puntatori agli elementi successivi e precedenti. I dati non devono essere necessariamente contigui in memoria e ogni operazione ha costo $O(1)$. Le liste possono essere implementate in maniera monodirezionale (un singolo puntatore al successivo), bidirezionale (doppio puntatore, es. LinkedList), bidirezionale circolare (con puntatori tra ultimo e primo) e con sentinella (una cella vuota legata al primo elemento della lista).
 
 #### Pile e code
 
 Una __pila__ è una struttura dati dinamica e lineare la cui politica di cancellazione e inserimento elementi segue __LIFO__ (Last In, First Out).
+
 
 Una __coda__ è simile alla __pila__ ma implementa invece la politica __FIFO__ (First In, First Out).
 
