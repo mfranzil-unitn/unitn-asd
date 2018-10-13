@@ -31,6 +31,9 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "tuple": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "string_view": "cpp",
+        "string": "cpp"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }
