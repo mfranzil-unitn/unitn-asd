@@ -1,8 +1,13 @@
 # File personali
-*.pdf
-.vscode\
-Materiale\
+.vscode/
+Materiale/
+Libri PDF/
+Esercizi/
+Esami/
+Slide/
+Vecchio materiale/
 *.txt
+*.pdf
 
 # Prerequisites
 *.d
