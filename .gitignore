@@ -2,6 +2,7 @@
 *.pdf
 .vscode\
 Materiale\
+*.txt
 
 # Prerequisites
 *.d
