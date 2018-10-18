@@ -18,6 +18,10 @@ int main() {
     ofstream out("output.txt");
     in >> N;
 
+    if (N % 2 == 0) {
+        throw new exception();
+    }
+
     vector<char> triangoli(N);
 
     for (int i = 0; i < N; i++) {
@@ -36,48 +40,47 @@ int main() {
 }
 
 void pick_triangle(vector<char> triangoli, int start, int end, int pick) {
-    //if (1 - done.count(string(triangoli.begin(), triangoli.end()))) {
-        char direzione = triangoli.at(pick);
-        int future_start = start, future_end = end;
-        triangoli.at(pick) = 'N';
+    char direzione = triangoli.at(pick);
+    int future_start = start, future_end = end;
+    triangoli.at(pick) = 'N';
 
-        if (direzione == 's') {
-            for (int i = pick - 1; i >= start; i--) {
-                if (triangoli.at(i) != 'N') {
-                    triangoli.at(i) = 'N';
-                    break;
-                }
-            }
-            while (triangoli.at(future_start) == 'N') {
-                future_start++;
-            }
-        } else if (direzione == 'd') {
-            for (int i = pick + 1; i <= end; i++) {
-                if (triangoli.at(i) != 'N') {
-                    triangoli.at(i) = 'N';
-                    break;
-                }
-            }
-            while (triangoli.at(future_end) == 'N') {
-                future_end--;
+    if (direzione == 's') {
+        for (int i = pick - 1; i >= start; i--) {
+            if (triangoli.at(i) != 'N') {
+                triangoli.at(i) = 'N';
+                break;
             }
         }
-        //cout << "pick_triangle(" << start << ", " << end << ", " << pick << ")\n";
-        /*for (int i = 0; i < N; i++) {
+        while (triangoli.at(future_start) == 'N') {
+            future_start++;
+        }
+    } else if (direzione == 'd') {
+        for (int i = pick + 1; i <= end; i++) {
+            if (triangoli.at(i) != 'N') {
+                triangoli.at(i) = 'N';
+                break;
+            }
+        }
+        while (triangoli.at(future_end) == 'N') {
+            future_end--;
+        }
+    }
+    //cout << "pick_triangle(" << start << ", " << end << ", " << pick << ")\n";
+    /*for (int i = 0; i < N; i++) {
             cout << triangoli.at(i) << " ";
         }
         cout << "\n";*/
-        
-        
-        if (future_start == future_end) {
-            results.insert(future_start);
-        } else {
-            for (int i = future_start + 1; i <= future_end - 1; i++) {
-                if (triangoli.at(i) != 'N') {
-                    pick_triangle(triangoli, future_start, future_end, i);
-                }
+
+    if (future_start == future_end) {
+        results.insert(future_start);
+    } else {
+        for (int i = future_start + 1; i <= future_end - 1; i++) {
+            if (triangoli.at(i) != 'N' &&
+                !done.count(string(triangoli.begin(), triangoli.end()))) {
+                pick_triangle(triangoli, future_start, future_end, i);
             }
         }
-    //}
-    //done.insert(pair<string, bool>(string(triangoli.begin(), triangoli.end()), true));
+    }
+
+    done.insert(pair<string, bool>(string(triangoli.begin(), triangoli.end()), true));
 }
