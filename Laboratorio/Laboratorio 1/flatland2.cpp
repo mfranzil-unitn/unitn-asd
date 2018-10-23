@@ -42,11 +42,8 @@ int main() {
 
             while (temp.size() > 2)
                 if (temp.size() == 3) {
-                    if (temp.at(1).dir == 's') {
-                        output.insert(temp.at(0).id);
-                    } else {
-                        output.insert(temp.at(2).id);
-                    }
+                    work(temp, 1);
+                    output.insert(temp.at(0).id);
                     //cout << "[" << temp.at(0).id << ", " << temp.at(0).dir << "]" << endl;
                 } else if (i >= temp.size() - 1) {
                     //cout << "CAMBIA SCELTA A " << temp.size()/2 << endl;
