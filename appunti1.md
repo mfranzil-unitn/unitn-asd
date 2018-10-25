@@ -37,6 +37,15 @@
         - [Analisi ammortizzata](#analisi-ammortizzata)
             - [Contatore binario](#contatore-binario)
             - [Vettori dinamici](#vettori-dinamici)
+    - [23/10/2018](#23102018)
+    - [15/10/2018](#15102018)
+        - [Alberi binari di ricerca](#alberi-binari-di-ricerca)
+            - [Funzioni degli alberi binari di ricerca](#funzioni-degli-alberi-binari-di-ricerca)
+            - [Costo computazionale degli alberi di ricerca](#costo-computazionale-degli-alberi-di-ricerca)
+        - [Alberi binari di ricerca bilanciati](#alberi-binari-di-ricerca-bilanciati)
+        - [Alberi Red-Black](#alberi-red-black)
+            - [Rotazioni](#rotazioni)
+            - [Inserimento con condizioni negli alberi RB](#inserimento-con-condizioni-negli-alberi-rb)
   
 ## 27/09/2018
 
@@ -142,7 +151,7 @@ Tramite opportuni passaggi algebrici otteniamo che $a^k = n^\alpha, \ a = \beta^
 
 $$T(n)\ = \ dn^{\alpha} + cb^{k\beta} \sum^{k-1}_{i = 0} q^i$$
 
-Possiamo distinguere tre casi a seconda del valore di q. Vedi slide per dimostrazioni sui singoli casi. 
+Possiamo distinguere tre casi a seconda del valore di q. Vedi slide per dimostrazioni sui singoli casi.
 
 #### Master Theorem - Versione estesa
 
@@ -158,11 +167,11 @@ $$T(n) = \left\{
 
 > Allora, sono dati tre casi:
 
-| Caso | Condizione                                                                                                                                                 |                                  | Risultato                      |
-| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------ |
-| (1)  | $\exists \epsilon > 0: f(n) = O(n^{\log_b{a - \epsilon}})$                                                                                                 | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(n^{log_b{a}})$ |
-| (2)  | $f(n) = \Theta(n^{log_b{a}})$                                                                                                                              | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(f(n) \log n)$  |
-| (3)  | $\exists \epsilon > 0 : f(n) = \Omega(n^{log_b{a+\epsilon}})\\ \wedge \exists c : 0 < c < 1, \exists m > 0:\text{} \\ af(n/b) \le cf(n), \forall n \ge m$  | $\qquad \Longrightarrow \qquad$  | $T(n) = \Theta(f(n))$          |
+| Caso | Condizione                                                                                                                                                |                                 | Risultato                     |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------------------------- |
+| (1)  | $\exists \epsilon > 0: f(n) = O(n^{\log_b{a - \epsilon}})$                                                                                                | $\qquad \Longrightarrow \qquad$ | $T(n) = \Theta(n^{log_b{a}})$ |
+| (2)  | $f(n) = \Theta(n^{log_b{a}})$                                                                                                                             | $\qquad \Longrightarrow \qquad$ | $T(n) = \Theta(f(n) \log n)$  |
+| (3)  | $\exists \epsilon > 0 : f(n) = \Omega(n^{log_b{a+\epsilon}})\\ \wedge \exists c : 0 < c < 1, \exists m > 0:\text{} \\ af(n/b) \le cf(n), \forall n \ge m$ | $\qquad \Longrightarrow \qquad$ | $T(n) = \Theta(f(n))$         |
 
 #### Master Theorem per ricorrenze lineari di ordine costante
 
@@ -177,7 +186,7 @@ $$T(n) = \left\{
 > Posto $a = \sum_{1\le i \le h} a_i$ vale:
 >
 > (1) $T(n)$ è $\Theta(n^{\beta + 1})$, se $a = 1$,
-> 
+>
 > (2) $T(n)$ è $\Theta(a^n n^{\beta})$, se $a \ge 2$.
 
 ### Strutture dati
@@ -389,3 +398,284 @@ In Java si ha l'opzione, una volta terminato lo spazio di un `vector`, di raddop
 Nel caso del raddoppio, possiamo definire il costo effettivo dell'aggiunta di un oggetto in fondo al vettore come $1$ nel caso normale oppure $i := 2^k + 1$ quando abbiamo sforato le dimensioni del vettore. Il costo effettivo di $n$ operazioni sarà pari a $O(3n - 1) = O(n)$, ma il costo ammortizzato sarà pari a $O(1)$.
 
 Nel caso dell'incremento, avremo che il costo effettivo di $n$ operazioni sarà pari a $O(n^2) = O(n)$, ma il costo ammortizzato sarà pari a $O(n)$.
+
+## 23/10/2018
+
+Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
+
+## 15/10/2018
+
+### Alberi binari di ricerca
+
+Andiamo ora ad approfondire l'implementazione di un albero binario di ricerca tramite un dizionario. L'idea è quella di ottenere una struttura dati efficiente per la ricerca, sfruttando la ricerca con complessità $O(\log n)$ negli alberi. Avremo quindi il nostro albero con nodi aventi questa struttura:
+
+> `Tree`
+> `Tree parent`
+> `Tree left`
+> `Tree right`
+> `Item key`
+> `Item value`
+
+In un albero binario di ricerca, avremo che le chiavi contenute nei nodi del sottoalbero sinistra di un qualsiasi nodo $u$ saranno più piccole di `u.key` e le chiavi contenute in quello di destra saranno maggiori. Le funzioni a nostre disposizione saranno le stesse degli alberi binari; andremo ora a implementare delle funzioni per inserire, visitare e rimuovere nodi nel nostro albero.
+
+#### Funzioni degli alberi binari di ricerca
+
+`lookupNode()` restituirà il nodo dell'albero T che contiene la chiave k, oppure nil.
+
+```c++
+Tree lookupNode(Tree T, Item k)
+```
+
+```python
+Tree u = T
+while u != nil and u.key != k:
+    if k < u.key then
+        u = u.left # Sotto-albero di sinistra
+    else
+        u = u.right # Sotto-albero di destra
+return u
+```
+
+`max()` e `min()` restituiranno rispettivamente il massimo e il minimo di un albero; questi saranno sempre e comunque il nodo in fondo a destra e rispettivamente a sinistra di qualsiasi albero binario di ricerca.
+
+```c++
+Tree min(Tree T)
+```
+
+```python
+Tree u = T
+while u.left != nil do
+    u = u.left
+return u
+```
+
+```c++
+Tree max(Tree T)
+```
+
+```python
+Tree u = T
+while u.right != nil do
+u = u.right
+return u
+```
+
+`successorNode()` e `predecessorNode()` ritroveranno rispettivamente il successore (ovvero il più piccolo nodo maggiore di un dato nodo u) e il predecessore (ovvero il più grande nodo minore di un dato nodo u). Per fare ciò, ad esempio, `successorNode()` va a cercare prima nei suoi figli destri e ne prende il minimo; se non ha figli destri, risalendo attraverso i padri, il predecessore è il primo avo $v$ tale per cui il nodo di partenza $u$ è nel suo sottoalbero sinistro.
+
+```c++
+Tree predecessorNode(Tree t)
+```
+
+```python
+if t == nil then
+    return t
+if t.left != nil then # Caso 1
+    return max(t.left)
+else # Caso 2
+    Tree p = t.parent
+    while p != nil and t == p.left do
+        t = p
+        p = p.parent
+    return p
+```
+
+```c++
+Tree successorNode(Tree t)
+```
+
+```python
+if t == nil then
+r   eturn t
+if t.right != nil then # Caso 1
+    return min(t.right)
+else # Caso 2
+    Tree p = t.parent
+    while p != nil and t == p.right do
+        t = p
+        p = p.parent
+    return p
+```
+
+`insertNode()` andrà a inserire un'associazione chiave valore nell'albero T; se la chiave è già presente, verrà sostituito il valore, altrimenti verrà inserita una nuova associazione. Alla fine il metodo va a restituire l'albero T inalterato oppure un nuovo albero T nel caso fosse stato appena creato (= è stato passato nil come parametro).
+
+```c++
+Tree insertNode(Tree T, Item k, Item v)
+```
+
+```python
+Tree p = nil # Padre
+Tree u = T
+while u != nil and u.key != k do # Cerca posizione inserimento
+    p = u
+    u = u.left if k < u.key else u.right
+if u != nil and u.key == k then
+    u.value = v # Chiave già presente
+else
+    Tree new = Tree(k, v) # Crea un nodo coppia chiave-valore
+    link(p, new, k)
+    if p == nil then
+        T = n # Primo nodo ad essere inserito
+return T
+```
+
+Mostro di seguito l'implementazione della funzione `link()` il cui compito è quello di registrare l'inserimento di un nuovo nodo aggiustando i relativi puntatori.
+
+```c++
+link(Tree p, Tree u, Item k)
+```
+
+```python
+if u != nil then
+    u.parent = p # Registrazione padre
+if p != nil then
+    if k < p.key then
+        p.left = u # Attaccato come figlio sinistro
+    else p.right = u # Attaccato come figlio destro
+```
+
+Mostro infine il funzionamento di `removeNode()` che rimuove, data la chiave k, il corrispondente nodo dell'albero T, andando a restituire la (potenzialmente diversa) radice dell'albero.
+
+Distinguiamo tre casi:
+
+- **caso in cui il figlio è singolo**: si attacca l'unico figlio nella posizione dell'ex padre.
+- **caso in cui non ci sono figli**: si elimina il nodo e basta.
+- **caso in cui ci sono due figli**: si individua il successore del nodo da cancellare (che non avrà figlio sinistro per definizione). Si stacca il successore, ed eventuali figli destri del successore vengono attaccati al padre del successore stesso. Si copia quindi il successore sul nodo da cancellare.
+
+```c++
+Tree removeNode(Tree T, Item k)
+```
+
+```python
+Tree t
+Tree u = lookupNode(T, k)
+if u != nil then
+    if u.left == nil and u.right == nil then # Caso 1
+        if u.parent != nil then
+            link(u.parent, nil, k)
+        delete u
+    else if u.left != nil and u.right != nil then # Caso 3
+        Tree s = successorNode()
+        u.key = s.key
+        u.value = s.value
+        k = s.key
+        link(s.parent, u.right, k)
+        delete s
+    else if u.left != nil and u.right == nil then # Caso 2
+        link(u.parent, u.left, k)
+        if u.parent = nil then
+            T = u.left
+    else
+        link(u.parent, u.right, k)
+        if u.parent = nil then
+            T = u.right
+return T
+```
+
+#### Costo computazionale degli alberi di ricerca
+
+Tutte le operazioni eseguite sono confinate a un cammino semplice da una radice a una foglie. Avremo quindi un tetto superiore agli algoritmi pare a $O(h)$, dove h è pari all'altezza dell'albero. Nel caso pessimo (un albero tutto a destra) avremo $O(n)$, nel caso ottimo (un albero perfettamente bilanciato) avremo $O(\log n)$.
+
+### Alberi binari di ricerca bilanciati
+
+Quale è l'altezza media di un ABR? Se gli inserimenti avvengono a caso l'altezza media è pari a $O(\log n)$. Se però teniamo in conto anche le cancellazioni la cosa diventa difficile. In realtà non ci si affida al caso e si adottano tecniche per mantenere l'albero bilanciato.
+
+Usiamo tre tipi di bilanciamento (dati anche dal fattore di bilanciamento $\beta (v)$ ovvero la massima differenza tra i sottoalberi di v:
+
+- ALbero AVL dove $\beta (v) \le 1 \forall v$
+- B-Alberi dove $\beta (v) = 0 \forall v$, specializzata per strutture in memoria secondaria (ovvero lenta, spesso si usa nei database)
+- Alberi 2-3 con fattore uguale ai B-ALberi che vengono bilanciati tramite divisione dei sottoalberi
+
+### Alberi Red-Black
+
+Andremo principalmente a utilizzare il metodo di rotazione per bilanciare gli alberi. Utilizzeremo gli **Alberi RB (Red-Black)**, dove ogni nodo è colorato o di rosso o di nero e le foglie sono nodi speciali **Nil**, ovvero dei nodi sentinella che puntano a un oggetto unico nil per risparmiare memoria (il loro scopo è quello di evitare di trattare diversamente i puntatori ai nodi dai puntatori nil nelle foglie). Un albero RB ha determinati vincoli da rispettare:
+
+- La radice è nera
+- Tutte le foglie sono nere
+- Entrambi i figli di un nodo rosso sono neri
+- Ogni cammino semplice da un nodo u ad una delle foglie contenute nel sottoalbero radicato in u hanno lo stesso numero di nodi neri
+
+Definiamo come **altezza nera** di un nodo come il numero di nodi neri da un percorso alla radice. (vedi slide, scritta male). Abbiamo che l'altezza di un albero RB sarà *al più* il doppio dell'altezza nera.
+
+Durante la modifica di un albero RB è possibile che le condizioni definite in precedenza risultino violate. Andiamo allora a vedere quali sono le possibili soluzioni a questo problema.
+
+#### Rotazioni
+
+Qui segue l'esempio di una rotazione a sinistra. 
+
+```c++
+Tree rotateLeft(Tree x)
+```
+
+```python
+Tree y = x.right
+Tree p = x.parent
+x.right = y.left # Il sottoalbero B diventa figlio destro di x
+if y.left != nil then
+    y.left.parent = x
+y.left = x # x diventa figlio sinistro di y
+x.parent = y
+y.parent = p # y diventa figlio di p
+if p != nil then
+    if p.left = x then
+        p.left = y
+    else
+        p.right = y
+return y
+```
+
+#### Inserimento con condizioni negli alberi RB
+
+Per inserire un nodo senza rompere i vincoli in un albero RB, si colora inizialmente il nodo di rosso e poi, risalendo, si sceglie uno tra 7 casi diversi per sistemare eventuali vincoli violati. Innanzitutto nella `insertNode()` andremo a inserire la chiamata del nostro nuovo metodo subito dopo `link()`. Nel nostro `balanceInsert()` inseriremo un enorme ciclo `while` nella quale andremo a risalire l'albero una volta inserito il nodo, via via sistemando i nodi che non rispettano i vincoli. I 7 casi citati in precedenza sono:
+
+1. Il nuovo nodo $t$ non ha padre; significa che si tratta del primo nodo o che siamo arrivati alla radice. Lo coloriamo di nero.
+2. Il padre di $t$ è nero; allora no problem, lo inseriamo normalmente.
+3. Abbiamo il caso in cui $t$ è rosso, così come il padre e lo zio (ovvero il fratello del padre). Risolviamo colorando padre e zio di nero e continuando per vedere se abbiamo violato vincoli sul nonno.
+4. Abbiamo il caso in cui il padre è rosso e lo zio è nero, e t è figlio **destro** di $p$, $p$ figlio **sinistro** di $n$. Allora procediamo con una rotazione a **sinistra** a partire del nodo $p$, ottenendo che $t$ sarà ora il figlio di $n$. Una variante sul tema è quando si scambia sinistro e destro e viceversa.
+5. Abbiamo il caso in cui il padre è rosso e lo zio è nero, e t è figlio **sinistro** di $p$, $p$ figlio **sinistro** di $n$. Allora procediamo con una rotazione a **destra** a partire del nodo $n$, ottenendo che $t$ sarà ora il figlio di $p$. Una variante sul tema è quando si scambia sinistro e destro e viceversa.
+
+```c++
+balanceInsert(Tree t)
+```
+
+```python
+t.color = RED
+while t != nil do
+    Tree p = t.parent # Padre
+    Tree n = iif(p != nil, p.parent, nil) # Nonno
+    Tree z = iif(n = nil, nil, iif(n.left = p, n.right, n.left)) # Zio
+    if p = nil then # Caso (1)
+        t.color = BLACK
+        t = nil
+    else if p.color = BLACK then # Caso (2)
+        t = nil
+    else if z.color = RED then # Caso (3)
+        p.color = z.color = BLACK
+        n.color = RED
+        t = n
+    else
+        if (t = p.right) and (p = n.left) then # Caso (4.a)
+            rotateLeft(p)
+            t = p
+        else if (t = p.left) and (p = n.right) then # Caso (4.b)
+            rotateRight(p)
+            t = p
+        else
+            if (t = p.left) and (p = n.left) then # Caso (5.a)
+                rotateRight(n)
+            else if (t = p.right) and (p = n.right) then # Caso (5.b)
+                rotateLeft(n)
+            p.color = BLACK
+            n.color = RED
+            t = nil
+```
+
+Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la cancellazione, potremmo andare a implementare `balanceDelete()` per ripristinare la proprietà Red-Black in caso di cancellazione. In particolare:
+
+- Se il nodo “cancellato” è rosso
+    - Altezza nera invariata
+    - Non sono stati creati nodi rossi consecutivi
+    - La radice resta nera
+- Se il nodo “cancellato” è nero
+    - Possiamo violare il vincolo 1: la radice può essere un nodo rosso
+    - Possiamo violare il vincolo 3: se il padre e uno dei figli del nodo cancellato erano rossi
+    - Abbiamo violato il vincolo 4: altezza nera cambiata
