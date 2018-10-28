@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "ABR.h"
 using namespace std;
 
@@ -50,11 +51,15 @@ int main() {
                     cout << "Dictionary empty!" << endl;
                 break;
             case 5:
+                cout << "INDENTED FORM" << endl;
+                ABR<int>::printIndented(dictionary);
+                break;
+            case 6:
                 break;
             default:
                 cout << "Comand not found!" << endl;
         }
-    } while (scelta != 5);
+    } while (scelta != 6);
 
     if (dictionary != NULL)
         delete dictionary;
@@ -68,8 +73,13 @@ int stampaMenu() {
     cout << "2. Remove key-value node" << endl;
     cout << "3. Search value of a key" << endl;
     cout << "4. Print all elements in order" << endl;
-    cout << "5. Quit" << endl;
+    cout << "5. Print the tree in indented form" << endl;
+    cout << "6. Quit" << endl;
     cout << "Choose: ";
     cin >> s;
+    while (!cin) {  // fail bit set
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     return s;
 }

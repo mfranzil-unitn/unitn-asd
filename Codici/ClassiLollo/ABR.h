@@ -112,12 +112,76 @@ class ABR : public BinaryTree<Item> {
             else
                 t = u->right;
             link(u->parent, t, x);
+            if (u->color == BLACK) {
+                balanceDelete(T, t);
+            }
             if (u->parent == NULL)
                 T = t;
             delete u;
         }
         return T;
     }
+
+    static void balanceDelete(ABR* T, ABR* t) {
+        while (t != T and t->color == BLACK) {
+            ABR* p = t->parent;
+            if (t == p->left) {
+                ABR* f = p->right;   // Fratello
+                ABR* ns = f->left;   // Nipote sinistro
+                ABR* nd = f->right;  // Nipote destro
+
+                if (f->color == RED) {  // caso 1
+                    p->color = RED;
+                    f->color = BLACK;
+                    rotateLeft(p);  // t viene lasciato in alterato, si passa ai casi 2, 3, 4
+                } else {
+                    if (ns->color == BLACK && nd->color == BLACK) {
+                        f->color = RED;
+                        t = p;
+                    } else if (ns->color == RED && nd->color == BLACK) {
+                        ns->color = BLACK;
+                        f->color = RED;
+                        rotateRight(f);  // t viene lasciato inalterato, si passa al caso 4
+                    } else if (nd->color == RED) {
+                        f->color = p->color;
+                        p->color = BLACK;
+                        nd->color = BLACK;
+                        rotateLeft(p);
+                        t = T;
+                    }
+                }
+            } else {                 // t == p->right
+                ABR* f = p->left;    // Fratello
+                ABR* ns = f->left;   // Nipote sinistro
+                ABR* nd = f->right;  // Nipote destro
+
+                if (f->color == RED) {  // caso 1
+                    p->color = RED;
+                    f->color = BLACK;
+                    rotateRight(p);  // t viene lasciato in alterato, si passa ai casi 2, 3, 4
+                } else {
+                    if (ns->color == BLACK && nd->color == BLACK) {
+                        f->color = RED;
+                        t = p;
+                    } else if (ns->color == BLACK && nd->color == RED) {
+                        nd->color = BLACK;
+                        f->color = RED;
+                        rotateLeft(f);  // t viene lasciato inalterato, si passa al caso 4
+                    } else if (ns->color == RED) {
+                        f->color = p->color;
+                        p->color = BLACK;
+                        ns->color = BLACK;
+                        rotateRight(p);
+                        t = T;
+                    }
+                }
+            }
+        }
+        if (t != NULL) {
+            t->color = BLACK;
+        }
+    }
+
     static ABR* min(ABR* T) {
         while (T->left != NULL)
             T = T->left;
@@ -182,6 +246,24 @@ class ABR : public BinaryTree<Item> {
             }
         }
     }
+
+    static void printIndented(const ABR* t) {
+        static int depth = 0;
+        depth++;
+        if (t != NULL) {
+            printIndented(t->right);
+            print_spaces(depth);
+            cout << t->value << endl;
+            printIndented(t->left);
+        }
+        depth--;
+    }
+
+    static void print_spaces(int depth) {
+        for (int i = 0; i < depth; i++)
+            cout << "  ";
+    }
+
     static ABR* rotateLeft(ABR* x) {
         ABR* y = x->right;
         ABR* p = (x->parent != NULL) ? x->parent : NULL;

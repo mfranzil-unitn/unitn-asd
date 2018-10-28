@@ -38,7 +38,7 @@
             - [Contatore binario](#contatore-binario)
             - [Vettori dinamici](#vettori-dinamici)
     - [23/10/2018](#23102018)
-    - [15/10/2018](#15102018)
+    - [25/10/2018](#25102018)
         - [Alberi binari di ricerca](#alberi-binari-di-ricerca)
             - [Funzioni degli alberi binari di ricerca](#funzioni-degli-alberi-binari-di-ricerca)
             - [Costo computazionale degli alberi di ricerca](#costo-computazionale-degli-alberi-di-ricerca)
@@ -403,7 +403,7 @@ Nel caso dell'incremento, avremo che il costo effettivo di $n$ operazioni sarà 
 
 Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
 
-## 15/10/2018
+## 25/10/2018
 
 ### Alberi binari di ricerca
 
