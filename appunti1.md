@@ -1,6 +1,6 @@
 # Appunti di Algoritmi e Strutture Dati [20180927 -]
 
-- [Appunti di Algoritmi e Strutture Dati [20180927 -]](#appunti-di-algoritmi-e-strutture-dati-20180927--)
+- [Appunti di Algoritmi e Strutture Dati [20180927 -]](#appunti-di-algoritmi-e-strutture-dati-20180927)
     - [27/09/2018](#27092018)
         - [Equazioni di ricorrenza (cont.)](#equazioni-di-ricorrenza-cont)
             - [Metodo dell'albero di ricorsione / per livelli (cont.)](#metodo-dellalbero-di-ricorsione--per-livelli-cont)
@@ -46,6 +46,7 @@
         - [Alberi Red-Black](#alberi-red-black)
             - [Rotazioni](#rotazioni)
             - [Inserimento con condizioni negli alberi RB](#inserimento-con-condizioni-negli-alberi-rb)
+    - [30/10/2018](#30102018)
   
 ## 27/09/2018
 
@@ -679,3 +680,9 @@ Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la ca
     - Possiamo violare il vincolo 1: la radice può essere un nodo rosso
     - Possiamo violare il vincolo 3: se il padre e uno dei figli del nodo cancellato erano rossi
     - Abbiamo violato il vincolo 4: altezza nera cambiata
+
+Vedi file in /Codici per implementazione.
+
+## 30/10/2018
+
+Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
