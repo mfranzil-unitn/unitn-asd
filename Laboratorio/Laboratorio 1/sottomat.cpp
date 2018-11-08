@@ -8,15 +8,15 @@ int main(void) {
     ofstream out("output.txt");
     in >> R >> C;
 
-    int A[R][C];
-    int S[R][C];
+    int data[R][C];
+    int somme[R][C];
 
     for (int i = 1; i <= R; i++) {
         int sumRow = 0;
         for (int j = 1; j <= C; j++) {
-            in >> A[i][j];
-            sumRow += A[i][j];
-            S[i][j] = sumRow;
+            in >> data[i][j];
+            sumRow += data[i][j];
+            somme[i][j] = sumRow;
         }
     }
 
@@ -25,7 +25,7 @@ int main(void) {
         for (int c2 = c1; c2 <= C; c2++) {
             int tot = 0;
             for (int r = 1; r <= R; r++) {
-                int current = S[r][c2] - S[r][c1 - 1];
+                int current = somme[r][c2] - somme[r][c1 - 1];
                 tot = max(current, current + tot);
                 maxSoFar = max(maxSoFar, tot);
             }

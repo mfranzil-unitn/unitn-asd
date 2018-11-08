@@ -1,6 +1,6 @@
-# Appunti di Algoritmi e Strutture Dati [20180927 -]
+# Appunti di Algoritmi e Strutture Dati [20180927 - 20181025]
 
-- [Appunti di Algoritmi e Strutture Dati [20180927 -]](#appunti-di-algoritmi-e-strutture-dati-20180927)
+- [Appunti di Algoritmi e Strutture Dati [20180927 - 20181025]](#appunti-di-algoritmi-e-strutture-dati-20180927---20181025)
     - [27/09/2018](#27092018)
         - [Equazioni di ricorrenza (cont.)](#equazioni-di-ricorrenza-cont)
             - [Metodo dell'albero di ricorsione / per livelli (cont.)](#metodo-dellalbero-di-ricorsione--per-livelli-cont)
@@ -46,7 +46,6 @@
         - [Alberi Red-Black](#alberi-red-black)
             - [Rotazioni](#rotazioni)
             - [Inserimento con condizioni negli alberi RB](#inserimento-con-condizioni-negli-alberi-rb)
-    - [30/10/2018](#30102018)
   
 ## 27/09/2018
 
@@ -423,7 +422,7 @@ In un albero binario di ricerca, avremo che le chiavi contenute nei nodi del sot
 
 `lookupNode()` restituirà il nodo dell'albero T che contiene la chiave k, oppure nil.
 
-```c++
+```Java
 Tree lookupNode(Tree T, Item k)
 ```
 
@@ -439,7 +438,7 @@ return u
 
 `max()` e `min()` restituiranno rispettivamente il massimo e il minimo di un albero; questi saranno sempre e comunque il nodo in fondo a destra e rispettivamente a sinistra di qualsiasi albero binario di ricerca.
 
-```c++
+```Java
 Tree min(Tree T)
 ```
 
@@ -450,7 +449,7 @@ while u.left != nil do
 return u
 ```
 
-```c++
+```Java
 Tree max(Tree T)
 ```
 
@@ -463,7 +462,7 @@ return u
 
 `successorNode()` e `predecessorNode()` ritroveranno rispettivamente il successore (ovvero il più piccolo nodo maggiore di un dato nodo u) e il predecessore (ovvero il più grande nodo minore di un dato nodo u). Per fare ciò, ad esempio, `successorNode()` va a cercare prima nei suoi figli destri e ne prende il minimo; se non ha figli destri, risalendo attraverso i padri, il predecessore è il primo avo $v$ tale per cui il nodo di partenza $u$ è nel suo sottoalbero sinistro.
 
-```c++
+```Java
 Tree predecessorNode(Tree t)
 ```
 
@@ -480,7 +479,7 @@ else # Caso 2
     return p
 ```
 
-```c++
+```Java
 Tree successorNode(Tree t)
 ```
 
@@ -499,7 +498,7 @@ else # Caso 2
 
 `insertNode()` andrà a inserire un'associazione chiave valore nell'albero T; se la chiave è già presente, verrà sostituito il valore, altrimenti verrà inserita una nuova associazione. Alla fine il metodo va a restituire l'albero T inalterato oppure un nuovo albero T nel caso fosse stato appena creato (= è stato passato nil come parametro).
 
-```c++
+```Java
 Tree insertNode(Tree T, Item k, Item v)
 ```
 
@@ -521,7 +520,7 @@ return T
 
 Mostro di seguito l'implementazione della funzione `link()` il cui compito è quello di registrare l'inserimento di un nuovo nodo aggiustando i relativi puntatori.
 
-```c++
+```Java
 link(Tree p, Tree u, Item k)
 ```
 
@@ -542,7 +541,7 @@ Distinguiamo tre casi:
 - **caso in cui non ci sono figli**: si elimina il nodo e basta.
 - **caso in cui ci sono due figli**: si individua il successore del nodo da cancellare (che non avrà figlio sinistro per definizione). Si stacca il successore, ed eventuali figli destri del successore vengono attaccati al padre del successore stesso. Si copia quindi il successore sul nodo da cancellare.
 
-```c++
+```Java
 Tree removeNode(Tree T, Item k)
 ```
 
@@ -603,7 +602,7 @@ Durante la modifica di un albero RB è possibile che le condizioni definite in p
 
 Qui segue l'esempio di una rotazione a sinistra. 
 
-```c++
+```Java
 Tree rotateLeft(Tree x)
 ```
 
@@ -634,7 +633,7 @@ Per inserire un nodo senza rompere i vincoli in un albero RB, si colora inizialm
 4. Abbiamo il caso in cui il padre è rosso e lo zio è nero, e t è figlio **destro** di $p$, $p$ figlio **sinistro** di $n$. Allora procediamo con una rotazione a **sinistra** a partire del nodo $p$, ottenendo che $t$ sarà ora il figlio di $n$. Una variante sul tema è quando si scambia sinistro e destro e viceversa.
 5. Abbiamo il caso in cui il padre è rosso e lo zio è nero, e t è figlio **sinistro** di $p$, $p$ figlio **sinistro** di $n$. Allora procediamo con una rotazione a **destra** a partire del nodo $n$, ottenendo che $t$ sarà ora il figlio di $p$. Una variante sul tema è quando si scambia sinistro e destro e viceversa.
 
-```c++
+```Java
 balanceInsert(Tree t)
 ```
 
@@ -682,7 +681,3 @@ Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la ca
     - Abbiamo violato il vincolo 4: altezza nera cambiata
 
 Vedi file in /Codici per implementazione.
-
-## 30/10/2018
-
-Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.

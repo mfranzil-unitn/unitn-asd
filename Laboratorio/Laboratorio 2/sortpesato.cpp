@@ -35,14 +35,14 @@ int main() {
                     current = array.at(current);
                     num++;
                 }
-                int cp = (num - 1) * mn + sum - mn;
+                int prezzo_scambio = (num - 1) * mn + sum - mn;
                 if (mn != 1) {
-                    cp = min(cp, 2 * (1 + mn) + num - 1 + sum - mn);
+                    prezzo_scambio = min(prezzo_scambio, 2 * (1 + mn) + num - 1 + sum - mn);
                 }
-                prezzo += cp;
+                prezzo += prezzo_scambio;
                 mosse += num - 1;
             }
-            visitati[i] = true;
+            visitati.at(i) = true;
         }
     }
     ofstream out("output.txt");
