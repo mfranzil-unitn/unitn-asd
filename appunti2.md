@@ -12,6 +12,9 @@
             - [Numero di Erdos](#numero-di-erdos)
         - [DFS](#dfs)
             - [Componenti (fortemente) connesse](#componenti-fortemente-connesse)
+    - [13/11/2018](#13112018)
+        - [Grafi con cicli](#grafi-con-cicli)
+        - [Ordinamento topologico](#ordinamento-topologico)
 ## 30/10/2018
 
 Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
@@ -215,3 +218,178 @@ for v in G.adj(u) do
     if id[v] == 0 then
         ccdfs(G, counter, v, id)
 ```
+
+## 13/11/2018
+
+### Grafi con cicli
+
+In un grafo non orientato, un ciclo C di lunghezza $k > 2$ è una sequenza di nodi $u_0, u_1...u_n$ tale che la sequenza è un cammino e il primo e l'ultimo nodo coincidono. Chiamiamo un grafo con almeno un ciclo **ciclico** e uno che non ne contiene **aciclico**.
+
+```Java
+boolean hasCycleRec(Graph G, Node u, Node p, boolean[] visited)
+```
+
+```Ruby
+visited[u] = true
+for u in G.adj(u) - {p} do
+    if visited[v] then
+        return true
+    else if hasCycleRec(G, v, u, visited) then
+        return true
+return false
+```
+
+Un grafo orientato aciclico è detto **DAG (directed acyclic graph)**. Per trovare eventuali cicli in grafi orientati, utilizziamo l'albero di copertura DFS. All'interno del nostro albero di copertura distinguiamo, dato un arco $(u, v)$:
+
+- **archi in avanti** - se $u$ è un antenato di $v$
+- **archi all'indietro** - se $u$ è un discendente di $v$
+- **archi di attraversamento** - altrimenti
+
+```Java
+void dfs-schema(Graph G, Node u, int &time, int[] dt, int[] ft)
+```
+
+```Ruby
+# { visita il nodo u (pre-order) }
+time = time + 1
+dt[u] = time
+for u in G.adj(u) do
+    # { visita l’arco (u, v) (qualsiasi) }
+    if dt[v] == 0 then
+        # { visita l’arco (u, v) (albero) }
+        dfs-schema(G, v, time, dt, ft)
+    else if dt[u] > dt[v] and ft[v] == 0 then
+        # { visita l’arco (u, v) (indietro) }
+    else if dt[u] < dt[v] and ft[v] 6= 0 then
+        # { visita l’arco (u, v) (avanti) }
+    else
+        # { visita l’arco (u, v) (attraversamento) }
+# { visita il nodo u (post-order) }
+time = time + 1
+ft[u] = time
+```
+
+Questo algoritmo va a classificare gli archi: infatti, costruito l'albero di copertura, ogni sottoalbero dell'albero avrà un intervallo [dt, ft] contenuto o uguale all'antenato. Vale il seguente teorema:
+
+> Data una visita DFS di un grafo G = (V,E), per ogni coppia di nodi u, v in V, solo una delle condizioni seguenti è vera:
+> Gli intervalli [dt[u], ft[u]] e [dt[v], ft[v]] sono non-sovrapposti `->` u, v non sono discendenti l’uno dell’altro nella foresta DF
+> L’intervallo [dt[u], ft[u]] è contenuto in [dt[v], ft[v]] `->` u è un discendente di v in un albero DF
+> L’intervallo [dt[v], ft[v]] è contenuto in [dt[u], ft[u]] `->` v è un discendente di u in un albero DF
+
+Vale anche il seguente teorema:
+
+> Un grafo orientato è aciclico $\Leftrightarrow$ non esistono archi all’indietro nel grafo.
+
+Vedi slide per dimostrazione. Ciò riduce di molto l'implementazione precedente: basta infatti trovare un arco all'indietro per troncare l'algoritmo e restituire true, ovvero che il grafo è ciclico. Se non viene individuato nessun'arco, ritornerà false.
+
+```Java
+boolean hasCycle(Graph G, Node u, int &time, int[ ] dt, int[ ] ft)3
+```
+
+```Ruby
+time = time + 1
+dt[u] = time
+foreach v in G.adj(u) do
+    if dt[v] == 0 then
+        if hasCycle(G, v, time, dt, ft) then
+            return true
+    else if dt[u] > dt[v] and ft[v] == 0 then
+        return true
+time = time + 1
+ft[u] = time
+return false
+```
+
+### Ordinamento topologico
+
+Dato un DAG G, un **ordinamento topologico** è un ordinamento lineare dei suoi nodi tale che se $(u, v) \in E$, allora $u$ è prima di $v$ nell'ordinamento.
+
+```Java
+Stack topSort(Graph G)
+```
+
+```Ruby
+Stack S = Stack()
+boolean[] visited = boolean[1...G.size()]
+for u in G.V() do
+    visited[u] = false
+    if not visited[u] then
+        ts-dfs(G, u, visited, S)
+return S
+```
+
+```Java
+ts-dfs(Graph G, Node u, boolean[] visited, Stack S)
+```
+
+```Ruby
+visited[u] = true
+for v in G.adj(u) do
+    if not visited[v] then
+        ts-dfs(G, v, visited, S)
+S.push(u)
+```
+
+### Componenti fortemente connesse
+
+- Un grafo orientato $G = (V, E)$ è fortemente connesso $\Leftrightarrow$ ogni suo nodo è raggiungibile da ogni altro suo nodo
+- Un grafo $G_0 = (V_0, E_0)$ è una componente fortemente connessa di G $\Leftrightarrow$ G0 è un sottografo connesso e massimale di G.
+
+```Java
+int[] scc(Graph G)
+```
+
+```Ruby
+Stack S = topSort(G) # First visit
+GT = transpose(G) # Graph transposal
+return cc(GT, S)
+```
+
+Utilizzando l'ordinamento topologico su un grafo generale `topSort`, siamo sicuri che restituirà un ordinamento perfetto per tempo di fine. Infatti eventuali archi di un ciclo vengono listati in un ordine ininfluente, mentre gli archi non di un ciclo saranno ordinati.
+
+Definiamo come **grafo trasposto** un grafo orientato i cui archi sono stati invertiti di direzione.
+
+```Java
+int[] transpose(Graph G)
+```
+
+```Ruby
+Graph GT = Graph()
+for u in G.V() do
+    GT.insertNode(u)
+for u in G.V() do
+    for v in G.adj(u) do
+        GT.insertEdge(v, u)
+return GT
+```
+
+Per quanto riguarda la visita delle componenti connesse del grafo trasposto, invece di esaminare i nodi in ordine arbitrario, questa versione di cc() li esamina nell’ordine LIFO memorizzato nello stack.
+
+```Java
+cc(Graph G, Stack S)
+```
+
+```Ruby
+int[] id = new int[1...G.size()]
+for u in G.V() do
+    id[u] = 0
+int counter = 0
+while not S.isEmpty() do
+    u = S.pop()
+    if id[u] == 0 then
+        counter = counter + 1
+return id
+```
+
+```Java
+ccdfs(Graph G, int counter, Node u, int[] id)
+```
+
+```Ruby
+id[u] = counter
+for v in G.adj(u) do
+    if id[v] == 0 then
+        ccdfs(G, counter, v, id)
+```
+
+L'algoritmo in totale avrà costo computazionale pari a $O(n + m)$.
