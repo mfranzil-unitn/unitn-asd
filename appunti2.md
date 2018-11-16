@@ -15,6 +15,9 @@
     - [13/11/2018](#13112018)
         - [Grafi con cicli](#grafi-con-cicli)
         - [Ordinamento topologico](#ordinamento-topologico)
+        - [Componenti fortemente connesse](#componenti-fortemente-connesse)
+    - [15/11/2018](#15112018)
+
 ## 30/10/2018
 
 Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
@@ -90,7 +93,7 @@ while S.size() > 0 do
     S.insert(v) # Da specificare
 ```
 
-### BFS 
+### BFS
 
 L'obiettivo della visita in ampiezza è visita i nodi a distanza crescenti dalla sorgente. Per farlo genereremo un albero *BFS*.
 
@@ -180,9 +183,9 @@ foreach v in G.adj(u) do
 
 Questo algoritmo presenta un problema strutturale: la grandezza degli stack nei sistemi operativi è limitata e per alberi di grandi dimensioni è facilmente superabile. Per ovviare al problema spesso si usa la BFS invece della DFS, oppure rendendo l'algoritmo iterativo e adattandolo rendendo simile alla BFS (ovvero si permette l'inserimento multiplo dei nodi nella coda, fino a un numero pari al numero di archi entranti; inoltre si anticipa il controllo della visita all'estrazione e non all'inserimento). Vedi slide per implementazione.
 
-#### Componenti (fortemente) connesse
+#### Componenti connesse
 
-Molti algoritmi iniziano decomponendo il grafo nelle sue componenti connesse, applicando l'algoritmo e poi ricompongono assieme il grafo. Abbiamo sia le **componenti connesse** che le **componenti fortemente connesse** (su grafi orientati)
+Molti algoritmi iniziano decomponendo il grafo nelle sue componenti connesse, applicando l'algoritmo e poi ricompongono assieme il grafo. Abbiamo sia le **componenti connesse** (su grafi non orientati) che le **componenti fortemente connesse** (su grafi orientati). Vediamo ora le componenti connesse semplici.
 
 Un grafo non orientato G è connesso $\leftrightarrow$ ogni suo nodo è raggiungibile da qualsiasi altro nodo.
 
@@ -221,7 +224,11 @@ for v in G.adj(u) do
 
 ## 13/11/2018
 
-### Grafi con cicli
+### DFS (cont.)
+
+Seguono tre ulteriori applicazioni della DFS.
+
+#### Grafi con cicli
 
 In un grafo non orientato, un ciclo C di lunghezza $k > 2$ è una sequenza di nodi $u_0, u_1...u_n$ tale che la sequenza è un cammino e il primo e l'ultimo nodo coincidono. Chiamiamo un grafo con almeno un ciclo **ciclico** e uno che non ne contiene **aciclico**.
 
@@ -283,7 +290,7 @@ Vale anche il seguente teorema:
 Vedi slide per dimostrazione. Ciò riduce di molto l'implementazione precedente: basta infatti trovare un arco all'indietro per troncare l'algoritmo e restituire true, ovvero che il grafo è ciclico. Se non viene individuato nessun'arco, ritornerà false.
 
 ```Java
-boolean hasCycle(Graph G, Node u, int &time, int[ ] dt, int[ ] ft)3
+boolean hasCycle(Graph G, Node u, int &time, int[ ] dt, int[ ] ft)
 ```
 
 ```Ruby
@@ -300,9 +307,9 @@ ft[u] = time
 return false
 ```
 
-### Ordinamento topologico
+#### Ordinamento topologico
 
-Dato un DAG G, un **ordinamento topologico** è un ordinamento lineare dei suoi nodi tale che se $(u, v) \in E$, allora $u$ è prima di $v$ nell'ordinamento.
+Dato un DAG G, un **ordinamento topologico** è un ordinamento lineare dei suoi nodi tale che se $(u, v) \in E$, allora $u$ è prima di $v$ nell'ordinamento. Con l'algoritmo `topSort` andiamo a generare un vettore contenente l'ordinamento topologico del
 
 ```Java
 Stack topSort(Graph G)
@@ -330,7 +337,7 @@ for v in G.adj(u) do
 S.push(u)
 ```
 
-### Componenti fortemente connesse
+#### Componenti fortemente connesse
 
 - Un grafo orientato $G = (V, E)$ è fortemente connesso $\Leftrightarrow$ ogni suo nodo è raggiungibile da ogni altro suo nodo
 - Un grafo $G_0 = (V_0, E_0)$ è una componente fortemente connessa di G $\Leftrightarrow$ G0 è un sottografo connesso e massimale di G.
@@ -363,7 +370,7 @@ for u in G.V() do
 return GT
 ```
 
-Per quanto riguarda la visita delle componenti connesse del grafo trasposto, invece di esaminare i nodi in ordine arbitrario, questa versione di cc() li esamina nell’ordine LIFO memorizzato nello stack.
+Per quanto riguarda la visita delle componenti connesse del grafo trasposto, invece di esaminare i nodi in ordine arbitrario, questa versione di `cc` li esamina nell’ordine LIFO memorizzato nello stack.
 
 ```Java
 cc(Graph G, Stack S)
@@ -393,3 +400,11 @@ for v in G.adj(u) do
 ```
 
 L'algoritmo in totale avrà costo computazionale pari a $O(n + m)$.
+
+## 15/11/2018
+
+Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
+
+## 20/11/2018
+
+Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
