@@ -11,12 +11,14 @@
         - [BFS](#bfs)
             - [Numero di Erdos](#numero-di-erdos)
         - [DFS](#dfs)
-            - [Componenti (fortemente) connesse](#componenti-fortemente-connesse)
+            - [Componenti connesse](#componenti-connesse)
     - [13/11/2018](#13112018)
-        - [Grafi con cicli](#grafi-con-cicli)
-        - [Ordinamento topologico](#ordinamento-topologico)
-        - [Componenti fortemente connesse](#componenti-fortemente-connesse)
+        - [DFS (cont.)](#dfs-cont)
+            - [Grafi con cicli](#grafi-con-cicli)
+            - [Ordinamento topologico](#ordinamento-topologico)
+            - [Componenti fortemente connesse](#componenti-fortemente-connesse)
     - [15/11/2018](#15112018)
+    - [20/11/2018](#20112018)
 
 ## 30/10/2018
 
@@ -103,7 +105,7 @@ bfs(Graph G, Node r)
 
 ```Ruby
 Queue Q = Queue()
-S.enqueue(r)
+Q.enqueue(r)
 boolean[] visited = new boolean[1 . . . G.size()]
 for u in G.V() - {r} do
     visited[u] = false
