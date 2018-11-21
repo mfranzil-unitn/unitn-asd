@@ -1,24 +1,22 @@
 #include <fstream>
 #include <iostream>
 #include <queue>
+#include <map>
 #include <vector>
 
 using namespace std;
 
-struct Arco {
-    int destNode;
-    int tPerc;
-    int primaAcc;
-    int tAcc;
-    int tSpeg;
-};
-
 struct Nodo {
-    vector<Arco*> vic;
+    vector<int> vic;
     int index;
+    int dist;
+    int prev;
 };
 
-int laser(vector<Nodo*>& G);
+int laser(vector<Nodo*>& G, map<int, map<int, vector<int>>> data);
+int partenza(vector<Nodo*>& G, int from, int to, int t, map<int, map<int, vector<int>>> data);
+
+int public_N;
 
 int main() {
     int N, M;
@@ -27,9 +25,15 @@ int main() {
     ifstream in("input.txt");
     in >> N >> M;
 
+    public_N = N;
+
+    map<int, map<int, vector<int>>> data;
+
     for (int i = 0; i < N; i++) {
         Nodo* tmp = new Nodo();
         tmp->index = i;
+        tmp->dist = -1;
+        tmp->prev = -1;
         G.push_back(tmp);
     }
 
@@ -38,57 +42,54 @@ int main() {
         in >> from >> to >> tPerc >> primaAcc >> tAcc >> tSpeg;
 
         if (tAcc <= tPerc) {
-            Arco* aFrom = new Arco();
-            Arco* aTo = new Arco();
+            G.at(from)->vic.push_back(to);
+            G.at(to)->vic.push_back(from);
 
-            aFrom->destNode = to;
-            aTo->destNode = from;
-
-            aFrom->tPerc = aTo->tPerc = tPerc;
-            aFrom->primaAcc = aTo->primaAcc = primaAcc;
-            aFrom->tAcc = aTo->tAcc = tAcc;
-            aFrom->tSpeg = aTo->tSpeg = tSpeg;
-
-            G.at(from)->vic.push_back(aFrom);
-            G.at(to)->vic.push_back(aTo);
+            data[from][to] = {tPerc, primaAcc, tAcc, tSpeg};
+            data[to][from] = {tPerc, primaAcc, tAcc, tSpeg};
         }
     }
 
     ofstream out("output.txt");
-    out << laser(G);
+    out << laser(G, data);
 
     return 0;
 }
 
-int laser(vector<Nodo*>& G) {
+int laser(vector<Nodo*>& G, map<int, map<int, vector<int>>> data) {
     queue<Nodo*> Q;
-    int count = 0;
 
     Q.push(0);
-    G.at(R->index)->visitato = true;
+    G.at(0)->dist = 0;
 
     while (!Q.empty()) {
         Nodo* u = Q.front();
         Q.pop();
-        u->visitato = true;
-        count++;
 
-        for (int i = 0; i < u->vic.size(); i++) {
+        cout << u->vic.at(0);
+        /*for (int i = 0; i < u->vic.size(); i++) {
             Nodo* v = G.at(u->vic.at(i));
-            if (!v->visitato) {
-                v->visitato = true;
+
+            if (v->dist == -1) {
+                v->dist = partenza(G, u->index, v->index, u->dist, data) + data[u->index][v->index][0];
                 Q.push(v);
             }
-        }
+        }*/
     }
+
+    return G.at(G.size() - 1)->dist;
 }
 
-int partenza(int t) {
-    if (t < inizio) {
-        return inizio;
+int partenza(vector<Nodo*>& G, int from, int to, int t, map<int, map<int, vector<int>>> data) {
+    if (t < data[from][to][1]) {
+        return data[from][to][1];
     }
-    int ciclo = vivo + morto;
-    int pos = (t - inizio) % ciclo;
-    6 7 if (vivo - pos >= peso) { return t; }
-    11 { 12 return t - pos + ciclo; }
+
+    int ciclo = data[from][to][2] + data[from][to][3];
+    int pos = (t - data[from][to][1]) % ciclo;
+    if (data[from][to][2] - pos >= data[from][to][0]) {
+        return t;
+    } else {
+        return t - pos + ciclo;
+    }
 }
