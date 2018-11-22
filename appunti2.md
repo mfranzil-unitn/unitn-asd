@@ -19,6 +19,21 @@
             - [Componenti fortemente connesse](#componenti-fortemente-connesse)
     - [15/11/2018](#15112018)
     - [20/11/2018](#20112018)
+    - [22/11/2018](#22112018)
+        - [Hashing](#hashing)
+            - [Tabelle ad accesso diretto](#tabelle-ad-accesso-diretto)
+            - [Funzione hash perfetta](#funzione-hash-perfetta)
+            - [Funzione di estrazione](#funzione-di-estrazione)
+            - [Funzione XOR](#funzione-xor)
+            - [Metodo della divisione](#metodo-della-divisione)
+            - [Metodo della moltiplicazione](#metodo-della-moltiplicazione)
+        - [Gestione delle collisioni](#gestione-delle-collisioni)
+            - [Liste di trabocco](#liste-di-trabocco)
+            - [Indirizzamento aperto](#indirizzamento-aperto)
+                - [Ispezione lineare](#ispezione-lineare)
+                - [Ispezione quadratica](#ispezione-quadratica)
+                - [Doppio hashing](#doppio-hashing)
+            - [Complessità](#complessit%C3%A0)
 
 ## 30/10/2018
 
@@ -410,3 +425,109 @@ Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
 ## 20/11/2018
 
 Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
+
+## 22/11/2018
+
+### Hashing
+
+Vediamo ora le implementazioni di dizionari tramite le cosìddette **tabelle hash**, ovvero delle tabelle che preso in input una coppia $(\text{chiave}, \text{valore})$, utilizzando una funzione hash $h$ che mappa ogni chiave k a un intero e lo memorizza nella suddetta tabella.
+
+L'insieme delle possibili chiavi è rappresentato dall'insieme universo $\mathbf{U}$. Definiamo quindi una funzione hash:
+
+$$
+h: \mathbf{U} \Rightarrow {0, 1, ..., m - 1}
+$$
+
+Quando due o più chiavi, diciamo che è avvenuta una *collisione*.
+
+#### Tabelle ad accesso diretto
+
+Caso particolare nella quale l'insieme $\mathbf{U}$ è già un sottoinsieme di $\mathbb{Z}^+$. In questi casi si sceglie la funzione hash identità e il valore $m$ di dimensione tabella pari a $u$.
+
+#### Funzione hash perfetta
+
+Una funzione hash h si dice perfetta se è iniettiva. Ciò può tuttavia risultare spesso impraticabile; le collisioni risultano quindi possibili, nostro compito sarà minimizzarle e rendere le funzioni hash il più uniformi sul nostro insieme.
+
+Sia $P(k)$ la probabilità che una chiave $k$ sia inserita in tabella. Sia $Q(i)$ (dove $i := h(k)$) la probabilità che una chiave finisca nella cella $i$. Allora una funzione hash gode di *uniformità semplice* se $\forall i \in [0, ..., m-1]: Q(i) = 1/m$.
+
+Nella realtà la distribuzione esatta non sarà mai completamente nota, andremo a utilizzare tecniche "euristiche" per sopperire al problema.
+
+#### Funzione di estrazione
+
+Poniamo $m := 2^p$ e $h(k) = int(b)$, dove b è un sottoinsieme di $p$ bit presi da $bin(k)$. $int(), bin()$ sono due funzioni che trasformano rispettivamente un numero binario in intero e un carattere alfabetico in binario.
+
+Questo approccio genera diversi problemi: infatti, a seconda del sottoinsieme scelto, la probabilità di collisioni è estremamente alta.
+
+#### Funzione XOR
+
+Poniamo $m := 2^p$ e $h(k) = int(b)$, dove b è dato dalla somma modulo 2 bit a bit di $p$ bit di $bin(k)$
+
+#### Metodo della divisione
+
+Poniamo $m$ dispari, possibilimente primo, e $h(k) = int(k) \mod m$. $m$ deve essere possibilmente lontano da potenze di 2 e 10 e non può essere $2^p$ nè $2^p - 1$.
+
+#### Metodo della moltiplicazione
+
+Poniamo $m$ qualsiasi, possibilmente potenza di 2, $C \in \mathbb{R} : 0 < C < 1$, $i := int(k)$, $h(k) = \lfloor m(C \cdot i - \lfloorC \cdot i \rfloor)\rfloor$
+
+In realtà si usano funzioni hash un po' più complicate come FNV Hash e City Hash.
+
+### Gestione delle collisioni
+
+Parliamo ora della gestione delle collisioni, ovvero dello spostamento delle chiavi nel caso il loro hash collida. La loro ricerca, una volta spostate, dovrebbe costare $O(1)$ nel caso medio ma può costare fino a $O(n)$.
+
+#### Liste di trabocco
+
+Idea: le chiavi con lo stesso valore hash vengono memorizzate in un vettore dinamico, e un puntatore alla testa del vettore viene aggiunto nella tabella hash. Avremo che nel caso pessimo l'inserimento sarà $\Omega(1)$ e la ricerca e la rimozione $\Omega(n)$.
+
+Definiamo:
+
+- Valore atteso della lunghezza della lista: pari a $\alpha = n/m$, dove $n$ è il numero totale di chiavi e $m$ la capacità della tabella hash. Se $m = O(n)$, avremo che tutte le operazioni saranno $O(1)$.
+- Numero medio di accessi alla tabella per la ricerca di una chiave non presente nella tabella (ricerca con insuccesso): indicata con $I(\alpha)$. Avrà un costo atteso pari a $\Omega(1) + \alpha$.
+- Numero medio di accessi alla tabella per la ricerca di una chiave presente nella tabella (ricerca con successo, che tocca in media metà delle chiavi nella lista): $S(\alpha)$. Avrà un costo atteso pari a $\Omega(1) + \alpha/2$.
+
+#### Indirizzamento aperto
+
+Questa alternativa memorizza tutte le chiavi nella tabella stessa. Ogni slot va quindi a contenere o una chiave o nil.
+
+Chiamiamo *ispezione* l'esame di uno slot durante la ricerca. Chiamiamo *sequenza di ispezione* una permutazione degli indici corrispondente all'ordine in cui vengono esaminati gli slot, in maniera univoca.
+
+La situazione ideale prende il nome di **hashing uniforme**, dove ogni chiave ha le stesse probabilità di avere come sequenza di ispezione una qualsiasi delle permutazioni degli m slot. Andiamo a vedere tre tecniche per avvicinarsi il più possibile all'hashing uniforme.
+
+##### Ispezione lineare
+
+Vale:
+
+$$
+H(k, i) = (H_1(k) + h \cdot i) mod m
+$$
+
+Grazie all'operazione modulo, avremo massimo $m$ sequenze di ispezione distinte.
+
+Con questo metodo andremo a ottenere la cosìddetta **agglomerazione primaria**, nella quale lunghe sottosequenze (che diventano sempre più lunque) della tabella vengono occupate, incrementando i tempi medi di inserimento e cancellazione.
+
+##### Ispezione quadratica
+
+Vale:
+
+$$
+H(k, i) = (H_1(k) + h \cdot i^2) mod m
+$$
+
+A differenza della precedente, dopo l'inserimento del primo elemento le ispezioni successive hanno un offset quadratico e non lineare. La sequenza non sarà quindi una permutazione ma sarà sparsa nel vettore.
+
+##### Doppio hashing
+
+Vale:
+
+$$
+H(k, i) = (H_1(k) + i \cdot H_2(k)) mod m
+$$
+
+Abbiamo due funzioni ausiliarie, $H_1$ che va a fornire la prima ispezione e $H_2$ l'offset delle successive ispezioni. Per garantire una permutazione completa, $H_2(k)$ deve essere coprimo con $m$.
+
+In tutti i casi non possiamo cancellare una chave sostituendola con un nil, in quanto le sequenze di ispezione andrebbero distrutte. Andiamo quindi a utilizzare uno speciale valore $deleted$ per marcare uno slot vuoto dopo la cancellazione. Questi slot verranno trattati come pieni nella ricerca e vuoti nell'inserimento. Questo va tuttavia a impattare sul tempo di ricerca (modificando $\alpha$). Vedi slide per implementazione su codice.
+
+#### Complessità
+
+Abbiamo infine che le liste di trabocco sono le più efficienti dal punto di vista della complessità (crescono infatti linearmente). In generale per ovviare alla crescita della complessità con il passare del tempo, superata una soglia per $\alpha$ prefissata (generalmente tra 0.5 e 0.75) si alloca una tabella grande il doppio e si reinseriscono tutte le chiavi, dimezzando il fattore di carico e rimuovendo eventuali elementi deleted. La ristrutturazione avrà costo $O(m)$ ma costo ammortizzato costante.
