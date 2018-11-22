@@ -1,6 +1,6 @@
-# Appunti di Algoritmi e Strutture Dati [20181025 -]
+# Appunti di Algoritmi e Strutture Dati [20181030 - 20181122]
 
-- [Appunti di Algoritmi e Strutture Dati [20181025 -]](#appunti-di-algoritmi-e-strutture-dati-20181025)
+- [Appunti di Algoritmi e Strutture Dati [20181030 - 20181122]](#appunti-di-algoritmi-e-strutture-dati-20181030---20181122)
     - [30/10/2018](#30102018)
     - [01/11/2018](#01112018)
     - [06/11/2018](#06112018)
