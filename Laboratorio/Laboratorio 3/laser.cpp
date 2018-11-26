@@ -1,95 +1,130 @@
 #include <fstream>
 #include <iostream>
-#include <queue>
 #include <map>
+#include <queue>
+#include <stack>
 #include <vector>
 
 using namespace std;
 
+struct Arco {
+    int to, tPerc, primaAcc, tAcc, tSpeg;
+    Arco(int t, int p, int a, int c, int s)
+        : to(t), tPerc(p), primaAcc(a), tAcc(c), tSpeg(s) {
+    }
+
+    int partenza(int t) {
+        if (t < primaAcc) {
+            return primaAcc;
+        }
+
+        int ciclo = tAcc + tSpeg;
+        int pos = (t - primaAcc) % ciclo;
+
+        if (tAcc - pos >= tPerc) {
+            return t;
+        } else {
+            return t - pos + ciclo;
+        }
+    }
+};
+
 struct Nodo {
-    vector<int> vic;
+    vector<Arco*> vic;
     int index;
     int dist;
     int prev;
+    bool visitato;
 };
 
-int laser(vector<Nodo*>& G, map<int, map<int, vector<int>>> data);
-int partenza(vector<Nodo*>& G, int from, int to, int t, map<int, map<int, vector<int>>> data);
+int laser();
+int partenza(int from, int to, int t);
 
-int public_N;
+map<int, map<int, vector<int>>> dati;
+vector<Nodo*> G;
 
 int main() {
     int N, M;
-    vector<Nodo*> G;
 
     ifstream in("input.txt");
     in >> N >> M;
 
-    public_N = N;
-
-    map<int, map<int, vector<int>>> data;
-
     for (int i = 0; i < N; i++) {
         Nodo* tmp = new Nodo();
-        tmp->index = i;
+        tmp->visitato = false;
         tmp->dist = -1;
         tmp->prev = -1;
         G.push_back(tmp);
     }
 
+   // clock_t begin = clock();
     for (int i = 0; i < M; i++) {
         int from, to, tPerc, primaAcc, tAcc, tSpeg;
         in >> from >> to >> tPerc >> primaAcc >> tAcc >> tSpeg;
 
-        if (tAcc <= tPerc) {
-            G.at(from)->vic.push_back(to);
-            G.at(to)->vic.push_back(from);
-
-            data[from][to] = {tPerc, primaAcc, tAcc, tSpeg};
-            data[to][from] = {tPerc, primaAcc, tAcc, tSpeg};
+        if (tAcc >= tPerc) {
+            Arco* fr = new Arco(to, tPerc, primaAcc, tAcc, tSpeg);
+            Arco* t = new Arco(from, tPerc, primaAcc, tAcc, tSpeg);
+            
+            G.at(from)->vic.push_back(fr);
+            G.at(to)->vic.push_back(t);
         }
     }
 
     ofstream out("output.txt");
-    out << laser(G, data);
+    int res = laser();
 
+    //clock_t end = clock();
+    //double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    //cout << elapsed_secs;
+
+    out << res << endl;
+
+    if (res != -1) {
+        Nodo* tmp = G.at(N - 1);
+        vector<int> cammino;
+
+        cammino.push_back(N - 1);
+        while (tmp->prev != -1) {
+            cammino.push_back(tmp->prev);
+            tmp = G.at(tmp->prev);
+        }
+
+        for (int i = cammino.size() - 1; i >= 0; i--) {
+            out << cammino.at(i) << endl;
+        }
+    }
     return 0;
 }
 
-int laser(vector<Nodo*>& G, map<int, map<int, vector<int>>> data) {
-    queue<Nodo*> Q;
-
-    Q.push(0);
+int laser() {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> Q;
+    Q.push(make_pair(0, 0));
     G.at(0)->dist = 0;
 
     while (!Q.empty()) {
-        Nodo* u = Q.front();
+        auto tmp = Q.top();
         Q.pop();
 
-        cout << u->vic.at(0);
-        /*for (int i = 0; i < u->vic.size(); i++) {
-            Nodo* v = G.at(u->vic.at(i));
+        int index = tmp.second;
 
-            if (v->dist == -1) {
-                v->dist = partenza(G, u->index, v->index, u->dist, data) + data[u->index][v->index][0];
-                Q.push(v);
+        if (!G.at(index)->visitato) {
+            G.at(index)->visitato = true;
+            Nodo* u = G.at(index);
+
+            for (int i = 0; i < u->vic.size(); i++) {
+                Arco* l = u->vic.at(i);
+                Nodo* v = G.at(l->to);
+                int dist = l->partenza(u->dist) + l->tPerc;
+
+                if (v->dist == -1 || dist < v->dist) {
+                    v->dist = dist;
+                    v->prev = index;
+                    Q.push(make_pair(dist, l->to));
+                }
             }
-        }*/
+        }
     }
 
     return G.at(G.size() - 1)->dist;
-}
-
-int partenza(vector<Nodo*>& G, int from, int to, int t, map<int, map<int, vector<int>>> data) {
-    if (t < data[from][to][1]) {
-        return data[from][to][1];
-    }
-
-    int ciclo = data[from][to][2] + data[from][to][3];
-    int pos = (t - data[from][to][1]) % ciclo;
-    if (data[from][to][2] - pos >= data[from][to][0]) {
-        return t;
-    } else {
-        return t - pos + ciclo;
-    }
 }
