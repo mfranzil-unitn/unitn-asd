@@ -56,14 +56,11 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         pokemon2(i, -1, i, 1);
-        //cout << G.size();
     }
 
     int size = cicli.size() - 1;
-    //cout << size;
     for (int i = 0; i < size; i++) {
         int i1 = cicli.top();
-        //cout << i1;
         cicli.pop();
         int i2 = cicli.top();
         cicli.pop();
@@ -142,7 +139,6 @@ void pokemon2(int node, int padre, int radice, int count) {
 }
 
 void pokemon(int count, int node, int padre) {
-    // cout << "Visiting edge " << node << " " << padre << endl;
     Nodo *N = G.at(node);
 
     N->low = count;
@@ -161,7 +157,6 @@ void pokemon(int count, int node, int padre) {
     }
 
     if (N->pre == N->low && padre != -1) {
-        //cout << "Marking bridge " << node << " " << padre;
         bridges[make_pair(node, padre)] = true;
     }
 }
