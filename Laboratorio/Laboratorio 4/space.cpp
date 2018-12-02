@@ -11,16 +11,17 @@ using namespace std;
 struct Nodo {
     vector<int> vic;
     bool skip;
-    int componente;
-    // int index;
-    // bool visitato;
+    int level;
+    int low;
 };
 
 pair<vector<int>*, int> checkConn(vector<Nodo*>& G);
 bool /*pair<bool, vector<int>*>*/ cc(vector<Nodo*>& G);
 pair<vector<int>*, int> cc_id(vector<Nodo*>& G);
-pair<int, vector<int>> position(vector<Nodo*>& G, pair<vector<int>*, int>);
+void position(vector<Nodo*>& G, pair<vector<int>*, int>);
 void ccdfs(vector<Nodo*>& G, int counter, int u, vector<int>* id);
+
+ofstream out("output.txt");
 
 int main() {
     int N, M, n1;
@@ -29,14 +30,13 @@ int main() {
     ifstream in("input.txt");
     in >> N >> M;
 
-    ofstream out("output.txt");
-
     for (int i = 0; i < N; i++) {
         Nodo* nodo = new Nodo();
         // tmp->index = i;
         //tmp->visitato = false;
+        nodo->level = -1;
+        nodo->low = -1;
         nodo->skip = false;
-        nodo->componente = -1;
         G.push_back(nodo);
     }
 
@@ -48,18 +48,10 @@ int main() {
     }
 
     pair<vector<int>*, int> paio = checkConn(G);
-    pair<int, vector<int>> second_pair = position(G, paio);
-
-    out << second_pair.first << endl;
-
-    for (int i = 0; i < second_pair.second.size(); i++) {
-        if (second_pair.second.at(i) != -1) {
-            out << second_pair.second.at(i) << " ";
-        }
-    }
+    position(G, paio);
 }
 
-pair<int, vector<int>> position(vector<Nodo*>& G, pair<vector<int>*, int> pair) {
+void position(vector<Nodo*>& G, pair<vector<int>*, int> pair) {
     vector<int>* id = pair.first;
     int counter = pair.second;
 
@@ -74,23 +66,39 @@ pair<int, vector<int>> position(vector<Nodo*>& G, pair<vector<int>*, int> pair) 
 
     for (int i = 0; i < G.size(); i++) {
         int expected_index = id->at(i);
+        bool added_vertex = false;
 
         for (int j = 0; j < G.at(i)->vic.size(); j++) {
             int connecting_index = id->at(G.at(i)->vic.at(j));
             if (connecting_index == 0 && connecting_index != expected_index) {
                 connections.at(expected_index).insert(G.at(i)->vic.at(j));
-                positions.at(expected_index) = i;
+                if (!added_vertex) {
+                    added_vertex = true;
+                    positions.at(expected_index) = i;
+                }
             }
         }
     }
 
-    int sec_counter = counter + 1;
+    //out << counter << endl;
+
+    //  int sec_counter = counter + 1;
+        int output_counter = 0;
     for (int i = 0; i < connections.size(); i++) {
         if (connections.at(i).size() != 1) {
-            sec_counter--;
             positions.at(i) = -1;
+        } else {
+            output_counter++;
         }
     }
+
+    out << output_counter << endl;
+    for (int i = 0; i < positions.size(); i++) {
+        if (positions.at(i) != -1) {
+            out << positions.at(i) << " ";
+        }
+    }
+
     /*
     for (int i = 0; i < connections.size(); i++) {
         cout << i << ": ";
@@ -99,55 +107,73 @@ pair<int, vector<int>> position(vector<Nodo*>& G, pair<vector<int>*, int> pair) 
         }
         cout << " - suggested position: " << positions.at(i) << endl;
     }*/
+}
 
-    return make_pair(sec_counter, positions);
+void dfs(vector<Nodo*>& G, int n) {
+    G.at(n)->low = G.at(n)->level;
+    for (int i = 0; i < G.at(n)->vic.size(); i++) {
+        int v_index = G.at(n)->vic.at(i);
+        Nodo* v = G.at(v_index);
+        if (v->level == -1) {
+            v->level = G.at(n)->level + 1;
+            dfs(G, v_index);
+            G.at(n)->low = min(G.at(n)->low, v->low);
+            if ((n != 0 && v->low >= G.at(n)->level) || (n == 0 && v_index != G.at(n)->vic.at(0))) {
+                G.at(n)->skip = true;
+            }
+        } else {
+            G.at(n)->low = min(G.at(n)->low, v->level);
+        }
+    }
 }
 
 pair<vector<int>*, int> checkConn(vector<Nodo*>& G) {
-    vector<bool> skippable;
-    for (int i = 0; i < G.size(); i++) {
-        G.at(i)->skip = true;
+    //  vector<bool> skippable;
+    // for (int i = 0; i < G.size(); i++) {
+    //G.at(i)->skip = true;
 
-        /*pair<bool, vector<int>*>*/ bool result = cc(G);
+    //  /*pair<bool, vector<int>*>*/ bool result = cc(G);
 
-        skippable.push_back(result);
-        /*
+    //  skippable.push_back(result);
+    /*
         for(int j = 0; j < result.second->size(); j++) {
             cout << result.second->at(j) << " ";
         }
         cout << endl;*/
 
-        G.at(i)->skip = false;
-    }
+    //   G.at(i)->skip = false;
+    // }
 
-    for (int i = 0; i < G.size(); i++) {
-        if (!skippable.at(i)) { // ottimizzare trasmettendo direttamente skippable
-            G.at(i)->skip = true;
-        }
-        //cout << skippable.at(i) << " ";
-    }
+    G.at(0)->level = 0;
+    G.at(0)->low = 0;
+    dfs(G, 0);
+
+    //  for (int i = 0; i < G.size(); i++) {
+    //  if (!skippable.at(i)) {  // ottimizzare trasmettendo direttamente skippable
+    // cout << G.at(i)->skip << " ";F
+    //  }
+    //cout << skippable.at(i) << " ";
+    //  }
 
     pair<vector<int>*, int> pair = cc_id(G);
     vector<int>* id = pair.first;
 
-    for (int i = 0; i < id->size(); i++) {
+    /*  for (int i = 0; i < id->size(); i++) {
         G.at(i)->componente = id->at(i);
-        //  cout << id->at(i) << " ";
-    }
+    }*/
 
     return pair;
 }
 
 pair<vector<int>*, int> cc_id(vector<Nodo*>& G) {
-    cout << " a";
     vector<int>* id = new vector<int>();
     id->resize(G.size());
     int counter = 0;
-
+    /*
     for (int i = 0; i < G.size(); i++) {
         id->at(i) = 0;
     }
-
+*/
     for (int i = 0; i < G.size(); i++) {
         if (!G.at(i)->skip && id->at(i) == 0) {
             counter++;
@@ -164,10 +190,10 @@ bool /*pair<bool, vector<int>*>*/ cc(vector<Nodo*>& G) {
     id->resize(G.size());
     int counter = 0;
     int res = true;
-
+    /*
     for (int i = 0; i < G.size(); i++) {
         id->at(i) = 0;
-    }
+    }*/
 
     for (int i = 0; i < G.size(); i++) {
         if (!G.at(i)->skip && id->at(i) == 0) {
