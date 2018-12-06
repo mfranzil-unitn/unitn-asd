@@ -6,7 +6,9 @@ Esercizi/
 Esami/
 Slide/
 Vecchio materiale/
-*.txt
+input.txt
+output.txt
+2017.01.25 Domande.txt
 *.pdf
 
 # Prerequisites
