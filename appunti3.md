@@ -137,3 +137,8 @@ Abbiamo che se $n \ge 2$ e $V[1] < V[n]$, $V$ contiene almeno un gap. Vedi slide
 
 ## Insiemi e dizionari (cont.)
 
+- **Bitset**: struttura dati speciale, formata da un vettore di booleani, che viene usata come sottostruttura per i dizionari.
+- **Albero bilanciato**: struttura vista in precedenza con accesso e ricerca pari a $O(n \log n)$ e iterazione pari a O(n).
+- **Hash table**: struttura vista in precedenza con accesso pari a $O(1)$ e iterazione pari a $O(m)$.
+
+Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguaggi.

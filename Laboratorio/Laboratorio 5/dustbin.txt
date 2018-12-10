@@ -1,0 +1,682 @@
+DUSTBIN
+
+-----
+
+
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+struct Nodo {
+    vector<int> vic;
+    int pre;
+    int visit;
+    int low;
+};
+
+void pokemon(int count, int node, int padre);
+void pokemon2(int node, int padre, int radice, int count);
+
+vector<Nodo *> G;
+stack<int> cicli;
+map<pair<int, int>, int> archi;
+vector<vector<pair<int, int>>> cicli_archi;
+map<pair<int, int>, bool> bridges;
+int cycle_count = 0;
+
+//vector<pair<int, int>> final_archi;
+
+int main() {
+    int N, M, from, to;
+
+    ifstream in("input.txt");
+    in >> N >> M;
+
+    for (int i = 0; i < N; i++) {
+        Nodo *tmp = new Nodo();
+        tmp->pre = -1;
+        tmp->low = -1;
+        tmp->visit = false;
+        G.push_back(tmp);
+    }
+
+    for (int i = 0; i < M; i++) {
+        in >> from >> to;
+        archi[make_pair(from, to)] = 0;  // !
+        G.at(to)->vic.push_back(from);
+        G.at(from)->vic.push_back(to);
+    }
+
+    for (int i = 0; i < N; i++) {
+        pokemon(1, i, -1);
+    }
+
+    cicli_archi.resize(1000000);
+
+    for (int i = 0; i < N; i++) {
+        pokemon2(i, -1, i, 1);
+        for (int k = 0; k < N; k++) {
+            G.at(k)->visit = false;
+        }
+        //cout << G.size() << "  " << i << " ok" << endl << endl;
+    }
+
+    int size = cicli.size() - 1;
+
+    //cout << size;
+    for (int i = 0; i < size; i++) {
+        int i1 = cicli.top();
+        //cout << i1;
+        cicli.pop();
+        int i2 = cicli.top();
+        cicli.pop();
+        int i_new = __gcd(i1, i2);
+        cicli.push(i_new);
+    }
+
+    int mcd = cicli.top();
+
+    cout << mcd << endl;
+
+    for (int i = 0; i < cycle_count; i++) {
+        sort(cicli_archi.at(i).begin(), cicli_archi.at(i).end());
+        for (int j = 0; j < cicli_archi.at(i).size(); j++) {
+            archi[make_pair(cicli_archi.at(i).at(j).first, cicli_archi.at(i).at(j).second)] = j % mcd;
+            cout << cicli_archi.at(i).at(j).first << " " << cicli_archi.at(i).at(j).second << " " << archi[make_pair(from, to)] << endl;
+        }
+          cout << endl;
+    }
+    ofstream out("output.txt");
+
+    out << cicli.top() << "\n";
+
+    for (map<pair<int, int>, int>::iterator it = archi.begin(); it != archi.end(); ++it) {
+        out /* << it->first.first << " " << it->first.second << " => " */ << it->second << '\n';
+    }
+
+    return 0;
+}
+
+void pokemon2(int node, int padre, int radice, int count) {
+    int res = 1;
+
+    Nodo *N = G.at(node);
+
+    N->visit = true;
+
+    for (int i = 0; i < N->vic.size(); i++) {
+        Nodo *U = G.at(N->vic.at(i));
+
+        bool a1, a2;
+        try {
+            a1 = bridges.at(make_pair(node, N->vic.at(i)));
+        } catch (out_of_range ex) {
+            a1 = false;
+        }
+
+        try {
+            a2 = bridges.at(make_pair(N->vic.at(i), node));
+        } catch (out_of_range ex) {
+            a2 = false;
+        }
+
+        if (!a1 && !a2) {
+            //  cout << node << " " << N->vic.at(i) << endl;
+
+            if (U->visit && N->vic.at(i) == radice && padre != radice) {
+                cicli.push(count);
+
+                if (N->vic.at(i) > node) {
+                    cicli_archi.at(cycle_count).push_back(make_pair(node, N->vic.at(i)));
+                } else {
+                    cicli_archi.at(cycle_count).push_back(make_pair(N->vic.at(i), node));
+                }
+                cout << "Ciclo di " << count << "\n";
+
+                cycle_count++;
+
+                U->visit = false;
+            }
+
+            if (!U->visit) {
+                if (N->vic.at(i) > node) {
+                    cicli_archi.at(cycle_count).push_back(make_pair(node, N->vic.at(i)));
+                } else {
+                    cicli_archi.at(cycle_count).push_back(make_pair(N->vic.at(i), node));
+                }
+
+                pokemon2(N->vic.at(i), node, radice, count + 1);
+            }
+        }
+    }
+}
+
+void pokemon(int count, int node, int padre) {
+    // cout << "Visiting edge " << node << " " << padre << endl;
+    Nodo *N = G.at(node);
+
+    N->low = count;
+    N->pre = count;
+
+    for (int i = 0; i < N->vic.size(); i++) {
+        Nodo *U = G.at(N->vic.at(i));
+
+        if (U->pre == -1) {
+            pokemon(count + 1, N->vic.at(i), node);
+        }
+
+        if (N->low > U->low && padre != N->vic.at(i)) {
+            N->low = U->low;
+        }
+    }
+
+    if (N->pre == N->low && padre != -1) {
+        //cout << "Marking bridge " << node << " " << padre;
+        bridges[make_pair(node, padre)] = true;
+    }
+}
+
+---
+
+
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <queue>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+struct Component {
+    int soldier;
+    int value;
+    pair<int, int> coord;
+};
+
+struct Soldier {
+    int component;
+    pair<int, int> coord;
+};
+
+void solve();
+int manhattan(pair<int, int> soldier, pair<int, int> component);
+
+vector<Component*> components;
+vector<Soldier*> soldiers;
+pair<int, int> target;
+
+int main() {
+    int C, S;
+    ifstream in("input.txt");
+    in >> C >> S;
+
+    for (int i = 0; i < C; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Component* tmp = new Component();
+        tmp->soldier = -1;
+        tmp->value = -1;
+        tmp->coord = make_pair(x, y);
+        components.push_back(tmp);
+    }
+
+    for (int i = 0; i < S; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Soldier* tmp = new Soldier();
+        tmp->component = -1;
+        tmp->coord = make_pair(x, y);
+        soldiers.push_back(tmp);
+    }
+
+    in >> target.first >> target.second;
+
+    solve();
+}
+
+void solve() {
+    for (int i = 0; i < components.size(); i++) {
+        int mini = INT32_MAX;
+        for (int j = 0; j < soldiers.size(); j++) {
+            int dist = manhattan(soldiers.at(j)->coord, components.at(i)->coord);
+            mini = min(dist, mini);
+            if (dist == mini) {
+                components.at(i)->soldier = j;
+                components.at(i)->value = dist;
+            }
+        }
+        int dist = manhattan(target, components.at(i)->coord);
+        mini = min(dist, mini);
+        if (dist == mini) {
+            components.at(i)->soldier = -1;
+            components.at(i)->value = dist;
+        }
+    }
+
+    for (int i = 0; i < components.size(); i++) {
+        cout << i << " portato da " << components.at(i)->soldier << " con peso " << components.at(i)->value << endl;
+    }
+
+    /* for (int k = 0; k < priorities.size(); k++) {
+        int size = priorities.at(k).size();
+        for (int i = 0; i < size; i++) {
+            pair<int, int> p = priorities.at(k).top();
+            priorities.at(k).pop();
+            cout << p.first << " ";
+        }
+        cout << "\n";
+    }*/
+}
+
+int manhattan(pair<int, int> soldier, pair<int, int> component) {
+    return abs(soldier.first - component.first) + abs(soldier.second - component.second) +
+           abs(component.first - target.first) + abs(component.second - target.second);
+}
+
+---
+
+
+#include <algorithm>
+#include <cassert>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <queue>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+struct Component {
+    int soldier;
+    int index;
+    int value;
+    pair<int, int> coord;
+};
+
+struct Soldier {
+    int component;
+    pair<int, int> coord;
+};
+
+int solve();
+int manhattan(pair<int, int> soldier, pair<int, int> component);
+
+vector<Component*> components;
+vector<Soldier*> soldiers;
+pair<int, int> target;
+
+ifstream in("input.txt");
+ofstream out("output.txt");
+
+int main() {
+    srand(time(0));
+    int C, S;
+    in >> C >> S;
+
+    for (int i = 0; i < C; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Component* tmp = new Component();
+        tmp->soldier = INT32_MAX;
+        tmp->value = INT32_MAX;
+        tmp->index = i;
+        tmp->coord = make_pair(x, y);
+        components.push_back(tmp);
+    }
+
+    for (int i = 0; i < S; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Soldier* tmp = new Soldier();
+        tmp->component = INT32_MAX;
+        tmp->coord = make_pair(x, y);
+        soldiers.push_back(tmp);
+    }
+
+    in >> target.first >> target.second;
+
+    cout << solve();
+}
+
+int solve() {
+    vector<priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>> priorities;
+    set<int> assigned;
+
+    // cout << components.size() << " " << soldiers.size();
+
+    for (int i = 0; i < components.size(); i++) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> tmp;
+        for (int j = 0; j < soldiers.size(); j++) {
+            tmp.push(make_pair(manhattan(soldiers.at(j)->coord, components.at(i)->coord), j));  // first = valore, secondo = soldato
+        }
+        tmp.push(make_pair(manhattan(target, components.at(i)->coord), -1));
+        priorities.push_back(tmp);
+    }
+
+    for (int i = 0; !priorities.empty(); i++) {
+        for (int j = 0; !priorities.at(i).empty(); j++) {
+            cout << priorities.at(i).top().first << " (" << priorities.at(i).top().second << ") ";
+            priorities.at(i).pop();
+        }
+        cout << endl;
+    } /*
+
+    for (int k = 0; k < priorities.size(); k++) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> current_queue = priorities.at(k);
+
+        pair<int, int> min_dist = current_queue.top();  // pair di distanza, soldato
+                                                        // cout << min_dist.first << " " << min_dist.second << endl;
+        current_queue.pop();
+
+        //if (assigned.count(min_dist.second)) {
+        int soldatoAssegnato = min_dist.second;
+          cout << components.at(14)->soldier << endl
+             << endl;
+        if (assigned.count(soldatoAssegnato) && min_dist.second != -1) {
+            cout << "Iteration starting from" << k << " - soldato " << soldatoAssegnato << endl;
+            cout << "Soldato3 ha " << soldiers.at(3)->component << endl;
+        }
+        while (assigned.count(soldatoAssegnato) && min_dist.second != -1) {
+            int componenteGiaAssegnata = soldiers.at(min_dist.second)->component;
+            int componenteCorrente = k;
+
+            int distanzaGiaAssegnata = components.at(componenteGiaAssegnata)->value;
+            int distanzaCorrente = min_dist.first;
+
+            int secondaGiaAssegnata = priorities.at(componenteGiaAssegnata).top().first;
+            int secondaCorrente = priorities.at(componenteCorrente).top().first;
+
+            if (secondaCorrente + componenteGiaAssegnata >= secondaGiaAssegnata + componenteCorrente) {
+                min_dist = current_queue.top();
+                current_queue.pop();
+                soldatoAssegnato = min_dist.second;
+            } else {
+                pair<int, int> giaAssegnataSeconda = priorities.at(componenteGiaAssegnata).top();
+                priorities.at(componenteGiaAssegnata).pop();
+
+                assigned.erase(soldatoAssegnato);
+                soldiers.at(soldatoAssegnato)->component = INT32_MAX;
+
+                soldatoAssegnato = giaAssegnataSeconda.second;
+
+                if (soldatoAssegnato != -1) {
+                    assigned.insert(giaAssegnataSeconda.second);
+                    soldiers.at(giaAssegnataSeconda.second)->component = componenteGiaAssegnata;
+                }
+                components.at(componenteGiaAssegnata)->soldier = giaAssegnataSeconda.second;
+                components.at(componenteGiaAssegnata)->value = giaAssegnataSeconda.first;
+            }
+
+            cout << soldatoAssegnato << " C(" << componenteGiaAssegnata << " " << secondaGiaAssegnata << endl;
+        }
+
+        if (min_dist.second != -1) {
+            assigned.insert(min_dist.second);
+            soldiers.at(min_dist.second)->component = k;
+        }
+        components.at(k)->soldier = min_dist.second;
+        components.at(k)->value = min_dist.first;
+    }
+
+    int sum = 0;
+    for (int i = 0; i < components.size(); i++) {
+        sum += components.at(i)->value;
+        cout << components.at(i)->index << " S(" << components.at(i)->soldier << ") V(" << components.at(i)->value << ")" << endl;
+    }
+
+    return sum;
+} 
+
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> f;
+    for (int k = 0; k < priorities.size(); k++) {
+        int size = priorities.at(k).size();
+        for (int i = 0; i < size; i++) {
+            pair<int, int> p = priorities.at(k).top();
+            f.push(make_pair(p.first, make_pair(p.second, k)));  // soldato componente valore
+            priorities.at(k).pop();
+            out << p.first << " (S" << p.second << ") ";
+        }
+        out << "\n";
+    }
+
+    int size = f.size();
+
+    for (int i = 0; i < size; i++) {
+        pair<int, pair<int, int>> p = f.top();
+        f.pop();
+        out << p.first << " (S" << p.second.first << " C" << p.second.second << ") ";
+    }*/
+}
+/*
+void solve1() {
+    int mini = INT32_MAX;
+    for (int i = 0; i < components.size(); i++) {
+        int dist = manhattan(soldiers.at(j)->coord, components.at(i)->coord);
+        mini = min(dist, mini);
+        if (dist == mini) {
+            components.at(i)->value = dist;
+        }
+    }
+
+    int tot = 0;
+    for (int i = 0; i < components.size(); i++) {
+    }
+}*/
+
+int manhattan(pair<int, int> soldier, pair<int, int> component) {
+    return abs(soldier.first - component.first) + abs(soldier.second - component.second) +
+           abs(component.first - target.first) + abs(component.second - target.second);
+}
+
+---
+
+#include <algorithm>
+#include <cassert>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <queue>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+struct Component {
+    int soldier;
+    int index;
+    int value;
+    pair<int, int> coord;
+};
+
+struct Soldier {
+    int component;
+    pair<int, int> coord;
+};
+
+int solve();
+int manhattan(pair<int, int> soldier, pair<int, int> component);
+
+vector<Component*> components;
+vector<Soldier*> soldiers;
+pair<int, int> target;
+
+ifstream in("input.txt");
+ofstream out("output.txt");
+
+int main() {
+    srand(time(0));
+    int C, S;
+    in >> C >> S;
+
+    for (int i = 0; i < C; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Component* tmp = new Component();
+        tmp->soldier = INT32_MAX;
+        tmp->value = INT32_MAX;
+        tmp->index = i;
+        tmp->coord = make_pair(x, y);
+        components.push_back(tmp);
+    }
+
+    for (int i = 0; i < S; i++) {
+        int x, y;
+        in >> x >> y;
+
+        Soldier* tmp = new Soldier();
+        tmp->component = INT32_MAX;
+        tmp->coord = make_pair(x, y);
+        soldiers.push_back(tmp);
+    }
+
+    in >> target.first >> target.second;
+
+    cout << solve();
+}
+
+int solve() {
+    vector<priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>> priorities;
+    set<int> assigned;
+
+    // cout << components.size() << " " << soldiers.size();
+
+    for (int i = 0; i < components.size(); i++) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> tmp;
+        for (int j = 0; j < soldiers.size(); j++) {
+            tmp.push(make_pair(manhattan(soldiers.at(j)->coord, components.at(i)->coord), j));  // first = valore, secondo = soldato
+        }
+        tmp.push(make_pair(manhattan(target, components.at(i)->coord), -1));
+        priorities.push_back(tmp);
+    } /*
+
+    for (int i = 0; !priorities.empty(); i++) {
+        for (int j = 0; !priorities.at(i).empty(); j++) {
+            cout << priorities.at(i).top().first << " (" << priorities.at(i).top().second << ") ";
+            priorities.at(i).pop();
+        }
+        cout << endl;
+    }*/
+
+    for (int k = 0; k < priorities.size(); k++) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> current_queue = priorities.at(k);
+
+        pair<int, int> min_dist = current_queue.top();  // pair di distanza, soldato
+                                                        // cout << min_dist.first << " " << min_dist.second << endl;
+        current_queue.pop();
+
+        //if (assigned.count(min_dist.second)) {
+        int soldatoAssegnato = min_dist.second;
+        /*  cout << components.at(14)->soldier << endl
+             << endl;
+        if (assigned.count(soldatoAssegnato) && min_dist.second != -1) {
+            cout << "Iteration starting from" << k << " - soldato " << soldatoAssegnato << endl;
+            cout << "Soldato3 ha " << soldiers.at(3)->component << endl;
+        }*/
+        while (assigned.count(soldatoAssegnato) && min_dist.second != -1) {
+            int componenteGiaAssegnata = soldiers.at(min_dist.second)->component;
+            int componenteCorrente = k;
+
+            int distanzaGiaAssegnata = components.at(componenteGiaAssegnata)->value;
+            int distanzaCorrente = min_dist.first;
+
+            int secondaGiaAssegnata = priorities.at(componenteGiaAssegnata).top().first;
+            int secondaCorrente = priorities.at(componenteCorrente).top().first;
+
+            if (secondaCorrente + componenteGiaAssegnata >= secondaGiaAssegnata + componenteCorrente) {
+                min_dist = current_queue.top();
+                current_queue.pop();
+                soldatoAssegnato = min_dist.second;
+            } else {
+                pair<int, int> giaAssegnataSeconda = priorities.at(componenteGiaAssegnata).top();
+                priorities.at(componenteGiaAssegnata).pop();
+
+                assigned.erase(soldatoAssegnato);
+                soldiers.at(soldatoAssegnato)->component = INT32_MAX;
+
+                soldatoAssegnato = giaAssegnataSeconda.second;
+
+                if (soldatoAssegnato != -1) {
+                    assigned.insert(giaAssegnataSeconda.second);
+                    soldiers.at(giaAssegnataSeconda.second)->component = componenteGiaAssegnata;
+                }
+                components.at(componenteGiaAssegnata)->soldier = giaAssegnataSeconda.second;
+                components.at(componenteGiaAssegnata)->value = giaAssegnataSeconda.first;
+            }
+
+            cout << soldatoAssegnato << " C(" << componenteGiaAssegnata << " " << secondaGiaAssegnata << endl;
+        }
+
+        if (min_dist.second != -1) {
+            assigned.insert(min_dist.second);
+            soldiers.at(min_dist.second)->component = k;
+        }
+        components.at(k)->soldier = min_dist.second;
+        components.at(k)->value = min_dist.first;
+    }
+
+    int sum = 0;
+    for (int i = 0; i < components.size(); i++) {
+        sum += components.at(i)->value;
+        cout << components.at(i)->index << " S(" << components.at(i)->soldier << ") V(" << components.at(i)->value << ")" << endl;
+    }
+
+    return sum;
+} /*
+}
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> f;
+    for (int k = 0; k < priorities.size(); k++) {
+        int size = priorities.at(k).size();
+        for (int i = 0; i < size; i++) {
+            pair<int, int> p = priorities.at(k).top();
+            f.push(make_pair(p.first,make_pair(p.second, k))); // soldato componente valore
+            priorities.at(k).pop();
+             out << p.first << " (S" << p.second << ") ";
+        }
+        out << "\n";
+    }}
+
+    int size = f.size();
+
+    for (int i = 0; i < size; i++) {
+        pair<int, pair<int, int>> p = f.top();
+        f.pop();
+        out << p.first  << " (S" << p.second.first << " C" <<  p.second.second << ") ";
+    }
+}
+
+void solve1(){
+    int mini = INT32_MAX;
+    for(int i=0; i < components.size(); i++){
+         int dist = manhattan(soldiers.at(j)->coord, components.at(i)->coord);
+            mini = min(dist, mini);
+            if (dist == mini) {
+                components.at(i)->value = dist;
+            }
+    }
+
+    int tot =0;
+    for(int i=0; i < components.size(); i++){
+
+    }
+
+
+}*/
+int manhattan(pair<int, int> soldier, pair<int, int> component) {
+    return abs(soldier.first - component.first) + abs(soldier.second - component.second) +
+           abs(component.first - target.first) + abs(component.second - target.second);
+}
