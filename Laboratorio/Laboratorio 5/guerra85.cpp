@@ -45,12 +45,17 @@ vector<Soldier*> soldiers;
 pair<int, int> target;
 
 vector<vector<int>> valori;  // matrice delle distanze (righe: componenti, colonne: soldati + centro)
+vector<vector<double>> vals;
 
 vector<vector<int>> maschera;  // maschera per la selezione
 vector<vector<int>> path;
 
 vector<int> righe_marcate;
 vector<int> colonne_marcate;
+
+vector<int> Lmate;
+vector<int> Rmate;
+int size_s;
 
 int C, S;
 
@@ -224,7 +229,7 @@ void marca_colonne() {
             }
         }
     }
-    //cout << colonne_m << ")";
+    cout << colonne_m << ")";
     if (colonne_m == size_r) {
         return;
     } else {
@@ -239,8 +244,8 @@ void minpath() {
     int next_six;
 
     while (!finito) {
-        //  cout << "4";
-        //cout.flush();
+          cout << "4";
+        cout.flush();
         //  cout << riga << " " << colonna << endl;
 
         trova_zeri(riga, colonna);
