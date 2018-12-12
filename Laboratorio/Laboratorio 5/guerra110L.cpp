@@ -55,9 +55,9 @@
 #include <algorithm>
 // #include <cmath>
 // #include <cstdlib>
-// #include <ctime> // (usato per debugging)
+#include <ctime>  // (usato per debugging)
 #include <fstream>
-//#include <iostream>
+#include <iostream>  // (usato per debugging)
 #include <vector>
 
 using namespace std;
@@ -115,8 +115,8 @@ vector<vector<int> > path;
 vector<int> righe_marcate;    // vettori usati per barrare righe e colonne. Avrei voluto usare un set
 vector<int> colonne_marcate;  // ma il tempo di esecuzione soffriva troppo
 
-int main() {
-    //int start = clock();
+int main(int argc, char** argv) {
+    int start = clock();
     in >> C >> S;
     for (int i = 0; i < C; i++) {
         int x, y;
@@ -200,7 +200,8 @@ int main() {
         }
     }
 
-    //cout << (clock() - start) / (double)CLOCKS_PER_SEC;
+    if (argc > 1 && argv[1][0] == 't')
+        cout << (clock() - start) / (double)CLOCKS_PER_SEC;
 }
 
 int soldatoCuoreSolitario() {
