@@ -1,9 +1,63 @@
+/*
+ * Gruppo krikka.
+ *
+ * Nel tentare di risolvere il progetto abbiamo ottenuto progressivamente diversi algoritmi.
+ * L'affetto provato per i suddetti algoritmi ci ha spinto a conservarli.
+ * Motivo per il quale il codice risulta essere molto voluminoso.
+ *
+ * Nel caso il soldato sia solamente uno => Prendiamo la minore possibile tra le combinazioni delle somme. (BruteForce)
+ * - Metodo: int soldatoCuoreSolitario()
+ *
+ * Nel caso le componenti siano < 500 =>
+ * L'algoritmo dopo aver aggiunto C-1 soldati posizionati al target (passaggio svolto ancora nel main)
+ * chiama una nostra implementazione dell'algoritmo ungherese.
+ * Nel farlo abbiamo fatto riferimento a 2 paper:
+ * 1. ("Algorithm for the Assignment and Transportation Problems", James Munkres, Journal of the Society For Industrial And Applied Mathematics, 1957)
+ * 2. ("An Extension of the Munkres Algorithm for the Assignment Problem to Rectangular Matrices", Franqois Bourgeois and Jean-Claude Lassalle, CERN, Geneva, Switzerland)
+ * Il secondo necessario per l'applicazione dell'algoritmo ungherese a matrici rettangolari.
+ * - Metodo: int solveMonumentsMen()
+ *
+ * Nel caso in cui il numero di componenti sia compreso fra 500 e 1000 =>
+ * L'algoritmo dopo aver aggiunto C-1 soldati posizionati al target (passaggio svolto ancora nel main) fa un padding della matrice delle distanze
+ * così da renderla quadrata.
+ * - Method: int solveMontySquad()
+ * A questo punto chiamiamo il metodo call_LaszloBiro(). (Descritto successivamente)
+ *
+ * Nel caso in cui il numero di componenti sia > 1000 =>
+ * L'algoritmo dopo aver aggiunto 30 (numero fissato, dedotto a tentativi) soldati posizionati al target (passaggio svolto ancora nel main)
+ * fa un padding della matrice delle distanze così da renderla quadrata.
+ * - Method: int solveApocalypseNow()
+ * A questo punto chiamiamo il metodo call_LaszloBiro(). (Descritto successivamente)
+ *
+ * Precisazione riguardo al Padding: Dopo aver trovato il massimo fra le somme.
+ *                                   Questo valore è assegnato alle righe definite, ci sentiamo di dire offensivamente,
+ *                                   Dummy Rows.
+ *
+ * Dopo aver discusso a ricevimento riguardo come ottenere il punteggio massimo.
+ * La dritta è stata di trovare un ottimizzazione per grafi bipariti e augmenting paths.
+ *
+ * Metodo call_LaszloBiro(): Min cost bipartite matching via shortest augmenting paths
+ *                  - 1° (Doppio) Ciclo: Minimo righe
+ *                  - 2° (Doppio) Ciclo: Minimo colonne (mentre sottrae minimo righe)
+ *                  - Associa il primo zero
+ *                  - Applica Dijsktra fino a che non si arriva ad avere il matching su tutte le componenti.
+ *
+ *   valori[i][j] = Matrice costi
+ *   coppiaDx[i] = indice del nodo destro con il quale il nodo i fa coppia
+ *   coppiaSx[j] = indice del nodo sinistro con il quale il nodo j fa coppia
+ *
+ *  Riferimenti:
+ *  http://e-maxx.ru/algo/assignment_hungary
+ *  https://github.com/t3nsor/codebook/blob/master/bipartite-mincost.cpp
+ *
+ */
+
 #include <algorithm>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
+// #include <cmath>
+// #include <cstdlib>
+// #include <ctime> // (usato per debugging)
 #include <fstream>
-#include <iostream>
+//#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -17,10 +71,10 @@ struct Soldier {
     pair<int, int> coord;
 };
 
-int solveSoldatoSingolo();
-int solveSoldatiMultipli(vector<int>& soluz);
-int solveCaso17();
-int solveCasi1819();
+int soldatoCuoreSolitario();
+int solveMonumentsMen();
+int solveMontySquad();
+int solveApocalypseNow();
 
 void marcaColonne();
 void zeriPrimiStelle();
@@ -28,7 +82,7 @@ void invertiPrimiStelle();
 void sottraiMinimi();
 void trovaZeri(int& riga, int& colonna);
 
-int hungarianEnneCubo();
+int call_LaszloBiro();
 
 int manhattan(pair<int, int> soldier, pair<int, int> component);
 
@@ -41,28 +95,28 @@ vector<Component*> components;  // vettore di puntatori a oggetti Component (rig
 vector<Soldier*> soldiers;      // vettore di puntatori a oggetti Soldier (colonne)
 pair<int, int> target;          // il bersaglio
 
-int C, S;  // il numero di componenti e soldati letti
+int C, S;                  // il numero di componenti e soldati letti
+int central_soldier = -1;  // il soldato preposto al recupero delle componenti partendo dal centro
 
-int size_c, size_r;
-int path_row_0;
+int size_c, size_r;  // usati solo per le matrici rettangolari
+int size_s;          // usati per matrici quadrate (size_s == size_c)
+
+int path_row_0;  // punto di partenza dell'augmenting path
 int path_col_0;
-int path_count;
+int path_count;  // numero di strade trovate per l'augmenting path
 
-int central_soldier = -1;
-
-vector<int> coppiaSx;
+vector<int> coppiaSx;  // liste di accoppiamento per i nodi sinistri/destri (componenti/soldati) (solo algoritmo finale)
 vector<int> coppiaDx;
-int size_s;
 
-vector<vector<int>> valori;    // matrice delle distanze (righe: componenti, colonne: soldati + centro)
-vector<vector<int>> maschera;  // maschera per la selezione
-vector<vector<int>> path;
+vector<vector<int> > valori;    // matrice delle distanze (righe: componenti, colonne: soldati + centro)
+vector<vector<int> > maschera;  // maschera per la selezione
+vector<vector<int> > path;
 
-vector<int> righe_marcate;
-vector<int> colonne_marcate;
+vector<int> righe_marcate;    // vettori usati per barrare righe e colonne. Avrei voluto usare un set
+vector<int> colonne_marcate;  // ma il tempo di esecuzione soffriva troppo
 
 int main() {
-    int start = clock();
+    //int start = clock();
     in >> C >> S;
     for (int i = 0; i < C; i++) {
         int x, y;
@@ -85,35 +139,38 @@ int main() {
     in >> target.first >> target.second;
 
     if (S == 1) {
-        out << solveSoldatoSingolo() << endl;
+        out << soldatoCuoreSolitario() << endl;
         for (int i = 0; i < C; i++) {
             out << 0 << endl;
         }
     } else if (C < 500) {
-        for (int i = 0; i < C; i++) {
+        //Aggiunta di C-1 soldati fittizi posizionati al target.
+
+        for (int i = 0; i < C - 1; i++) {
             Soldier* tmp = new Soldier();
             tmp->coord = target;
             soldiers.push_back(tmp);
         }
 
-        vector<int> soluz;
-        soluz.resize(C);
-        out << solveSoldatiMultipli(soluz) << endl;
+        out << solveMonumentsMen() << endl;
+
         for (int i = 0; i < C; i++) {
-            if (soluz[i] >= S) {
+            if (coppiaSx[i] >= S) {
                 out << central_soldier << endl;
             } else {
-                out << soluz[i] << endl;
+                out << coppiaSx[i] << endl;
             }
         }
     } else if (C < 1000) {
-        for (int i = 0; i < C; i++) {
+        for (int i = 0; i < C - 1; i++) {
             Soldier* tmp = new Soldier();
             tmp->coord = target;
             soldiers.push_back(tmp);
         }
 
-        out << solveCaso17() << endl;
+        out << solveMontySquad() << endl;
+
+        // stampa del rapporto
         for (int i = 0; i < C; i++) {
             if (coppiaSx[i] >= S) {
                 out << central_soldier << endl;
@@ -122,12 +179,18 @@ int main() {
             }
         }
     } else {
-        for (int i = 0; i < 50; i++) {
+        //Per velocizzare i tempi di esecuzione, con brutalità e freddezza militare
+        //si è scelto di fissare il numero di soldati fittizi posizionati al target a 30.
+
+        for (int i = 0; i < 30; i++) {  //Questo 30 direbbe Lo Cigno, non è altro che: "Un accidenti della storia".
             Soldier* tmp = new Soldier();
             tmp->coord = target;
             soldiers.push_back(tmp);
         }
-        out << solveCasi1819() << endl;
+
+        out << solveApocalypseNow() << endl;
+
+        // stampa del rapporto
         for (int i = 0; i < C; i++) {
             if (coppiaSx[i] >= S) {
                 out << central_soldier << endl;
@@ -137,10 +200,13 @@ int main() {
         }
     }
 
-    cout << (clock() - start) / (double)CLOCKS_PER_SEC;
+    //cout << (clock() - start) / (double)CLOCKS_PER_SEC;
 }
 
-int solveSoldatoSingolo() {
+int soldatoCuoreSolitario() {
+    //Quando sei l'unico soldato mandato in una missione suicida.
+    // La "BruteForce" non è una scelta, è un obbligo.
+
     vector<int> center_dists;
     center_dists.resize(components.size());
     pair<int, int> shortest = make_pair(INF, INF);
@@ -169,12 +235,18 @@ int solveSoldatoSingolo() {
     return minimal_sum;
 }
 
-int solveSoldatiMultipli(vector<int>& soluz) {
+int solveMonumentsMen() {
+    // Quasi 500 preziosissime opere d'arte andavano recuperate.
+    // Tutta la fiducia del generale fu riposta in George Clooney.
+    // Il buon GC, lo chiamiamo così, per l'occassione si improvvisò anche regista dell'operazione (e del film).
+
     int sum = 0;
-    int massimo = INT32_MIN;
     size_c = S + C - 1;
     size_r = C;
 
+    // Funzione della maschera: ha la stessa dimensione size_r*size_c, ha 0 in tutti i valori inizalmente.
+    // viene settata a 1 quando uno zero viene stellato (aka scelto per la combinazione) o primato (aka compete con
+    // uno zero stellato nella stessa riga, ma non è stato scelto)
     maschera.resize(size_r);
     valori.resize(size_r);  // espando valori per accomodare le righe delle componenti
 
@@ -193,16 +265,12 @@ int solveSoldatiMultipli(vector<int>& soluz) {
     }
 
     for (int i = 0; i < size_r; i++) {
-        valori[i].resize(size_c);
-        maschera[i].resize(size_c);
-        // minimi_righe.push_back(INF);  // setto il minimo a INF per far funzionare min() - servirà per il passo successivo
+        valori[i].resize(size_c);    //Resize delle righe di valori.
+        maschera[i].resize(size_c);  //Resize della maschera.
 
         for (int j = 0; j < size_c; j++) {
-            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);  // manhattan calcola in automatico la distanza soldato-componente-centro
+            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);
             valori[i][j] = soldier_dist;
-            // prima componente poi soldato
-            massimo = max(soldier_dist, massimo);
-            // minimi_righe[i] = min(minimi_righe[i], soldier_dist);
         }
     }
     // ciclo per calcolare i minimi della colonna
@@ -222,24 +290,27 @@ int solveSoldatiMultipli(vector<int>& soluz) {
         }
     }
 
-    for (int i = 0; i < size_r; i++) {
-        righe_marcate[i] = 0;
-    }
-    for (int i = 0; i < size_c; i++) {
-        colonne_marcate[i] = 0;
-    }
+    fill(righe_marcate.begin(), righe_marcate.end(), 0);
+    fill(colonne_marcate.begin(), colonne_marcate.end(), 0);
 
+    // L'algoritmo effettivo parte da qui
     marcaColonne();
+
+    // Tecnicamente coppiaSx viene usato solo nell'implementazione Dijkstra per i casi > 1000,
+    // ma abbiamo deciso di riciclarlo per evitare di scrivere troppe dichiarazioni globali
+    coppiaSx.resize(C);
 
     for (int i = 0; i < C; i++) {
         for (int j = 0; j < size_c; j++) {
             if (maschera[i][j] == 1) {
+                // Assegno, se non è già stato fatto, il soldato centrale in modo da
+                // poterlo stampare nel rapporto
                 if (central_soldier == -1 && j < S) {
                     central_soldier = j;
                 }
                 sum += manhattan(soldiers[j]->coord, components[i]->coord) +
                        manhattan(target, components[i]->coord);
-                soluz[i] = j;
+                coppiaSx[i] = j;
             }
         }
     }
@@ -269,13 +340,13 @@ void zeriPrimiStelle() {
     int colonna = -1;
     int riga = -1;
     bool finito = false;
-    int next_six;
+    bool sottraiMinimiMode;
 
     while (!finito) {
         trovaZeri(riga, colonna);
         if (riga == -1) {
             finito = true;
-            next_six = true;
+            sottraiMinimiMode = true;
         } else {
             maschera[riga][colonna] = 2;
             // ha una stella?
@@ -300,14 +371,14 @@ void zeriPrimiStelle() {
                 colonne_marcate[colonna] = 0;
             } else {
                 finito = true;
-                next_six = false;
+                sottraiMinimiMode = false;
                 path_row_0 = riga;
                 path_col_0 = colonna;
             }
         }
     }
 
-    if (next_six) {
+    if (sottraiMinimiMode) {
         sottraiMinimi();
     } else {
         invertiPrimiStelle();
@@ -390,14 +461,11 @@ void invertiPrimiStelle() {
         }
     }
 
-    for (int i = 0; i < size_r; i++) {
-        righe_marcate[i] = 0;
-    }
-    for (int i = 0; i < size_c; i++) {
-        colonne_marcate[i] = 0;
-    }
+    // svuoto i vettori delle righe marchiate
+    fill(righe_marcate.begin(), righe_marcate.end(), 0);
+    fill(colonne_marcate.begin(), colonne_marcate.end(), 0);
 
-    // cancella primi
+    // cancello eventuali zeri primi (2) rimasti nella maschera
     for (int i = 0; i < size_r; i++) {
         for (int j = 0; j < size_c; j++) {
             if (maschera[i][j] == 2) {
@@ -412,7 +480,7 @@ void invertiPrimiStelle() {
 void sottraiMinimi() {
     int min = INF;
 
-    // trova piccolo
+    // trova l'elemento più piccolo delle righe e colonne non marchiate
     for (int i = 0; i < size_r; i++) {
         for (int j = 0; j < size_c; j++) {
             if (!righe_marcate[i] && !colonne_marcate[j] && min > valori[i][j]) {
@@ -421,6 +489,7 @@ void sottraiMinimi() {
         }
     }
 
+    // sottraggo suddetto valore alle righe marchiate e alle colonne non marchiate
     for (int i = 0; i < size_r; i++) {
         for (int j = 0; j < size_c; j++) {
             if (righe_marcate[i]) {
@@ -434,10 +503,13 @@ void sottraiMinimi() {
     zeriPrimiStelle();
 }
 
-int solveCaso17() {
-    int sum = 0;
+int solveMontySquad() {
+    // C < 1000. La squadra Monty non ha paura. La squadra Monty non conosce fatica.
+    // Meno di 1000 componenti sono uno scherzo, ma abbiamo comunque chiesto l'aiuto di
+    // Lorenzo Ghiro, ehm no!.. di Laszlo Biro.
+
     int massimo = INT32_MIN;
-    size_s = S + C - 1;
+    size_s = C + S - 1;
 
     valori.resize(size_s);  // espando valori per accomodare le righe delle componenti
 
@@ -445,38 +517,8 @@ int solveCaso17() {
         valori[i].resize(size_s);
 
         for (int j = 0; j < size_s; j++) {
-            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);  // manhattan calcola in automatico la distanza soldato-componente-centro
-            valori[i][j] = soldier_dist;
-        }
-    }
-    // dummy row
-    for (int i = C; i < size_s; i++) {
-        valori[i].resize(size_s);
-
-        for (int j = 0; j < size_s; j++) {
-            valori[i][j] = massimo;
-        }
-    }
-
-    coppiaSx.resize(size_s);
-    coppiaDx.resize(size_s);
-
-    return hungarianEnneCubo();
-}
-
-int solveCasi1819() {
-    int sum = 0;
-    int massimo = INT32_MIN;
-    size_s = 30 + C;
-
-    valori.resize(size_s);  // espando valori per accomodare le righe delle componenti
-
-    for (int i = 0; i < C; i++) {
-        valori[i].resize(size_s);
-
-        for (int j = 0; j < size_s; j++) {
-            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);  // manhattan calcola in automatico la distanza soldato-componente-centro
-            massimo = max(soldier_dist, massimo);
+            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);
+            massimo = max(soldier_dist, massimo);  // tengo conto del massimo per inserirlo nelle dummy row
             valori[i][j] = soldier_dist;
         }
     }
@@ -490,13 +532,55 @@ int solveCasi1819() {
         }
     }
 
-    return hungarianEnneCubo();
+    return call_LaszloBiro();
 }
 
-int hungarianEnneCubo() {
+int solveApocalypseNow() {
+    //"Andavo nel posto peggiore del mondo, e ancora non lo sapevo, per settimane e centinaia di miglia su per un fiume
+    // che serpeggiava attraverso la guerra come un cavo elettrico con il terminale inserito direttamente dentro Kurtz…"
+    // Testimonianza di uno dei soldati... dopo aver letto C.
+    // Anche in questo caso ricorriamo all'aiuto di Lorenzo Ghiro, No... maledizione! Di Laszlo Biro
+
+    int massimo = INT32_MIN;
+    size_s = C + 30;
+
+    valori.resize(size_s);  // espando valori per accomodare le righe delle componenti
+
+    for (int i = 0; i < C; i++) {
+        valori[i].resize(size_s);
+
+        for (int j = 0; j < size_s; j++) {
+            int soldier_dist = manhattan(soldiers[j]->coord, components[i]->coord);
+            massimo = max(soldier_dist, massimo);  // tengo conto del massimo per inserirlo nelle dummy row
+            valori[i][j] = soldier_dist;
+        }
+    }
+
+    // Dummy Row (per rendere la matrice quadrata, altrimenti non funziona neanche a piangere)
+    for (int i = C; i < size_s; i++) {
+        valori[i].resize(size_s);
+
+        for (int j = 0; j < size_s; j++) {
+            valori[i][j] = massimo;
+        }
+    }
+
+    return call_LaszloBiro();
+}
+
+int call_LaszloBiro() {
+    // László József Bíró, ispanizzato in Ladislao José Biro (Budapest, 29 Settembre 1899 – Buenos Aires, 24 Ottobre 1985),
+    // è stato un giornalista e inventore UNGHERESE naturalizzato argentino,
+    // famoso per aver ideato la penna a sfera che porta il suo nome.
+    // Quello che molti non sanno è che egli fu, prima della rottura definitiva avvenuta nel Novembre del 1980,
+    // uno dei più fidati consiglieri del gen. Montresor.
+    // In sua assenza... Lorenzo Ghiro ha preso il suo posto.
+    // Si suppone che uno dei fattori di questa scelta sia la somiglianza, evidente, tra i nomi dei 2.
+
     vector<int> u(size_s);
     vector<int> v(size_s);
 
+    //Minimo righe
     for (int i = 0; i < size_s; i++) {
         u[i] = valori[i][0];
         for (int j = 1; j < size_s; j++) {
@@ -504,6 +588,7 @@ int hungarianEnneCubo() {
         }
     }
 
+    //Minimo colonne mentre sottrae minimo righe
     for (int j = 0; j < size_s; j++) {
         v[j] = valori[0][j] - u[0];
         for (int i = 1; i < size_s; i++) {
@@ -511,17 +596,15 @@ int hungarianEnneCubo() {
         }
     }
 
+    //Inizializzazione vettori
     coppiaSx = vector<int>(size_s, -1);
     coppiaDx = vector<int>(size_s, -1);
 
+    //contatore dei partner
     int associati = 0;
-
     for (int i = 0; i < size_s; i++) {
         for (int j = 0; j < size_s; j++) {
-            if (coppiaDx[j] != -1) {
-                continue;
-            }
-            if (abs(valori[i][j] - u[i] - v[j]) < 1e-10) {
+            if (coppiaDx[j] == -1 && valori[i][j] - u[i] - v[j] == 0) {
                 coppiaSx[i] = j;
                 coppiaDx[j] = i;
                 associati++;
@@ -529,19 +612,21 @@ int hungarianEnneCubo() {
             }
         }
     }
+
+    //Dichiarazione delle strutture necessarie per l'algoritmo di Dijkstra
     vector<int> dist(size_s);
     vector<int> prev(size_s);
     vector<int> visit(size_s);
 
-    // repeat until primal solution is feasible
+    // ripete l'esecuzione di Dijkstra finché non finiscono tutti i nodi (size_s)
     while (associati < size_s) {
-        // find an unmatched left node
+        // trova il primo nodo sinistro non associato
         int s = 0;
         while (coppiaSx[s] != -1) {
             s++;
         }
 
-        // initialize Dijkstra
+        // inizializza Dijkstra
         fill(prev.begin(), prev.end(), -1);
         fill(visit.begin(), visit.end(), 0);
 
@@ -551,60 +636,52 @@ int hungarianEnneCubo() {
 
         int j = 0;
         while (true) {
-            // find closest
+            // Trova il più vicino
             j = -1;
             for (int k = 0; k < size_s; k++) {
-                if (visit[k]) {
-                    continue;
-                }
-                if (j == -1 || dist[k] < dist[j]) {
+                if (!visit[k] && (j == -1 || dist[k] < dist[j])) {
                     j = k;
                 }
             }
             visit[j] = 1;
 
-            // termination condition
+            // Condizione di uscita
             if (coppiaDx[j] == -1) {
                 break;
             }
-            // relax neighbors
-            const int i = coppiaDx[j];
+            int i = coppiaDx[j];
             for (int k = 0; k < size_s; k++) {
-                if (visit[k]) {
-                    continue;
-                }
-
-                const double new_dist = dist[j] + valori[i][k] - u[i] - v[k];
-                if (dist[k] > new_dist) {
-                    dist[k] = new_dist;
-                    prev[k] = j;
+                if (!visit[k]) {
+                    int new_dist = dist[j] + valori[i][k] - u[i] - v[k];
+                    if (dist[k] > new_dist) {
+                        dist[k] = new_dist;
+                        prev[k] = j;
+                    }
                 }
             }
         }
-        // update dual variables
+        // Aggiornamento delle variabili
         for (int k = 0; k < size_s; k++) {
-            if (k == j || !visit[k]) {
-                continue;
+            if (k != j && visit[k]) {
+                int i = coppiaDx[k];
+                v[k] += dist[k] - dist[j];
+                u[i] -= dist[k] - dist[j];
             }
-
-            const int i = coppiaDx[k];
-            v[k] += dist[k] - dist[j];
-            u[i] -= dist[k] - dist[j];
         }
 
         u[s] += dist[j];
 
-        // augment along path
+        // augmenting path (scorro il vettore dei precedenti per riassociare tutti gli zeri)
         while (prev[j] >= 0) {
-            const int d = prev[j];
+            int d = prev[j];
             coppiaDx[j] = coppiaDx[d];
             coppiaSx[coppiaDx[j]] = j;
             j = d;
         }
 
-        coppiaDx[j] = s;
+        coppiaDx[j] = s;  // passaggio finale della parte precedente
         coppiaSx[s] = j;
-        associati++;
+        associati++;  // aumento il numero di zeri trovati
     }
 
     // somma finale con identificazione del soldato assegnato al recupero dei pezzi del centro
@@ -618,6 +695,8 @@ int hungarianEnneCubo() {
     return value;
 }
 
+// Questo metodo si limita a calcolare la distanza soldato-componente, ma può accettare
+// anche target come primo parametro, andando a calcolare la distanza target-componente.
 int manhattan(pair<int, int> soldier, pair<int, int> component) {
     return abs(soldier.first - component.first) + abs(soldier.second - component.second);
 }

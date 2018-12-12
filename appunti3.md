@@ -1,17 +1,18 @@
 # Appunti di Algoritmi e Strutture Dati [20181127 - ]
 
 - [Appunti di Algoritmi e Strutture Dati [20181127 - ]](#appunti-di-algoritmi-e-strutture-dati-20181127)
-    - [27/11/2018](#27112018)
-    - [29/11/2018](#29112018)
-    - [4/12/2018](#4122018)
-    - [6/12/2018](#6122018)
-        - [Risoluzione di problemi generali](#risoluzione-di-problemi-generali)
-        - [Divide et impera](#divide-et-impera)
-        - [Torre di Hanoi](#torre-di-hanoi)
-        - [Quicksort](#quicksort)
-        - [Moltiplicazione di matrici](#moltiplicazione-di-matrici)
-        - [Gap](#gap)
-    - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
+  - [27/11/2018](#27112018)
+  - [29/11/2018](#29112018)
+  - [4/12/2018](#4122018)
+  - [6/12/2018](#6122018)
+    - [Risoluzione di problemi generali](#risoluzione-di-problemi-generali)
+    - [Divide et impera](#divide-et-impera)
+    - [Torre di Hanoi](#torre-di-hanoi)
+    - [Quicksort](#quicksort)
+    - [Moltiplicazione di matrici](#moltiplicazione-di-matrici)
+    - [Gap](#gap)
+  - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
+  - [11/12/2018](#11122018)
 
 ## 27/11/2018
 
@@ -142,3 +143,7 @@ Abbiamo che se $n \ge 2$ e $V[1] < V[n]$, $V$ contiene almeno un gap. Vedi slide
 - **Hash table**: struttura vista in precedenza con accesso pari a $O(1)$ e iterazione pari a $O(m)$.
 
 Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguaggi.
+
+## 11/12/2018
+
+Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
