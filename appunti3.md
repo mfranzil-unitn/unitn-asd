@@ -13,6 +13,7 @@
     - [Gap](#gap)
   - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
   - [11/12/2018](#11122018)
+  - [13/12/2018](#13122018)
 
 ## 27/11/2018
 
@@ -147,3 +148,7 @@ Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguag
 ## 11/12/2018
 
 Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
+
+## 13/12/2018
+
+Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
