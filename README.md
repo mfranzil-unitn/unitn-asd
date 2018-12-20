@@ -24,8 +24,7 @@ You can find the following material in the repo:
 * appunti.html - Not-so-often updated HTML version of said notes.
 * markdown.css - File used to style the appunti.md file.
 * Codici/ - Code for algorithms seen in class.
-* Esercitazioni/ - Coming soon...
-* Laboratorio/ - Coming soon...
+* Laboratorio/ - Code written during labs, including projects made in the first and second semester.
 
 ## Authors
 
