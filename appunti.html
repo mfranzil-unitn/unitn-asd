@@ -691,6 +691,28 @@
                                 <li><a href="#complessit%C3%A0">Complessità</a></li>
                             </ul>
                         </li>
+
+                    </ul>
+                </li>
+                <li><a href="#27112018">27/11/2018</a></li>
+                <li><a href="#29112018">29/11/2018</a></li>
+                <li><a href="#4122018">4/12/2018</a></li>
+                <li><a href="#6122018">6/12/2018</a>
+                    <ul>
+                        <li><a href="#risoluzione-di-problemi-generali">Risoluzione di problemi generali</a></li>
+                        <li><a href="#divide-et-impera">Divide et impera</a></li>
+                        <li><a href="#torre-di-hanoi">Torre di Hanoi</a></li>
+                        <li><a href="#quicksort">Quicksort</a></li>
+                        <li><a href="#moltiplicazione-di-matrici">Moltiplicazione di matrici</a></li>
+                        <li><a href="#gap">Gap</a></li>
+                    </ul>
+                </li>
+                <li><a href="#insiemi-e-dizionari-cont">Insiemi e dizionari (cont.)</a></li>
+                <li><a href="#11122018">11/12/2018</a></li>
+                <li><a href="#13122018">13/12/2018</a></li>
+                <li><a href="#18122018">18/12/2018</a>
+                    <ul>
+                        <li><a href="#bloom-filter">Bloom Filter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -7328,7 +7350,7 @@ y.parent = p <span class="hljs-comment"># y diventa figlio di p</span>
             </ul>
         </li>
     </ul>
-    
+
     <h2 id="30102018">30/10/2018</h2>
     <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="01112018">01/11/2018</h2>
@@ -7764,9 +7786,9 @@ y.parent = p <span class="hljs-comment"># y diventa figlio di p</span>
     <p>Una <strong>visita in profondità</strong> visita, dato ogni nodo adiacente, ricorsivamente i vicini adiacenti,
         etc. Viene usato per verificare, ad esempio, le componenti connesse.</p>
     <p>Segue un'implementazione standard dell'attraversamento del grafo.</p>
-    <pre><code class="language-Java"><div>graphTraversal(Graph G, Node r)
+    <pre class="hljs"><code class="language-Java"><div>graphTraversal(Graph G, Node r)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>Set S = Set() <span class="hljs-comment"># Insieme generico</span>
+    <pre class="hljs"><code class="language-Ruby"><div>Set S = Set() <span class="hljs-comment"># Insieme generico</span>
 S.insert(r) <span class="hljs-comment"># Da specificare</span>
 <span class="hljs-comment"># { marca il nodo r }</span>
 <span class="hljs-keyword">while</span> S.size() &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">do</span>
@@ -7781,9 +7803,9 @@ S.insert(r) <span class="hljs-comment"># Da specificare</span>
     <h3 id="bfs">BFS</h3>
     <p>L'obiettivo della visita in ampiezza è visita i nodi a distanza crescenti dalla sorgente. Per farlo genereremo
         un albero <em>BFS</em>.</p>
-    <pre><code class="language-Java"><div>bfs(Graph G, Node r)
+    <pre class="hljs"><code class="language-Java"><div>bfs(Graph G, Node r)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>Queue Q = Queue()
+    <pre class="hljs"><code class="language-Ruby"><div>Queue Q = Queue()
 Q.enqueue(r)
 boolean[] visited = new boolean[<span class="hljs-number">1</span> . . . G.size()]
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() - {r} <span class="hljs-keyword">do</span>
@@ -7854,9 +7876,9 @@ visited[r] = <span class="hljs-literal">true</span>
                         class="mop">in<span style="margin-right:0.07778em;">f</span></span></span></span></span>.
         Questa implementazione è molto simile ai numeri di Bacon.</p>
     <p>Abbiamo quindi l'implementazione <code>bfs</code> adattata ai numeri di Erdos:</p>
-    <pre><code class="language-Java"><div>erdos(Graph G, Node r, <span class="hljs-keyword">int</span>[] erdos, Node[] parent)
+    <pre class="hljs"><code class="language-Java"><div>erdos(Graph G, Node r, <span class="hljs-keyword">int</span>[] erdos, Node[] parent)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>Queue Q = Queue()
+    <pre class="hljs"><code class="language-Ruby"><div>Queue Q = Queue()
 Q.enqueue(r)
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() - {r} <span class="hljs-keyword">do</span>
     visited[u] = Inf
@@ -7873,9 +7895,9 @@ parent[r] = <span class="hljs-literal">nil</span>
     <p>Durante la visita, andremo via via ad accumulare blocchi di nodi che hanno tutti distanza uguale dalla radice.
         Per generare il nostro albero BFS di copertura che conterrà tali nodi utilizziamo il vettore <code>parent</code>nell'algoritmo
         precedente. Per stampare il cammino minimo utilizziamo questa implementazione:</p>
-    <pre><code class="language-Java"><div>printPath(Node r, Node s, Node[] parent)
+    <pre class="hljs"><code class="language-Java"><div>printPath(Node r, Node s, Node[] parent)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div><span class="hljs-keyword">if</span> r == s <span class="hljs-keyword">then</span>
+    <pre class="hljs"><code class="language-Ruby"><div><span class="hljs-keyword">if</span> r == s <span class="hljs-keyword">then</span>
     print(s)
     <span class="hljs-keyword">return</span>
 <span class="hljs-keyword">if</span> parent[s] == <span class="hljs-literal">nil</span> <span class="hljs-keyword">then</span>
@@ -7906,9 +7928,9 @@ print(s)
     <h3 id="dfs">DFS</h3>
     <p>La Depth-First Search viene spesso usata come subroutine di altri problemi. L'output sarà una <em>foresta</em>
         depth-first, un albero per ogni nodo visitato.</p>
-    <pre><code class="language-Java"><div>dfs(Graph G, Node u, <span class="hljs-keyword">boolean</span>[] visited)
+    <pre class="hljs"><code class="language-Java"><div>dfs(Graph G, Node u, <span class="hljs-keyword">boolean</span>[] visited)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
+    <pre class="hljs"><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
 <span class="hljs-comment"># { visita il nodo u (pre-order) }</span>
 foreach v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> visited[v] <span class="hljs-keyword">then</span>
@@ -8008,9 +8030,9 @@ foreach v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keywor
     <p>Per identificare le sue componenti connesse, verifichiamo alla fine della DFS se tutti i nodi sono marcati;
         altrimenti siamo in presenza di un grafo con più componenti connesse, e la visita deve ricominciare da capo da
         una componente non ancora visitata.</p>
-    <pre><code class="language-Java"><div><span class="hljs-keyword">int</span>[] cc(Graph G)
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-keyword">int</span>[] cc(Graph G)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>int[] id = new int[<span class="hljs-number">1</span> ...G.size()]
+    <pre class="hljs"><code class="language-Ruby"><div>int[] id = new int[<span class="hljs-number">1</span> ...G.size()]
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() <span class="hljs-keyword">do</span>
     id[u] = <span class="hljs-number">0</span>
 int counter = <span class="hljs-number">0</span>
@@ -8020,9 +8042,9 @@ int counter = <span class="hljs-number">0</span>
         ccdfs(G, counter, u, id)
 <span class="hljs-keyword">return</span> id
 </div></code></pre>
-    <pre><code class="language-Java"><div>ccdfs(Graph G, <span class="hljs-keyword">int</span> counter, Node u, <span class="hljs-keyword">int</span>[] id)
+    <pre class="hljs"><code class="language-Java"><div>ccdfs(Graph G, <span class="hljs-keyword">int</span> counter, Node u, <span class="hljs-keyword">int</span>[] id)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>id[u] = counter
+    <pre class="hljs"><code class="language-Ruby"><div>id[u] = counter
 <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> id[v] == <span class="hljs-number">0</span> <span class="hljs-keyword">then</span>
         ccdfs(G, counter, v, id)
@@ -8088,9 +8110,9 @@ int counter = <span class="hljs-number">0</span>
                                     class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
         tale che la sequenza è un cammino e il primo e l'ultimo nodo coincidono. Chiamiamo un grafo con almeno un ciclo
         <strong>ciclico</strong> e uno che non ne contiene <strong>aciclico</strong>.</p>
-    <pre><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasCycleRec</span><span class="hljs-params">(Graph G, Node u, Node p, <span class="hljs-keyword">boolean</span>[] visited)</span>
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasCycleRec</span><span class="hljs-params">(Graph G, Node u, Node p, <span class="hljs-keyword">boolean</span>[] visited)</span>
 </span></div></code></pre>
-    <pre><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
+    <pre class="hljs"><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.adj(u) - {p} <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> visited[v] <span class="hljs-keyword">then</span>
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
@@ -8154,9 +8176,9 @@ int counter = <span class="hljs-number">0</span>
                             style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span></li>
         <li><strong>archi di attraversamento</strong> - altrimenti</li>
     </ul>
-    <pre><code class="language-Java"><div><span class="hljs-keyword">void</span> dfs-schema(Graph G, Node u, <span class="hljs-keyword">int</span> &amp;time, <span class="hljs-keyword">int</span>[] dt, <span class="hljs-keyword">int</span>[] ft)
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-keyword">void</span> dfs-schema(Graph G, Node u, <span class="hljs-keyword">int</span> &amp;time, <span class="hljs-keyword">int</span>[] dt, <span class="hljs-keyword">int</span>[] ft)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div><span class="hljs-comment"># { visita il nodo u (pre-order) }</span>
+    <pre class="hljs"><code class="language-Ruby"><div><span class="hljs-comment"># { visita il nodo u (pre-order) }</span>
 time = time + <span class="hljs-number">1</span>
 dt[u] = time
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
@@ -8202,9 +8224,9 @@ ft[u] = time
     <p>Vedi slide per dimostrazione. Ciò riduce di molto l'implementazione precedente: basta infatti trovare un arco
         all'indietro per troncare l'algoritmo e restituire true, ovvero che il grafo è ciclico. Se non viene
         individuato nessun'arco, ritornerà false.</p>
-    <pre><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasCycle</span><span class="hljs-params">(Graph G, Node u, <span class="hljs-keyword">int</span> &amp;time, <span class="hljs-keyword">int</span>[ ] dt, <span class="hljs-keyword">int</span>[ ] ft)</span>
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasCycle</span><span class="hljs-params">(Graph G, Node u, <span class="hljs-keyword">int</span> &amp;time, <span class="hljs-keyword">int</span>[ ] dt, <span class="hljs-keyword">int</span>[ ] ft)</span>
 </span></div></code></pre>
-    <pre><code class="language-Ruby"><div>time = time + <span class="hljs-number">1</span>
+    <pre class="hljs"><code class="language-Ruby"><div>time = time + <span class="hljs-number">1</span>
 dt[u] = time
 foreach v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> dt[v] == <span class="hljs-number">0</span> <span class="hljs-keyword">then</span>
@@ -8257,9 +8279,9 @@ ft[u] = time
                         class="mord mathit" style="margin-right:0.03588em;">v</span></span></span></span>
         nell'ordinamento. Con l'algoritmo <code>topSort</code> andiamo a generare un vettore contenente l'ordinamento
         topologico del</p>
-    <pre><code class="language-Java"><div><span class="hljs-function">Stack <span class="hljs-title">topSort</span><span class="hljs-params">(Graph G)</span>
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-function">Stack <span class="hljs-title">topSort</span><span class="hljs-params">(Graph G)</span>
 </span></div></code></pre>
-    <pre><code class="language-Ruby"><div>Stack S = Stack()
+    <pre class="hljs"><code class="language-Ruby"><div>Stack S = Stack()
 boolean[] visited = boolean[<span class="hljs-number">1</span>...G.size()]
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() <span class="hljs-keyword">do</span>
     visited[u] = <span class="hljs-literal">false</span>
@@ -8267,9 +8289,9 @@ boolean[] visited = boolean[<span class="hljs-number">1</span>...G.size()]
         ts-dfs(G, u, visited, S)
 <span class="hljs-keyword">return</span> S
 </div></code></pre>
-    <pre><code class="language-Java"><div>ts-dfs(Graph G, Node u, <span class="hljs-keyword">boolean</span>[] visited, Stack S)
+    <pre class="hljs"><code class="language-Java"><div>ts-dfs(Graph G, Node u, <span class="hljs-keyword">boolean</span>[] visited, Stack S)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
+    <pre class="hljs"><code class="language-Ruby"><div>visited[u] = <span class="hljs-literal">true</span>
 <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> visited[v] <span class="hljs-keyword">then</span>
         ts-dfs(G, v, visited, S)
@@ -8365,9 +8387,9 @@ S.push(u)
                             style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">⇔</span></span></span></span>
             G0 è un sottografo connesso e massimale di G.</li>
     </ul>
-    <pre><code class="language-Java"><div><span class="hljs-keyword">int</span>[] scc(Graph G)
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-keyword">int</span>[] scc(Graph G)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>Stack S = topSort(G) <span class="hljs-comment"># First visit</span>
+    <pre class="hljs"><code class="language-Ruby"><div>Stack S = topSort(G) <span class="hljs-comment"># First visit</span>
 GT = transpose(G) <span class="hljs-comment"># Graph transposal</span>
 <span class="hljs-keyword">return</span> cc(GT, S)
 </div></code></pre>
@@ -8376,9 +8398,9 @@ GT = transpose(G) <span class="hljs-comment"># Graph transposal</span>
         ininfluente, mentre gli archi non di un ciclo saranno ordinati.</p>
     <p>Definiamo come <strong>grafo trasposto</strong> un grafo orientato i cui archi sono stati invertiti di
         direzione.</p>
-    <pre><code class="language-Java"><div><span class="hljs-keyword">int</span>[] transpose(Graph G)
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-keyword">int</span>[] transpose(Graph G)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>Graph GT = Graph()
+    <pre class="hljs"><code class="language-Ruby"><div>Graph GT = Graph()
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() <span class="hljs-keyword">do</span>
     GT.insertNode(u)
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() <span class="hljs-keyword">do</span>
@@ -8388,9 +8410,9 @@ GT = transpose(G) <span class="hljs-comment"># Graph transposal</span>
 </div></code></pre>
     <p>Per quanto riguarda la visita delle componenti connesse del grafo trasposto, invece di esaminare i nodi in
         ordine arbitrario, questa versione di <code>cc</code> li esamina nell’ordine LIFO memorizzato nello stack.</p>
-    <pre><code class="language-Java"><div>cc(Graph G, Stack S)
+    <pre class="hljs"><code class="language-Java"><div>cc(Graph G, Stack S)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>int[] id = new int[<span class="hljs-number">1</span>...G.size()]
+    <pre class="hljs"><code class="language-Ruby"><div>int[] id = new int[<span class="hljs-number">1</span>...G.size()]
 <span class="hljs-keyword">for</span> u <span class="hljs-keyword">in</span> G.V() <span class="hljs-keyword">do</span>
     id[u] = <span class="hljs-number">0</span>
 int counter = <span class="hljs-number">0</span>
@@ -8400,9 +8422,9 @@ int counter = <span class="hljs-number">0</span>
         counter = counter + <span class="hljs-number">1</span>
 <span class="hljs-keyword">return</span> id
 </div></code></pre>
-    <pre><code class="language-Java"><div>ccdfs(Graph G, <span class="hljs-keyword">int</span> counter, Node u, <span class="hljs-keyword">int</span>[] id)
+    <pre class="hljs"><code class="language-Java"><div>ccdfs(Graph G, <span class="hljs-keyword">int</span> counter, Node u, <span class="hljs-keyword">int</span>[] id)
 </div></code></pre>
-    <pre><code class="language-Ruby"><div>id[u] = counter
+    <pre class="hljs"><code class="language-Ruby"><div>id[u] = counter
 <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> G.adj(u) <span class="hljs-keyword">do</span>
     <span class="hljs-keyword">if</span> id[v] == <span class="hljs-number">0</span> <span class="hljs-keyword">then</span>
         ccdfs(G, counter, v, id)
@@ -9510,6 +9532,772 @@ int counter = <span class="hljs-number">0</span>
                         class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
                         class="mord mathit">m</span><span class="mclose">)</span></span></span></span> ma costo
         ammortizzato costante.</p>
+    <h2 id="27112018">27/11/2018</h2>
+    <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
+    <h2 id="29112018">29/11/2018</h2>
+    <p>Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.</p>
+    <h2 id="4122018">4/12/2018</h2>
+    <p>Lezione di Laboratorio svolta in Aula A101, con introduzione al progetto del semestre. Nessun nuovo argomento di
+        teoria trattato.</p>
+    <h2 id="6122018">6/12/2018</h2>
+    <h3 id="risoluzione-di-problemi-generali">Risoluzione di problemi generali</h3>
+    <p>Dato un problema, non ci sono ricette generali per risolverlo in modo efficiente ma possiamo evidenziare:</p>
+    <ul>
+        <li>Classificazione del problema</li>
+        <li>Caratteristiche della soluzione</li>
+        <li>Tecniche del progetto</li>
+        <li>Utilizzo delle strutture dati</li>
+    </ul>
+    <p>Possiamo classificare i problemi in due categorie: i <em>problemi decisionali</em> (con risposta sì-no), i <em>problemi
+            di ricerca</em> (con un certo sottoinsieme di soluzioni ammissibili), i <em>problemi di ottimizzazione</em>
+        (con ricerca del costo minimo), e i <em>problemi di approssimazione</em> (per i problemi NP-completi).</p>
+    <p>E' inoltre fondamentale definire matematicamente il problema prima di decidere la procedura corretta per
+        arrivare alla soluzione ottima. Vedremo nelle prossime lezioni svariate tecniche di progettazione di algoritmi
+        che possono essere applicate a varie formulazioni di problemi.</p>
+    <h3 id="divide-et-impera">Divide et impera</h3>
+    <p>E' una tecnica di programmazione che si divide in tre fasi:</p>
+    <ul>
+        <li><strong>Divide</strong>: dividi il problema in sotto-problemi più piccoli</li>
+        <li><strong>Impera</strong>: risolvi ricorsivamente i sottoproblemi</li>
+        <li><strong>Combina</strong>: unisci le soluzioni ottenute</li>
+    </ul>
+    <p>Esempio di algoritmo divide-et-impera (potenzialmente inutile con complessità <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi mathvariant="normal">Θ</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\Theta(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord">Θ</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>)</p>
+    <pre class="hljs"><code class="language-Java"><div>minrec(<span class="hljs-keyword">int</span>[] A, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)
+    </div></code></pre>
+    <pre class="hljs"><code class="language-Ruby"><div><span class="hljs-keyword">if</span> i == j <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">return</span> A[i]
+    <span class="hljs-keyword">else</span>
+        m = floor((i + j) / <span class="hljs-number">2</span>)
+        <span class="hljs-keyword">return</span> min(minrec(A, i, m), minrec(A, m + <span class="hljs-number">1</span>, j))
+    </div></code></pre>
+    <p>In generale, l'uso di algoritmi divide-et-impera è consigliato se e solo se migliorano la complessità rispetto
+        alla corrispondente versione iterativa. Sono facilmente parallelizzabili e sfruttano in maniera ottimale la
+        cache, andando ad accedere su aree contingue di memoria.</p>
+    <h3 id="torre-di-hanoi">Torre di Hanoi</h3>
+    <pre class="hljs"><code class="language-Java"><div>hanoi(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> src, <span class="hljs-keyword">int</span> dest, <span class="hljs-keyword">int</span> middle)
+    </div></code></pre>
+    <pre class="hljs"><code class="language-Ruby"><div><span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span> <span class="hljs-keyword">then</span>
+        print(src -&gt; dest)
+    <span class="hljs-keyword">else</span>
+        hanoi(n - <span class="hljs-number">1</span>, src, middle, dest)
+        print(src -&gt; dest)
+        hanoi(n - <span class="hljs-number">1</span>, middle, dest, src)
+    </div></code></pre>
+    <p>Questo algoritmo ha complessità <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi mathvariant="normal">Θ</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mn>2</mn>
+                                <mi>n</mi>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\Theta(2^n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord">Θ</span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span
+                            class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span><span
+                        class="mclose">)</span></span></span></span> ma si può dimostrare che è ottimo.</p>
+    <h3 id="quicksort">Quicksort</h3>
+    <p>Quicksort è un algoritmo di ordinamento divide-et-impera. Nel caso medio ha complessità <span class="katex"><span
+                class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>O</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mi>log</mi>
+                            <mo>⁡</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">O(n\log n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                        class="mord mathit">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mord mathit">n</span><span class="mclose">)</span></span></span></span>, nel caso
+        pessimo <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>O</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mi>n</mi>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">O(n^2)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                        class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                    class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                        class="mclose">)</span></span></span></span>; tuttavia ha il vantaggio di avere fattori
+        moltiplicativi minori rispetto a MergeSort e ha un basso impatto sulla memoria.</p>
+    <p>L'algoritmo prende in input un vettore di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>n</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">n</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">n</span></span></span></span> elementi e:</p>
+    <ul>
+        <li>Sceglie un <em>perno</em> <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>p</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">p</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathit">p</span></span></span></span>
+            appartenente al vettore e sposta tutti gli elementi più piccoli di <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>p</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">p</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathit">p</span></span></span></span>
+            a sinistra di <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>p</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">p</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathit">p</span></span></span></span>,
+            tutti quelli più grandi a destra.</li>
+        <li>Calcola l'indice j in modo che questa condizione venga rispettata e posiziona <span class="katex"><span
+                    class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>p</mi>
+                            </mrow>
+                            <annotation encoding="application/x-tex">p</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathit">p</span></span></span></span>
+            su data posizione</li>
+        <li>Ordina ricorsivamente i due sottovettori a destra e a sinistra del perno.</li>
+    </ul>
+    <pre class="hljs"><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pivot</span><span class="hljs-params">(Item[] A, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span>
+    </span></div></code></pre>
+    <pre class="hljs"><code class="language-Ruby"><div>Item p = A[start]
+    int j = start
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(start + <span class="hljs-number">1</span>, <span class="hljs-keyword">end</span>) <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">if</span> A[i] &lt; p <span class="hljs-keyword">then</span>
+            j = j + <span class="hljs-number">1</span>
+            A[i] &lt;=&gt; A[j]
+    A[start] = A[j]
+    A[j] = p
+    <span class="hljs-keyword">return</span> j
+    </div></code></pre>
+    <pre class="hljs"><code class="language-Java"><div>QuickSort(Item[] A, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)
+    </div></code></pre>
+    <pre class="hljs"><code class="language-Ruby"><div>int j = pivot(A, start, <span class="hljs-keyword">end</span>)
+    QuickSort(A, start, j-<span class="hljs-number">1</span>)
+    QuickSort(A, j, <span class="hljs-keyword">end</span>)
+    </div></code></pre>
+    <p>Il costo di <code>pivot</code> è <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi mathvariant="normal">Θ</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\Theta(n)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord">Θ</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>,
+        mentre <code>QuickSort</code> dal partizionamento:</p>
+    <ul>
+        <li>Se il vettore di dimensione n viene diviso in sottoproblemi di dimensione 0 e n - 1, generando una
+            complessità pari a <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">Θ</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>n</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Theta(n^2)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span
+                            class="mopen">(</span><span class="mord"><span class="mord mathit">n</span><span class="msupsub"><span
+                                    class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                                style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span
+                            class="mclose">)</span></span></span></span>.</li>
+        <li>Se il vettore viene invece diviso in due sottoproblemi pari a n / 2, la complessità sarà pari a <span class="katex"><span
+                    class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi mathvariant="normal">Θ</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mi>log</mi>
+                                <mo>⁡</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\Theta(n \log n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Θ</span><span class="mopen">(</span><span
+                            class="mord mathit">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace"
+                            style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span
+                            class="mclose">)</span></span></span></span>.</li>
+    </ul>
+    <p>Per analizzare il caso medio, bisognerebbe eseguire uno studio probabilistico per verificare il comportamento
+        dell'algoritmo dato un certo input.</p>
+    <h3 id="moltiplicazione-di-matrici">Moltiplicazione di matrici</h3>
+    <p>Date due matrici <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>A</mi>
+                            <mo separator="true">,</mo>
+                            <mi>B</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">A, B</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span
+                        class="mord mathit">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>
+        moltiplicabili riga per colonna (il nimero di righe della prima è pari al numero di colonne della seconda),
+        calcoliamo <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>A</mi>
+                            <mo>×</mo>
+                            <mi>B</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">A \times B</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span
+                        class="mord mathit">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                        class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit"
+                        style="margin-right:0.05017em;">B</span></span></span></span>.</p>
+    <p>Possiamo utilizzare un algoritmo banale <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>O</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mi>n</mi>
+                                <mn>3</mn>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">O(n^3)</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
+                        class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                    class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span
+                        class="mclose">)</span></span></span></span>, ma andremo ora a vedere un altro algoritmo
+        divide-et-impera (<code>strassen</code>). Tramite alcuni accorgimenti e matrici intermedie (simili
+        all'approccio usato da Karatsuba) otteniamo un'equazione di ricorrenza pari a <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mn>7</mn>
+                            <mi>T</mi>
+                            <mo>(</mo>
+                            <mi>n</mi>
+                            <mi mathvariant="normal">/</mi>
+                            <mn>2</mn>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <msup>
+                                <mi>n</mi>
+                                <mn>2</mn>
+                            </msup>
+                        </mrow>
+                        <annotation encoding="application/x-tex">7T(n/2) + n^2</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord">7</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span
+                        class="mopen">(</span><span class="mord mathit">n</span><span class="mord">/</span><span class="mord">2</span><span
+                        class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                        class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span
+                        class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span
+                                    class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>
+        che fornisce una complessità pari a <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi mathvariant="normal">Θ</mi>
+                            <mo>(</mo>
+                            <msup>
+                                <mi>n</mi>
+                                <mn>2.81</mn>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">\Theta(n^{2.81})</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span
+                        class="mord">Θ</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">n</span><span
+                            class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span
+                                            style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span
+                                                        class="mord mtight">2</span><span class="mord mtight">.</span><span
+                                                        class="mord mtight">8</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span
+                        class="mclose">)</span></span></span></span>.</p>
+    <h3 id="gap">Gap</h3>
+    <p>Dato un vettore <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>V</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">V</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.22222em;">V</span></span></span></span> con almeno
+        due elementi, un <strong>gap</strong> è un indice i tale che <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>V</mi>
+                            <mo>[</mo>
+                            <mi>i</mi>
+                            <mo>−</mo>
+                            <mn>1</mn>
+                            <mo>]</mo>
+                            <mo>&lt;</mo>
+                            <mi>V</mi>
+                            <mo>[</mo>
+                            <mi>i</mi>
+                            <mo>]</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">V[i - 1] &lt; V[i]</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span
+                        class="mord mathit">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                        class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                    class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span
+                        class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                        style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span class="mord mathit">i</span><span
+                        class="mclose">]</span></span></span></span>.</p>
+    <p>Abbiamo che se <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>n</mi>
+                            <mo>≥</mo>
+                            <mn>2</mn>
+                        </mrow>
+                        <annotation encoding="application/x-tex">n \ge 2</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span
+                        class="mord mathit">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>
+        e <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>V</mi>
+                            <mo>[</mo>
+                            <mn>1</mn>
+                            <mo>]</mo>
+                            <mo>&lt;</mo>
+                            <mi>V</mi>
+                            <mo>[</mo>
+                            <mi>n</mi>
+                            <mo>]</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">V[1] &lt; V[n]</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span
+                        class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                        class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                    class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit"
+                        style="margin-right:0.22222em;">V</span><span class="mopen">[</span><span class="mord mathit">n</span><span
+                        class="mclose">]</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>V</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">V</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.22222em;">V</span></span></span></span> contiene
+        almeno un gap. Vedi slide per implementazione dell'algoritmo.</p>
+    <h2 id="insiemi-e-dizionari-cont">Insiemi e dizionari (cont.)</h2>
+    <ul>
+        <li><strong>Bitset</strong>: struttura dati speciale, formata da un vettore di booleani, che viene usata come
+            sottostruttura per i dizionari.</li>
+        <li><strong>Albero bilanciato</strong>: struttura vista in precedenza con accesso e ricerca pari a <span class="katex"><span
+                    class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <mi>n</mi>
+                                <mi>log</mi>
+                                <mo>⁡</mo>
+                                <mi>n</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">O(n \log n)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mord mathit">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace"
+                            style="margin-right:0.16666666666666666em;"></span><span class="mord mathit">n</span><span
+                            class="mclose">)</span></span></span></span> e iterazione pari a O(n).</li>
+        <li><strong>Hash table</strong>: struttura vista in precedenza con accesso pari a <span class="katex"><span
+                    class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">O(1)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>
+            e iterazione pari a <span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>O</mi>
+                                <mo>(</mo>
+                                <mi>m</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">O(m)</annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span
+                            class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span></span></span></span>.</li>
+    </ul>
+    <p>Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguaggi.</p>
+    <h2 id="11122018">11/12/2018</h2>
+    <p>Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
+    <h2 id="13122018">13/12/2018</h2>
+    <p>Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.</p>
+    <h2 id="18122018">18/12/2018</h2>
+    <h3 id="bloom-filter">Bloom Filter</h3>
+    <p>I <strong>Bloom Filter</strong> sono delle strutture dati dinamiche che combinano il basso uso di memoria dei
+        bitset con l'algoritmo implementato dalle tabelle hash. Non permettono la cancellazione di oggetti una volta
+        inseriti.</p>
+    <p>La struttura dati utilizzato è un vettore booleano di <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>m</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">m</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">m</span></span></span></span> bit, inizializzati a <span class="katex"><span
+                class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mn>0</mn>
+                        </mrow>
+                        <annotation encoding="application/x-tex">0</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span
+                        class="mord">0</span></span></span></span>. Utilizziamo <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>k</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">k</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> funzione hash
+        del tipo:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>U</mi>
+                                <mo>→</mo>
+                                <mo>[</mo>
+                                <mn>0</mn>
+                                <mo separator="true">,</mo>
+                                <mi>m</mi>
+                                <mo>−</mo>
+                                <mn>1</mn>
+                                <mo>]</mo>
+                            </mrow>
+                            <annotation encoding="application/x-tex">U \rightarrow [0, m-1]
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.10903em;">U</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span
+                            class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord mathit">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span
+                            class="mclose">]</span></span></span></span></span></p>
+    <p>Per inserire un oggetto in un Bloom Filter, si applicano le <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>k</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">k</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> funzioni hash
+        all'oggetto da inserire, ottenendo <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>k</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">k</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> valori
+        numerici. Andiamo quindi a settare i corrispondenti bit nella tabella a <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mn>1</mn>
+                        </mrow>
+                        <annotation encoding="application/x-tex">1</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span
+                        class="mord">1</span></span></span></span>: ad esempio, se inserendo la stringa &quot;ASD&quot;
+        e applicando due funzioni hash otteniamo i valori 45 e 13, andremo a settare <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>A</mi>
+                            <mo>[</mo>
+                            <mn>45</mn>
+                            <mo>]</mo>
+                            <mo separator="true">,</mo>
+                            <mi>A</mi>
+                            <mo>[</mo>
+                            <mn>13</mn>
+                            <mo>]</mo>
+                        </mrow>
+                        <annotation encoding="application/x-tex">A[45], A[13]</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+                        class="mord mathit">A</span><span class="mopen">[</span><span class="mord">4</span><span class="mord">5</span><span
+                        class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                        class="mord mathit">A</span><span class="mopen">[</span><span class="mord">1</span><span class="mord">3</span><span
+                        class="mclose">]</span></span></span></span> su true.</p>
+    <p>Il downside dei Bloom Filter è che quando andiamo a controllare l'appartenenza di un dato elemento al filtro, se
+        restituisce <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>f</mi>
+                            <mi>a</mi>
+                            <mi>l</mi>
+                            <mi>s</mi>
+                            <mi>e</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">false</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span
+                        class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mord mathit">a</span><span
+                        class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">s</span><span
+                        class="mord mathit">e</span></span></span></span> è sicuramente non presente, se restituisce
+        <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>t</mi>
+                            <mi>r</mi>
+                            <mi>u</mi>
+                            <mi>e</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">true</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span
+                        class="mord mathit">t</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span
+                        class="mord mathit">u</span><span class="mord mathit">e</span></span></span></span> potrebbe
+        essere presente oppure no, con una probabilità di falso positivo pari a:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>ϵ</mi>
+                                <mo>=</mo>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>−</mo>
+                                <msup>
+                                    <mi>e</mi>
+                                    <mrow>
+                                        <mo>−</mo>
+                                        <mi>k</mi>
+                                        <mi>n</mi>
+                                        <mi mathvariant="normal">/</mi>
+                                        <mi>m</mi>
+                                    </mrow>
+                                </msup>
+                                <msup>
+                                    <mo>)</mo>
+                                    <mi>k</mi>
+                                </msup>
+                            </mrow>
+                            <annotation encoding="application/x-tex">\epsilon = (1 - e^{-kn/m})^k
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathit">ϵ</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span
+                            class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span
+                            class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span
+                        class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span
+                            class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span
+                                                    class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span
+                                                        class="mord mtight"><span class="mord mtight">−</span><span
+                                                            class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span
+                                                            class="mord mathit mtight">n</span><span class="mord mtight">/</span><span
+                                                            class="mord mathit mtight">m</span></span></span></span></span></span></span></span></span><span
+                            class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span
+                                        class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span
+                                                style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span
+                                                    class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight"
+                                                        style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></span></p>
+    <p>I valori ottimali per <span class="katex"><span class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>k</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">k</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span
+                        class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> e <span class="katex"><span
+                class="katex-mathml"><math>
+                    <semantics>
+                        <mrow>
+                            <mi>m</mi>
+                        </mrow>
+                        <annotation encoding="application/x-tex">m</annotation>
+                    </semantics>
+                </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span
+                        class="mord mathit">m</span></span></span></span> sono invece:</p>
+    <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math>
+                        <semantics>
+                            <mrow>
+                                <mi>k</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>m</mi>
+                                    <mi>n</mi>
+                                </mfrac>
+                                <mi>ln</mi>
+                                <mo>⁡</mo>
+                                <mn>2</mn>
+                                <mspace width="2em" />
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>−</mo>
+                                        <mi>n</mi>
+                                        <mi>ln</mi>
+                                        <mo>⁡</mo>
+                                        <mi>ϵ</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mi>ln</mi>
+                                        <mo>⁡</mo>
+                                        <mn>2</mn>
+                                        <msup>
+                                            <mo>)</mo>
+                                            <mn>2</mn>
+                                        </msup>
+                                    </mrow>
+                                </mfrac>
+                            </mrow>
+                            <annotation encoding="application/x-tex">k = \frac{m}{n} \ln{2}\qquad m =
+                                \frac{-n\ln{\epsilon}}{(\ln{2})^2}
+                            </annotation>
+                        </semantics>
+                    </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+                            style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span
+                            class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span
+                            class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span
+                            class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span
+                                        class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                        class="mord mathit">n</span></span></span><span style="top:-3.23em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="frac-line"
+                                                    style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                        class="mord mathit">m</span></span></span></span><span class="vlist-s">​</span></span><span
+                                        class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span
+                                class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                            class="mord"><span class="mord">2</span></span><span class="mspace" style="margin-right:2em;"></span><span
+                            class="mord mathit">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span
+                            class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span
+                        class="base"><span class="strut" style="height:2.30744em;vertical-align:-0.936em;"></span><span
+                            class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span
+                                        class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span
+                                                    class="pstrut" style="height:3em;"></span><span class="mord"><span
+                                                        class="mopen">(</span><span class="mop">ln</span><span class="mspace"
+                                                        style="margin-right:0.16666666666666666em;"></span><span class="mord"><span
+                                                            class="mord">2</span></span><span class="mclose"><span
+                                                            class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span
+                                                                    class="vlist-r"><span class="vlist" style="height:0.740108em;"><span
+                                                                            style="top:-2.9890000000000003em;margin-right:0.05em;"><span
+                                                                                class="pstrut" style="height:2.7em;"></span><span
+                                                                                class="sizing reset-size6 size3 mtight"><span
+                                                                                    class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span
+                                                style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span
+                                                    class="frac-line" style="border-bottom-width:0.04em;"></span></span><span
+                                                style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span
+                                                    class="mord"><span class="mord">−</span><span class="mord mathit">n</span><span
+                                                        class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                                                        class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span
+                                                        class="mord"><span class="mord mathit">ϵ</span></span></span></span></span><span
+                                            class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
+                                            style="height:0.936em;"><span></span></span></span></span></span><span
+                                class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+
 </body>
 
-</html>
+</html>FF

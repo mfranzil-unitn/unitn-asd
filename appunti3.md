@@ -14,6 +14,8 @@
   - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
   - [11/12/2018](#11122018)
   - [13/12/2018](#13122018)
+  - [18/12/2018](#18122018)
+    - [Bloom Filter](#bloom-filter)
 
 ## 27/11/2018
 
@@ -152,3 +154,28 @@ Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria tra
 ## 13/12/2018
 
 Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
+
+## 18/12/2018
+
+### Bloom Filter
+
+I **Bloom Filter** sono delle strutture dati dinamiche che combinano il basso uso di memoria dei bitset con l'algoritmo implementato dalle tabelle hash. Non permettono la cancellazione di oggetti una volta inseriti.
+
+La struttura dati utilizzato è un vettore booleano di $m$ bit, inizializzati a $0$. Utilizziamo $k$ funzione hash del tipo:
+
+$$
+U \rightarrow [0, m-1]
+$$
+
+Per inserire un oggetto in un Bloom Filter, si applicano le $k$ funzioni hash all'oggetto da inserire, ottenendo $k$ valori numerici. Andiamo quindi a settare i corrispondenti bit nella tabella a $1$: ad esempio, se inserendo la stringa "ASD" e applicando due funzioni hash otteniamo i valori 45 e 13, andremo a settare $A[45], A[13]$ su true.
+
+Il downside dei Bloom Filter è che quando andiamo a controllare l'appartenenza di un dato elemento al filtro, se restituisce $false$ è sicuramente non presente, se restituisce $true$ potrebbe essere presente oppure no, con una probabilità di falso positivo pari a:
+$$
+\epsilon = (1 - e^{-kn/m})^k
+$$
+
+I valori ottimali per $k$ e $m$ sono invece:
+
+$$
+k = \frac{m}{n} \ln{2}\qquad m = \frac{-n\ln{\epsilon}}{(\ln{2})^2}
+$$
