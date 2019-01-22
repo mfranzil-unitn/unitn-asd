@@ -63,8 +63,8 @@
     - [Alberi](#alberi)
       - [Albero radicato](#albero-radicato)
       - [Alberi binari](#alberi-binari)
-      - [Visite degli alberi binari](#visite-degli-alberi-binari)
-      - [Alberi generici](#alberi-generici)
+      - [Visite degli alberi binari - `dfs`, `printExp`, `count`](#visite-degli-alberi-binari---dfs-printexp-count)
+      - [Alberi generici - `bfs`, `binarybfs`](#alberi-generici---bfs-binarybfs)
     - [Memorizzazione di un albero](#memorizzazione-di-un-albero)
       - [Memorizzazione con vettore dei figli](#memorizzazione-con-vettore-dei-figli)
       - [Memorizzazione basata su primo figlio, ultimo padre](#memorizzazione-basata-su-primo-figlio-ultimo-padre)
@@ -79,8 +79,8 @@
       - [Costo computazionale degli alberi di ricerca](#costo-computazionale-degli-alberi-di-ricerca)
     - [Alberi binari di ricerca bilanciati](#alberi-binari-di-ricerca-bilanciati)
     - [Alberi Red-Black](#alberi-red-black)
-      - [Rotazioni](#rotazioni)
-      - [Inserimento con condizioni negli alberi RB](#inserimento-con-condizioni-negli-alberi-rb)
+      - [Rotazioni - `rotateLeft`](#rotazioni---rotateleft)
+      - [Inserimento con condizioni negli alberi RB - `balanceInsert`](#inserimento-con-condizioni-negli-alberi-rb---balanceinsert)
   - [30/10/2018](#30102018)
   - [01/11/2018](#01112018)
   - [06/11/2018](#06112018)
@@ -88,15 +88,15 @@
     - [Grafi](#grafi)
     - [Implementazione dei grafi](#implementazione-dei-grafi)
     - [Visite dei grafi](#visite-dei-grafi)
-    - [BFS](#bfs)
-      - [Numero di Erdos](#numero-di-erdos)
-    - [DFS](#dfs)
-      - [Componenti connesse](#componenti-connesse)
+    - [BFS - `bfs`](#bfs---bfs)
+      - [Numero di Erdős - `erdős`](#numero-di-erd%C5%91s---erd%C5%91s)
+    - [DFS - `dfs`](#dfs---dfs)
+      - [Componenti connesse - `cc`](#componenti-connesse---cc)
   - [13/11/2018](#13112018)
     - [DFS (cont.)](#dfs-cont)
-      - [Grafi con cicli](#grafi-con-cicli)
-      - [Ordinamento topologico](#ordinamento-topologico)
-      - [Componenti fortemente connesse](#componenti-fortemente-connesse)
+      - [Grafi con cicli - `hasCycle`](#grafi-con-cicli---hascycle)
+      - [Ordinamento topologico - `topSort`](#ordinamento-topologico---topsort)
+      - [Componenti fortemente connesse - `scc`, `transpose`](#componenti-fortemente-connesse---scc-transpose)
   - [15/11/2018](#15112018)
   - [20/11/2018](#20112018)
   - [22/11/2018](#22112018)
@@ -120,9 +120,9 @@
   - [6/12/2018](#6122018)
     - [Risoluzione di problemi generali](#risoluzione-di-problemi-generali)
     - [Divide et impera](#divide-et-impera)
-    - [Torre di Hanoi](#torre-di-hanoi)
-    - [Quicksort](#quicksort)
-    - [Moltiplicazione di matrici](#moltiplicazione-di-matrici)
+    - [Torre di Hanoi - `hanoi`](#torre-di-hanoi---hanoi)
+    - [Quicksort - `quicksort`](#quicksort---quicksort)
+    - [Moltiplicazione di matrici - `strassen`](#moltiplicazione-di-matrici---strassen)
     - [Gap](#gap)
   - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
   - [11/12/2018](#11122018)
@@ -145,9 +145,9 @@ def _sum(a, i, j):
     return sum(a[i:j+1])
 
 def maxsum3(a):
-            max_so_far = 0
-            for i in range(0, len(a)):
-            for j in range(i, len(a)):
+    max_so_far = 0
+    for i in range(0, len(a)):
+        for j in range(i, len(a)):
             max_so_far = max(_sum(a, i, j), max_so_far)
     return max_so_far
 ```
@@ -194,7 +194,7 @@ def maxsum3(A):
 
 #### Versione $O(n)$
 
-```c++
+```Java
 int maxsum4(int A[], int n) {
     int maxSoFar = 0;
     int maxHere = 0;
@@ -208,17 +208,13 @@ int maxsum4(int A[], int n) {
 
 Vedi slide per versione 4 con restituzione di coppia di indici.
 
-----
-
 ## 18/09/2018
 
 ### Problemi computazionali
 
-__Problema computazionale__:
-> Rappresentato da una relazione matematica che associa gli elementi dei domini di input e output.
+__Problema computazionale__: Rappresentato da una relazione matematica che associa gli elementi dei domini di input e output.
 
-__Algoritmo__:
-> Un procedimento effettivo che risolve il problema in un tempo finito.
+__Algoritmo__: Un procedimento effettivo che risolve il problema in un tempo finito.
 
 Esempi di problemi computazionali possono essere il minimo e la ricerca. Esprimere tali problemi in italiano si rivela tuttavia impreciso e poco formale. Utilizzeremo una descrizione molto più formale con lo *pseudo-codice*.
 
@@ -226,29 +222,27 @@ Vedi slide per esempi sulla sintassi dello pseudo-codice. Seguono i due algoritm
 
 #### Minimo - `min`
 
-```c++
+```Java
 int min (int[] s, int n)
 ```
 
 ```Coffee
-for i <- 1 to n do
-    boolean isMin <- true
-    for j <- 1 to n do
-        if i != j and S[j] < S[i] then
-            isMin <- false
+int minSoFar = s[1]
+for i = 2 to n do
+    if s[i] < minSoFar then
+        minSoFar = s[i]
 
-    if isMin then
-        return S[i]
+return minSoFar
 ```
 
 #### Ricerca dicotomica - `lookup`
 
-```c++
+```Java
 int lookup(int[] S, int n, int v)
 ```
 
 ```Coffee
-for i <- 1 to n do
+for i = 1 to n do
     if S[i] == v then
         return i
 return 0
@@ -265,7 +259,7 @@ Definiamo il tempo come il _numero di operazioni rilevanti_ al fine della soluzi
 
 #### Ricerca binaria - `binarySearch`
 
-```c++
+```Java
 int binarySearch(int[] S, int v, int i, int j)
 ```
 
@@ -273,7 +267,7 @@ int binarySearch(int[] S, int v, int i, int j)
 if i > j then
     return 0
 else
-    int m <- floor((i + j)/2)
+    int m = floor((i + j)/2)
     if S[m] == v then
         return m
     else if S[m] < v then
@@ -314,21 +308,19 @@ Nei casi degli algoritmi ricorsivi, dobbiamo andare a contare anche un costo fis
 
 #### Ordini di complessità
 
-| Alcuni tipi di ordini di complessità |
-| :----------------------------------: |
-| $\log(n)$                            |
-| $\sqrt{n}$                           |
-| $n$                                  |
-| $n\ \log(n)$                         |
-| $n^2$                                |
-| $n^3$                                |
-| $2^n$                                |
+<center>
+
+|           |            |       |    Ordini    |       |       |       |
+| :-------: | :--------: | :---: | :----------: | :---: | :---: | :---: |
+| $\log(n)$ | $\sqrt{n}$ |  $n$  | $n\log(n)$ | $n^2$ | $n^3$ | $2^n$ |
+
+</center>
 
 #### Funzioni di costo
 
 Utilizziamo il termine funzione di costo per una funzione $f: \mathbb{N}\Longrightarrow \mathbb{R}$
 
-Sia ora g(n) una funzione di costo.
+Sia ora $g(n)$ una funzione di costo.
 
 __Limite asintotico superiore__:
 
@@ -348,15 +340,13 @@ Indichiamo con $\Theta(g(n))$ l'insieme delle funzioni f(n) tali per cui
 $$\exists c > 0, \exists m \ge 0 :c_1 g(n) \le f(n) \le c_2 g(n), \forall n \ge m$$
 ovvero, grazie al teorema dei Carabinieri, $f(n)$ cresce esattamente come $g(n)$.
 
-----
-
 ## 20/09/2018
 
 ### Analisi di algoritmi (cont.)
 
 #### Stima dei limiti asintotici
 
-Per dimostrare $\Theta(n)$, dimostreremo sia la validità del limite inferiore sia del limite superiore tramite semplici disequazioni (vedi slide 22-23-24). Ai fini della dimostrazione non è importante ottenere una stima troppo precisa, ma semplicemente ottenere una stima inferiore e superiore sullo stesso ordine di grandezza.
+Per dimostrare $\Theta(n)$, dimostreremo sia la validità del limite inferiore sia del limite superiore tramite semplici disequazioni (vedi slide 22-23-24). Ai fini della dimostrazione non è importante ottenere una stima troppo precisa, ma semplicemente ottenere una stima asintotica inferiore e superiore sullo stesso ordine di grandezza.
 
 ### Complessità degli algoritmi e dei problemi
 
@@ -382,9 +372,9 @@ Effettuare tre moltiplicazioni anzi che quattro può offrire un risparmio del 25
 
 Consideriamo ora l'algoritmo della somma elementare `sum`. Richiede di esaminare tutti i bit e ha un costo totale $cn$ (dove $cn \equiv$ costo per sommare e generare riporto). Si piò dimostrare per assurdo che NON esiste un metodo più efficiente (infatti tutti i bit vanno visitati almeno una volta).
 
-> Il problema della somma di numeri binari ha complessità $O(n)$ e $\Theta(n)$.
+> Il problema della somma di numeri binari ha complessità $\Theta(n)$.
 
-Si ha che un problema ha complessità $O(f(n))$ se esiste almeno un algoritmo che lo risolve con complessità $O(f(n))$. Si ha che un problema ha complessità $\Omega(f(n))$ se tutti gli algoritmi che lo risolvono hanno complessità $\Omega(f(n))$.
+Si ha che un problema ha complessità $O(f(n))$ se esiste almeno un algoritmo che lo risolve con complessità $O(f(n))$. Si ha che un problema ha complessità $\Omega(f(n))$ se tutti gli algoritmi che lo risolvono hanno al massimo complessità $\Omega(f(n))$.
 
 Analogamente possiamo discutere della complessità della moltiplicazione. Si dimostra che la moltiplicazione ha complessità $O(n^2)$, perlomeno con l'algoritmo studiato alle elementari.
 
@@ -396,7 +386,7 @@ $$X = a 2^{n/2} + b\\
 Y = c 2^{n/2} + d\\
 XY = ac2^n + (ad + bc) 2 ^ {n/2} + bd$$
 
-```c++
+```Java
 bool[] pdi(bool[] X, bool[]y, int n)
 ```
 
@@ -409,13 +399,13 @@ else
            pdi(b, c, n/2) * 2^n + pdi(b, d, n/2)
 ```
 
-Grazie alle moltiplicazioni per $2^n$ che vengono risolte in tempo lineare, così come le somme, otteniamo una funzione di ricorrenza (vedi slide 41) che viene ridotta nuovamente a una funzione di costo O(n^2).
+Grazie alle moltiplicazioni per $2^n$ che vengono risolte in tempo lineare, così come le somme, otteniamo una funzione di ricorrenza (vedi slide 41) che viene ridotta nuovamente a una funzione di costo $O(n^2)$, rendendo di fatto inutile questa applicazione del divide et impera.
 
 #### Moltiplicazione di Karatsuba - `karatsuba`
 
-Usiamo lo stesso principio di Gauss visto in precedenza per ridurre il numero di moltiplicazioni richieste a tre.
+Usiamo lo stesso principio di Gauss visto in precedenza per ridurre il numero di moltiplicazioni richieste a tre, riducendo di fatto anche la complessità.
 
-```c++
+```Java
 bool[] karatsuba(bool[] X, bool[] Y, int n)
 ```
 
@@ -431,7 +421,7 @@ else
     return A1 * 2^(n/2) + A2 * 2^(n/2) + A3
 ```
 
-Questo algoritmo ha complessità $n^{1.58}$. Esistono comunque altri algoritmi (Toom-Cook, Furer, che vengono usati, a causa dei fattori moltiplicativi, solo per numeri molto grandi) che hanno ulteriormente abbassato la complessità della moltiplicazione, e si suppone che la moltiplicazione ha un limite inferiore pari a $\Omega(n\log(n))$.
+Questo algoritmo ha complessità $n^{1.58}$. Esistono comunque altri algoritmi (Toom-Cook, Fürer, che vengono usati, a causa dei fattori moltiplicativi, solo per numeri molto grandi) che hanno ulteriormente abbassato la complessità della moltiplicazione, e si suppone che la moltiplicazione ha un limite inferiore pari a $\Omega(n\log(n))$.
 
 ### Algoritmi di ordinamento
 
@@ -444,26 +434,26 @@ Valuteremo ora gli algoritmi di ordinamento in base a dimensione e tipologia del
 - __Caso ottimo__: utile se si hanno informazioni particolari
 
 Il problema da risolvere è il seguente:
-> Data una sequenza A di n valori, ottenere una sequenza Bche sia una permutazione dell'input tale che $\forall b \in b, b_1 \le b_2 \le ... \le b_n$.
+> Data una sequenza $A$ di n valori, ottenere una sequenza $B$ permutazione dell'input tale che $\forall b \in b, b_1 \le b_2 \le ... \le b_n$.
 
 #### Selection Sort - `selectionsort`
 
-```c++
-void selectionSort(T[] A, int n)
+```Java
+selectionSort(T[] A, int n)
 ```
 
 ```Coffee
 for i = 1 to n - 1 do
     int min = min(A, i, n)
-    A[i] <-> A[min]
+    A[i] => A[min]
 ```
 
-L'algoritmo ha una complessità pari a $O(n^2)$ e $\Theta(n^2)$.
+L'algoritmo ha una complessità pari a $\Theta(n^2)$.
 
 #### Insertion Sort - `insertionsort`
 
-```c++
-void insertionSort(T[] A, int n)
+```Java
+insertionSort(T[] A, int n)
 ```
 
 ```Coffee
@@ -476,7 +466,7 @@ for i = 2 to n do
     A[j] = temp
 ```
 
-Questo algoritmo costa in media e nel caso pessimo $O(n^2)$, ma nei casi migliori si avvicina a $O(n)$.
+Questo algoritmo costa in media e nel caso pessimo $O(n^2)$, ma nei casi migliori si avvicina a $O(n)$. Funziona molto bene per sequenze relativamente piccole.
 
 ## 25/09/2018
 
@@ -484,12 +474,12 @@ Questo algoritmo costa in media e nel caso pessimo $O(n^2)$, ma nei casi miglior
 
 #### Merge Sort - `mergesort`
 
-Dato un vettore di $n$ interi, andiamo a usare la tecnica divide et impera per ordinare il vettore. Usiamo come appoggio il metodo `merge()` che dato in input un vettore di $n$ interi contenente due sottovettori di interi già ordinati, fornisce in output un vettore ordinato tramite un vettore di appoggio B.
+Dato un vettore di $n$ interi, andiamo a usare la tecnica divide et impera per ordinare il vettore. Usiamo come appoggio il metodo `merge()` che dato in input un vettore di $n$ interi contenente due sottovettori di interi già ordinati, fornisce in output un vettore ordinato tramite un vettore di appoggio $B$.
 
 > Nell'implementazione del programma, abbiamo un singolo vettore d'appoggio $B$ lungo $n$ che viene utilizzato durante tutta l'esecuzione del programma.
 
-```c++
-void merge(int A[], int first, int last, int mid)
+```Java
+merge(int A[], int first, int last, int mid)
 ```
 
 ```Coffee
@@ -517,10 +507,10 @@ for j = first to k - 1 do
     A[j] = B[j]
 ```
 
-`merge()` ha un costo computazionale di $O(n)$. Il resto dell'algoritmo si basa appunto sulla tecnica divide-et-impera ricorsiva; il caso base è dato da vettori di lunghezza 1.
+`merge` ha un costo computazionale di $\Theta(n)$. Il resto dell'algoritmo si basa appunto sulla tecnica divide-et-impera ricorsiva; il caso base è dato da vettori di lunghezza 1.
 
-```c++
-void mergeSort(int A[], int first, int last)
+```Java
+mergeSort(int A[], int first, int last)
 ```
 
 ```Coffee
@@ -571,10 +561,10 @@ Vedi slide per ulteriori proprietà di logaritmi e esponenziali.
 ### Notazioni $o,\ \omega$
 
 Sia $g(n)$ una funzione di costo; indichiamo con $o(g(n))$ l'insieme delle funzioni f(n) tali per cui
-$$\forall c, \exists m : f(n) < cg(n), \forall n \ge m$$
+$$\forall c,\ \exists m : f(n) < cg(n), \forall n \ge m$$
 
 Sia $g(n)$ una funzione di costo; indichiamo con $\omega(g(n))$ l'insieme delle funzioni f(n) tali per cui
-$$\forall c, \exists m : f(n) > cg(n), \forall n \ge m$$
+$$\forall c,\ \exists m : f(n) > cg(n), \forall n \ge m$$
 
 ### Classificazione delle funzioni
 
@@ -586,10 +576,7 @@ $$O(1) \subset O(\log^r n) \subset O(\log^s n) \subset O(n^h) \subset O(n^h \log
 
 Si ottengono calcolando la complessità di un algoritmo ricorsivo. L'obiettivo è ottenere una *forma chiusa* che rappresenti la complessità. Utilizzeremo le equazioni di ricorrenza anche per risolvere problemi.
 
-__Problema__:
-> Un bambino scende una scala composta da n scalini. Ad ogni passo,
-può decidere di fare 1, 2, 3, 4 scalini alla volta. Determinare in quanti
-modi diversi può scendere le scale.
+__Problema__: Un bambino scende una scala composta da n scalini. Ad ogni passo, può decidere di fare 1, 2, 3, 4 scalini alla volta. Determinare in quanti modi diversi può scendere le scale.
 
 Una possibile soluzione può essere una funzione ricorsiva che conta a ogni passo il numero di modi possibili, con due casi base, uno quando si hanno terminato gli scalini (con un modo possibile) e uno quando si "sfora" (con zero modi).
 
@@ -597,7 +584,7 @@ Distinguiamo ora tre metodi per le risolvere le ricorrenze.
 
 #### Metodo dell'albero di ricorsione / per livelli
 
-Si "srotola" la ricorrenza in un albero come già visto prima. Una volta arrivati al caso base, si valutano i costi delle chiamate comprimendoli in una sommatoria per poi usare passaggi algebrici (segue).
+Si "srotola" la ricorrenza in un albero (o in una tabella), andando a ricavare un modello matematico che rispetti l'equazione data. Una volta arrivati al caso base, si valutano i costi delle chiamate comprimendoli in una sommatoria per poi usare passaggi algebrici (segue).
 
 ## 27/09/2018
 
@@ -605,7 +592,7 @@ Si "srotola" la ricorrenza in un albero come già visto prima. Una volta arrivat
 
 #### Metodo dell'albero di ricorsione / per livelli (cont.)
 
-(cont.) Bisogna fare estrema attenzione ai fattori moltiplicativi associati alle chiamate ricorsive in quanto si ripercuotono su tutta la chiamata. All'arrivo del caso base ($T(1)$) si ottengono generalmente $\log (n) + 1$ elementi di cui l'ultima conterrà $T(1)$, e le altre si potranno condensare, ad esempio, in una serie matematica.
+(cont.) Bisogna fare estrema attenzione ai fattori moltiplicativi associati alle chiamate ricorsive in quanto si ripercuotono su tutta la chiamata. All'arrivo del caso base ($T(1)$) si ottengono generalmente $\log (n) + 1$ elementi di cui l'ultima conterrà $T(1)$, e le altre si potranno condensare in una serie matematica.
 
 Un metodo alternativo, usato per casi più complicati, è cercare di visualizzare graficamente l'albero delle chiamate oppure utilizzare una tabella; ad esempio per un'equazione di ricorrenze del tipo
 
@@ -635,15 +622,17 @@ Si cercare di "indovinare" la complessità dell'algoritmo e si procede con una d
 
 > Reminder: Le equazioni del tioo $cT(\cdot \cdot \cdot) + n^{\alpha}$ sono sempre $\Omega(n^{\alpha})$
 
-A volte le assunzioni, pur risultando valide, possono fallire sotto certi aspetti (ad esempio un termine di ordine inferiore che rende invalida una disequazione). In tali casi è opportuno effettuare una dimostrazione sottraendo il termine di ordine superiore nell'ipotesi, ad esempio:
+A volte le assunzioni, pur risultando valide, possono fallire sotto certi aspetti (ad esempio un termine di ordine inferiore che rende invalida una disequazione). In tali casi è opportuno effettuare una dimostrazione sottraendo il termine di ordine inferiore nell'ipotesi, ad esempio:
 $$\exists c > 0, \exists m \ge 0 : T(n) \le cn, \forall n \ge m$$
 Ipotesi possibili:
 $$\forall k < n : T(k) \le ck \qquad\ \quad\text{fallisce}\\
   \forall k < n : T(k) \le ck - b \qquad \text{ funziona}$$
 
-Altre volte, invece, si possono presentare problemi con il caso base $T(0)$ (ovvero che la dimostrazione fallisce). Grazie all'arbitrarietà di $m$, possiamo andare a dimostrare i vari casi base ($T(1), T(2)...$) che dipendono ancora da $T(0)$ finché non si esauriscono. Si ottengono quindi diversi $c$ dalla quale poi si sceglie il $\max()$.
+Altre volte, invece, si possono presentare problemi con il caso base $T(0)$ (ovvero che la dimostrazione fallisce, ad esempio per colpa di un logaritmo). Grazie all'arbitrarietà di $m$, possiamo andare a dimostrare i vari casi base ($T(1), T(2)...$) che dipendono ancora da $T(0)$ finché non si esauriscono. Si ottengono quindi diversi $c$ dalla quale poi si sceglie il maggiore.
 
-Bisogna infine fare attenzione ad ipotizzare soluzioni troppo strette.
+Bisogna infine fare attenzione ad ipotizzare soluzioni troppo strette. Infatti, data un'equazione di ricorrenza,
+
+> la sua complessità $\Omega(f(x))$ sarà sempre almeno pari alla componente non ricorsiva.
 
 #### Esempio completo
 
@@ -821,7 +810,9 @@ Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
 
 ### Alberi
 
-Possiamo trovare all'interno di ambiti informatici o meno tantissimi esempi di alberi; ad esempio, l'albero genealogico, così come la struttura di una pagina HTML può essere rappresentata con un albero.
+Come visto nella lezione precedente, un'albero è un grafo con $n - 1$ nodi e senza cicli. 
+
+Possiamo trovare all'interno di ambiti informatici o meno tantissimi esempi di alberi; ad esempio, l'albero genealogico, così come la struttura di una pagina HTML può essere rappresentata con un albero. In questo corso ci concentreremo soprattutto sugli alberi radicati e binari.
 
 #### Albero radicato
 
@@ -833,74 +824,95 @@ Definiamo come **profondità** la lunghezza del cammino dalla radice al nodo mis
 
 Un **albero binario** è un albero radicato in cui ogni nodo ha al massimo due figli, identificati come *sinistro* e *destro*. Vedi slide per implementazione della struttura dati
 
-#### Visite degli alberi binari
+#### Visite degli alberi binari - `dfs`, `printExp`, `count`
 
 Un albero binario può essere visitato *in profondità* (ovvero ricorsivamente sui sottoalberi) oppure *in ampiezza* (ovvero per livello).
 
-Per la visità in profondità, si usa uno *stack* per gestire le chiamate ricorsive.
+Per la visità in profondità, si usa una *pila* per gestire le chiamate ricorsive.
 
-```ruby
-def dfs(t):
-    if t != nil:
-        # pre-order visit of t
-        print(t)
-
-        dfs(t.left())
-
-        # in-order visit of t
-        print(t)
-
-        dfs(t.right())
-
-        # post-order visit of t
-        print(t)
+```Java
+dfs(Tree t)
 ```
 
-La post-visita viene spesso applicata per il conteggio dei nodi di un dato albero.
-
-```ruby
-def count(T):
-    if T == nil:
-        return 0
-    else
-    Cl = count(T.left())
-    Cr = count(T.right())
-    return Cl + Cr + 1
+```Coffee
+if t != nil:
+    # pre-order visit of t
+    dfs(t.left())
+    # in-order visit of t
+    dfs(t.right())
+    # post-order visit of t
 ```
 
-L'in-visita viene spesso applicata per stampare espressioni matematiche. Un'espressione matematica puà essere infatti sintetizzata tramite un albero binario nella quale le foglie sono numeri e i padri sono operazioni. Il corso computazionale è generalmente $\Theta(n)$.
+La post-visita può essere applicata per il conteggio dei nodi di un dato albero.
 
-```ruby
-def printExp(T)
-    if T.left() == nil and T.right == nil:
-        print T.read()
-    else
-        print("(")
-        printExp(T.left())
-        print(T.read())
-        printExp(T.right())
-        print(")")
+```Java
+count(Tree t)
 ```
 
-#### Alberi generici
+```Coffee
+if T == nil then
+    return 0
+else
+    cl = count(T.left())
+    cr = count(T.right())
+return cl + cr + 1
+```
+
+L'in-visita può essere applicata per stampare espressioni matematiche. Un'espressione matematica puà essere infatti sintetizzata tramite un albero binario nella quale le foglie sono numeri e i padri sono operazioni. Il corso computazionale è generalmente $\Theta(n)$.
+
+```Java
+printExp(Tree t)
+```
+
+```Coffee
+if T.left() == nil and T.right == nil then
+    print(T.read())
+else
+    print("(")
+    printExp(T.left())
+    print(T.value())
+    printExp(T.right())
+    print(")")
+```
+
+#### Alberi generici - `bfs`, `binarybfs`
 
 Un albero generico differisce dagli alberi binari in quanto può avere un numero arbitrario di figli. L'implementazione nel codice differisce per l'uso di iteratori per scorrere in tutti i sottoalberi, dato un certo nodo.
 
 Vediamo ora la visita in ampiezza di un albero generico che è perfettamente applicabile anche a quelli binari. Si utilizza una coda per gestire i nodi da visitare.
 
-```ruby
-def bfs(t):
-    Queue Q = Queue()
-    Q.enqueue(t)
-    while not Q.isEmpty() do
-        Tree u = Q.dequeue()
+```Java
+bfs(Tree t)
+```
 
-        # visita per livelli dal nodo u
-        print u
-        u = u.leftmostChild()
-        while u != nil do
-            Q.enqueue(u)
-            u = u.rightSibling()
+```Coffee
+Queue Q = Queue()
+Q.enqueue(t)
+while not Q.isEmpty() do
+    Tree u = Q.dequeue()
+    # visita per livelli dal nodo u
+    u = u.leftmostChild()
+    while u != nil do
+        Q.enqueue(u)
+        u = u.rightSibling()
+```
+
+Segue invece l'implementazione binaria.
+
+```Java
+binarybfs(Tree t)
+```
+
+```Coffee
+Queue Q = Queue()
+Q.enqueue(t)
+while not Q.isEmpty() do
+    Tree u = Q.dequeue()
+    # visita per livelli dal nodo u
+    if u.left() != nil then
+        Q.enqueue(u.left())
+    if u.right() != nil then
+        Q.enqueue(u.right())
 ```
 
 ### Memorizzazione di un albero
@@ -949,7 +961,7 @@ In Java si ha l'opzione, una volta terminato lo spazio di un `vector`, di raddop
 
 Nel caso del raddoppio, possiamo definire il costo effettivo dell'aggiunta di un oggetto in fondo al vettore come $1$ nel caso normale oppure $i := 2^k + 1$ quando abbiamo sforato le dimensioni del vettore. Il costo effettivo di $n$ operazioni sarà pari a $O(3n - 1) = O(n)$, ma il costo ammortizzato sarà pari a $O(1)$.
 
-Nel caso dell'incremento, avremo che il costo effettivo di $n$ operazioni sarà pari a $O(n^2) = O(n)$, ma il costo ammortizzato sarà pari a $O(n)$.
+Nel caso dell'incremento, avremo che il costo effettivo di $n$ operazioni sarà pari a $O(n^2)$, ma il costo ammortizzato sarà pari a $O(n)$.
 
 ## 23/10/2018
 
@@ -959,14 +971,7 @@ Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
 
 ### Alberi binari di ricerca
 
-Andiamo ora ad approfondire l'implementazione di un albero binario di ricerca tramite un dizionario. L'idea è quella di ottenere una struttura dati efficiente per la ricerca, sfruttando la ricerca con complessità $O(\log n)$ negli alberi. Avremo quindi il nostro albero con nodi aventi questa struttura:
-
-> `Tree`
-> `Tree parent`
-> `Tree left`
-> `Tree right`
-> `Item key`
-> `Item value`
+Andiamo ora ad approfondire l'implementazione di un albero binario di ricerca tramite un dizionario. L'idea è quella di ottenere una struttura dati efficiente per la ricerca, sfruttando la ricerca con complessità $O(\log n)$ negli alberi.
 
 In un albero binario di ricerca, avremo che le chiavi contenute nei nodi del sottoalbero sinistra di un qualsiasi nodo $u$ saranno più piccole di `u.key` e le chiavi contenute in quello di destra saranno maggiori. Le funzioni a nostre disposizione saranno le stesse degli alberi binari; andremo ora a implementare delle funzioni per inserire, visitare e rimuovere nodi nel nostro albero.
 
@@ -978,7 +983,7 @@ In un albero binario di ricerca, avremo che le chiavi contenute nei nodi del sot
 Tree lookupNode(Tree T, Item k)
 ```
 
-```python
+```Coffee
 Tree u = T
 while u != nil and u.key != k:
     if k < u.key then
@@ -994,7 +999,7 @@ return u
 Tree min(Tree T)
 ```
 
-```python
+```Coffee
 Tree u = T
 while u.left != nil do
     u = u.left
@@ -1005,10 +1010,10 @@ return u
 Tree max(Tree T)
 ```
 
-```python
+```Coffee
 Tree u = T
 while u.right != nil do
-u = u.right
+    u = u.right
 return u
 ```
 
@@ -1018,12 +1023,12 @@ return u
 Tree predecessorNode(Tree t)
 ```
 
-```python
+```Coffee
 if t == nil then
     return t
-if t.left != nil then # Caso 1
+if t.left != nil then  # Caso 1
     return max(t.left)
-else # Caso 2
+else                   # Caso 2
     Tree p = t.parent
     while p != nil and t == p.left do
         t = p
@@ -1035,12 +1040,12 @@ else # Caso 2
 Tree successorNode(Tree t)
 ```
 
-```python
+```Coffee
 if t == nil then
-r   eturn t
-if t.right != nil then # Caso 1
+    return t
+if t.right != nil then  # Caso 1
     return min(t.right)
-else # Caso 2
+else                    # Caso 2
     Tree p = t.parent
     while p != nil and t == p.right do
         t = p
@@ -1054,7 +1059,7 @@ else # Caso 2
 Tree insertNode(Tree T, Item k, Item v)
 ```
 
-```python
+```Coffee
 Tree p = nil # Padre
 Tree u = T
 while u != nil and u.key != k do # Cerca posizione inserimento
@@ -1076,7 +1081,7 @@ Mostro di seguito l'implementazione della funzione `link()` il cui compito è qu
 link(Tree p, Tree u, Item k)
 ```
 
-```python
+```Coffee
 if u != nil then
     u.parent = p # Registrazione padre
 if p != nil then
@@ -1097,11 +1102,10 @@ Distinguiamo tre casi:
 Tree removeNode(Tree T, Item k)
 ```
 
-```python
-Tree t
+```Coffee
 Tree u = lookupNode(T, k)
 if u != nil then
-    if u.left == nil and u.right == nil then # Caso 1
+    if u.left == nil and u.right == nil then      # Caso 1
         if u.parent != nil then
             link(u.parent, nil, k)
         delete u
@@ -1150,7 +1154,7 @@ Definiamo come **altezza nera** di un nodo come il numero di nodi neri da un per
 
 Durante la modifica di un albero RB è possibile che le condizioni definite in precedenza risultino violate. Andiamo allora a vedere quali sono le possibili soluzioni a questo problema.
 
-#### Rotazioni
+#### Rotazioni - `rotateLeft`
 
 Qui segue l'esempio di una rotazione a sinistra.
 
@@ -1158,7 +1162,7 @@ Qui segue l'esempio di una rotazione a sinistra.
 Tree rotateLeft(Tree x)
 ```
 
-```python
+```Coffee
 Tree y = x.right
 Tree p = x.parent
 x.right = y.left # Il sottoalbero B diventa figlio destro di x
@@ -1175,7 +1179,7 @@ if p != nil then
 return y
 ```
 
-#### Inserimento con condizioni negli alberi RB
+#### Inserimento con condizioni negli alberi RB - `balanceInsert`
 
 Per inserire un nodo senza rompere i vincoli in un albero RB, si colora inizialmente il nodo di rosso e poi, risalendo, si sceglie uno tra 7 casi diversi per sistemare eventuali vincoli violati. Innanzitutto nella `insertNode()` andremo a inserire la chiamata del nostro nuovo metodo subito dopo `link()`. Nel nostro `balanceInsert()` inseriremo un enorme ciclo `while` nella quale andremo a risalire l'albero una volta inserito il nodo, via via sistemando i nodi che non rispettano i vincoli. I 7 casi citati in precedenza sono:
 
@@ -1189,7 +1193,7 @@ Per inserire un nodo senza rompere i vincoli in un albero RB, si colora inizialm
 balanceInsert(Tree t)
 ```
 
-```python
+```Coffee
 t.color = RED
 while t != nil do
     Tree p = t.parent # Padre
@@ -1221,7 +1225,7 @@ while t != nil do
             t = nil
 ```
 
-Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la cancellazione, potremmo andare a implementare `balanceDelete()` per ripristinare la proprietà Red-Black in caso di cancellazione. In particolare:
+Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la cancellazione, potremmo andare a implementare `balanceDelete` per ripristinare la proprietà Red-Black in caso di cancellazione. In particolare:
 
 - Se il nodo “cancellato” è rosso
     - Altezza nera invariata
@@ -1254,11 +1258,11 @@ Un grafo è un insieme di nodi collegati da archi. Gli archi e i nodi possono es
 
 Chiamiamo **grafo orientato** una coppia $G = (V, E)$ dove V è un insieme di nodi ed è un insieme di coppie ordinate $(u, v)$ detti archi. Un **grafo non orientato** non avrà coppie ordinate nell'insieme degli archi.
 
-Un vertice $v$ è detto *adiacente* se $\exists v : (u, v)$. Il risultante arco è detto *incidente*.
+Un vertice $v$ è detto *adiacente* se $\exists v \in V : (u, v) \in E$. Il risultante arco è detto *incidente*.
 
 Chiameremo il numero di nodi $n$ ed il numero di archi $m$. Vale $m \le \frac{n(n-1)}{2} = O(n^2)$ per grafi non orientati e $m \le n^2 -n = O(n^2)$ per grafi orientati. Definiremo da ora in poi la complessità in funzione sia di $n$ che di $m$.
 
-Un grafo con un arco in tutte le coppie di nodi è detto **completo**. Un grafo con "pochi" o "tanti" archi è detto rispettivamente **sparso** (es. $m = O(n), m = O(n \log n)$) e **denso** (es. $m = \theta(n^2)$).
+Un grafo con un arco in tutte le coppie di nodi è detto **completo**. Un grafo con "pochi" o "tanti" archi è detto rispettivamente **sparso** (es. $m = O(n), m = O(n \log n)$) e **denso** (es. $m = \Theta(n^2)$).
 
 Un albero **libero** è un grafo connesso con $m = n - 1$. Un albero **radicato** è un albero libero con una radice fissato. Un insieme di alberi è detto **foresta**.
 
@@ -1295,21 +1299,21 @@ Segue un'implementazione standard dell'attraversamento del grafo.
 graphTraversal(Graph G, Node r)
 ```
 
-```Ruby
-Set S = Set() # Insieme generico
-S.insert(r) # Da specificare
-# { marca il nodo r }
+```Coffee
+Set S = Set()
+S.insert(r)
+int [] visited = new int[1...G.V]
+visited[r] = true
 while S.size() > 0 do
-    Node u = S.remove() # Da specificare
-    # { visita il nodo u }
+    Node u = S.remove()
+    visited[u] = true
     for v in G.adj(u) do
-    # { visita l’arco (u; v) }
-    if v non è ancora stato marcato then
-    # { marca il nodo v }
-    S.insert(v) # Da specificare
+        # { visita l’arco (u, v) }
+        if not visited[v] then
+            S.insert(v)
 ```
 
-### BFS
+### BFS - `bfs`
 
 L'obiettivo della visita in ampiezza è visita i nodi a distanza crescenti dalla sorgente. Per farlo genereremo un albero *BFS*.
 
@@ -1317,10 +1321,10 @@ L'obiettivo della visita in ampiezza è visita i nodi a distanza crescenti dalla
 bfs(Graph G, Node r)
 ```
 
-```Ruby
+```Coffee
 Queue Q = Queue()
 Q.enqueue(r)
-boolean[] visited = new boolean[1 . . . G.size()]
+boolean[] visited = new boolean[1...G.V]
 for u in G.V() - {r} do
     visited[u] = false
 visited[r] = true
@@ -1334,28 +1338,28 @@ while not Q.isEmpty() do
             Q.enqueue(v)
 ```
 
-#### Numero di Erdos
+#### Numero di Erdős - `erdős`
 
-Il numero di Erdos rappresenta il cammino minimo in un grafo di persone che hanno scritto articoli scientifici. Erdös ha valore erdos = 0. I co-autori di Erdös hanno erdos $= 1$. Se X è co-autore di qualcuno con erdos = k e non è coautore con qualcuno con erdos $< k$, allora X ha erdos $= k + 1$. Le persone non raggiunte da questa definizione hanno erdos = $+ \inf$. Questa implementazione è molto simile ai numeri di Bacon.
+Il numero di Erdős rappresenta il cammino minimo in un grafo di persone che hanno scritto articoli scientifici. Erdös ha valore erdős = 0. I co-autori di Erdős hanno erdős $= 1$. Se X è co-autore di qualcuno con erdős = k e non è coautore con qualcuno con erdős $< k$, allora X ha erdős $= k + 1$. Le persone non raggiunte da questa definizione hanno erdős = $+ \infty$. Questa implementazione è molto simile ai numeri di Bacon.
 
-Abbiamo quindi l'implementazione `bfs` adattata ai numeri di Erdos:
+Abbiamo quindi l'implementazione `bfs` adattata ai numeri di Erdős:
 
 ```Java
-erdos(Graph G, Node r, int[] erdos, Node[] parent)
+erdős(Graph G, Node r, int[] erdős, Node[] parent)
 ```
 
-```Ruby
+```Coffee
 Queue Q = Queue()
 Q.enqueue(r)
 for u in G.V() - {r} do
     visited[u] = Inf
-erdos[r] = 0
+erdős[r] = 0
 parent[r] = nil
 while not Q.isEmpty() do
     Node u = Q.dequeue()
     for v in G.adj(u) do
-        if erdos[v] == Inf then # Se il nodo v non è stato scoperto
-        erdos[v] = erdos[u] + 1
+        if erdős[v] == Inf then # Se il nodo v non è stato scoperto
+        erdős[v] = erdős[u] + 1
         parent[v] = u
         Q.enqueue(v)
 ```
@@ -1366,12 +1370,11 @@ Durante la visita, andremo via via ad accumulare blocchi di nodi che hanno tutti
 printPath(Node r, Node s, Node[] parent)
 ```
 
-```Ruby
+```Coffee
 if r == s then
     print(s)
     return
 if parent[s] == nil then
-    raise ValueError
     return
 printPath(r, parent[s], parent)
 print(s)
@@ -1379,7 +1382,7 @@ print(s)
 
 La complessità di questo algoritmo è pari a $O(n + m)$, infatti ogni singolo nodo e ogni singolo arco viene analizzato una volta sola.
 
-### DFS
+### DFS - `dfs`
 
 La Depth-First Search viene spesso usata come subroutine di altri problemi. L'output sarà una *foresta* depth-first, un albero per ogni nodo visitato.
 
@@ -1387,10 +1390,10 @@ La Depth-First Search viene spesso usata come subroutine di altri problemi. L'ou
 dfs(Graph G, Node u, boolean[] visited)
 ```
 
-```Ruby
+```Coffee
 visited[u] = true
 # { visita il nodo u (pre-order) }
-foreach v in G.adj(u) do
+for v in G.adj(u) do
     if not visited[v] then
         # { visita l’arco (u, v) }
         dfs(G, v, visited)
@@ -1399,7 +1402,7 @@ foreach v in G.adj(u) do
 
 Questo algoritmo presenta un problema strutturale: la grandezza degli stack nei sistemi operativi è limitata e per alberi di grandi dimensioni è facilmente superabile. Per ovviare al problema spesso si usa la BFS invece della DFS, oppure rendendo l'algoritmo iterativo e adattandolo rendendo simile alla BFS (ovvero si permette l'inserimento multiplo dei nodi nella coda, fino a un numero pari al numero di archi entranti; inoltre si anticipa il controllo della visita all'estrazione e non all'inserimento). Vedi slide per implementazione.
 
-#### Componenti connesse
+#### Componenti connesse - `cc`
 
 Molti algoritmi iniziano decomponendo il grafo nelle sue componenti connesse, applicando l'algoritmo e poi ricompongono assieme il grafo. Abbiamo sia le **componenti connesse** (su grafi non orientati) che le **componenti fortemente connesse** (su grafi orientati). Vediamo ora le componenti connesse semplici.
 
@@ -1407,7 +1410,7 @@ Un grafo non orientato G è connesso $\leftrightarrow$ ogni suo nodo è raggiung
 
 - Un grafo G' = (V', E') è una componente connessa di G $\leftrightarrow$ G' è un sottografo connesso e massimale di G
 - G' è un sottografo di G (G' $\in$ G) $\leftrightarrow$ V' $\in$ V e E' $\in$ E
-- -G' è massimale, non esiste nessun altro sottografo G'' di G tale che G'' è connesso e più grande di G' (i.e. G' $\in$ G'' $\in$ G)
+- G' è massimale, non esiste nessun altro sottografo G'' di G tale che G'' è connesso e più grande di G' (i.e. G' $\in$ G'' $\in$ G)
 
 Per identificare le sue componenti connesse, verifichiamo alla fine della DFS se tutti i nodi sono marcati; altrimenti siamo in presenza di un grafo con più componenti connesse, e la visita deve ricominciare da capo da una componente non ancora visitata.
 
@@ -1415,8 +1418,8 @@ Per identificare le sue componenti connesse, verifichiamo alla fine della DFS se
 int[] cc(Graph G)
 ```
 
-```Ruby
-int[] id = new int[1 ...G.size()]
+```Coffee
+int [] id = new int[1...G.V]
 for u in G.V() do
     id[u] = 0
 int counter = 0
@@ -1431,7 +1434,7 @@ return id
 ccdfs(Graph G, int counter, Node u, int[] id)
 ```
 
-```Ruby
+```Coffee
 id[u] = counter
 for v in G.adj(u) do
     if id[v] == 0 then
@@ -1444,7 +1447,7 @@ for v in G.adj(u) do
 
 Seguono tre ulteriori applicazioni della DFS.
 
-#### Grafi con cicli
+#### Grafi con cicli - `hasCycle`
 
 In un grafo non orientato, un ciclo C di lunghezza $k > 2$ è una sequenza di nodi $u_0, u_1...u_n$ tale che la sequenza è un cammino e il primo e l'ultimo nodo coincidono. Chiamiamo un grafo con almeno un ciclo **ciclico** e uno che non ne contiene **aciclico**.
 
@@ -1452,7 +1455,7 @@ In un grafo non orientato, un ciclo C di lunghezza $k > 2$ è una sequenza di no
 boolean hasCycleRec(Graph G, Node u, Node p, boolean[] visited)
 ```
 
-```Ruby
+```Coffee
 visited[u] = true
 for u in G.adj(u) - {p} do
     if visited[v] then
@@ -1469,10 +1472,10 @@ Un grafo orientato aciclico è detto **DAG (directed acyclic graph)**. Per trova
 - **archi di attraversamento** - altrimenti
 
 ```Java
-void dfs-schema(Graph G, Node u, int &time, int[] dt, int[] ft)
+dfsschema(Graph G, Node u, int &time, int[] dt, int[] ft)
 ```
 
-```Ruby
+```Coffee
 # { visita il nodo u (pre-order) }
 time = time + 1
 dt[u] = time
@@ -1480,7 +1483,7 @@ for u in G.adj(u) do
     # { visita l’arco (u, v) (qualsiasi) }
     if dt[v] == 0 then
         # { visita l’arco (u, v) (albero) }
-        dfs-schema(G, v, time, dt, ft)
+        dfsschema(G, v, time, dt, ft)
     else if dt[u] > dt[v] and ft[v] == 0 then
         # { visita l’arco (u, v) (indietro) }
     else if dt[u] < dt[v] and ft[v] 6= 0 then
@@ -1509,7 +1512,7 @@ Vedi slide per dimostrazione. Ciò riduce di molto l'implementazione precedente:
 boolean hasCycle(Graph G, Node u, int &time, int[ ] dt, int[ ] ft)
 ```
 
-```Ruby
+```Coffee
 time = time + 1
 dt[u] = time
 foreach v in G.adj(u) do
@@ -1523,7 +1526,7 @@ ft[u] = time
 return false
 ```
 
-#### Ordinamento topologico
+#### Ordinamento topologico - `topSort`
 
 Dato un DAG G, un **ordinamento topologico** è un ordinamento lineare dei suoi nodi tale che se $(u, v) \in E$, allora $u$ è prima di $v$ nell'ordinamento. Con l'algoritmo `topSort` andiamo a generare un vettore contenente l'ordinamento topologico del
 
@@ -1531,38 +1534,38 @@ Dato un DAG G, un **ordinamento topologico** è un ordinamento lineare dei suoi 
 Stack topSort(Graph G)
 ```
 
-```Ruby
+```Coffee
 Stack S = Stack()
 boolean[] visited = boolean[1...G.size()]
 for u in G.V() do
     visited[u] = false
     if not visited[u] then
-        ts-dfs(G, u, visited, S)
+        tsdfs(G, u, visited, S)
 return S
 ```
 
 ```Java
-ts-dfs(Graph G, Node u, boolean[] visited, Stack S)
+tsdfs(Graph G, Node u, boolean[] visited, Stack S)
 ```
 
-```Ruby
+```Coffee
 visited[u] = true
 for v in G.adj(u) do
     if not visited[v] then
-        ts-dfs(G, v, visited, S)
+        tsdfs(G, v, visited, S)
 S.push(u)
 ```
 
-#### Componenti fortemente connesse
+#### Componenti fortemente connesse - `scc`, `transpose`
 
 - Un grafo orientato $G = (V, E)$ è fortemente connesso $\Leftrightarrow$ ogni suo nodo è raggiungibile da ogni altro suo nodo
-- Un grafo $G_0 = (V_0, E_0)$ è una componente fortemente connessa di G $\Leftrightarrow$ G0 è un sottografo connesso e massimale di G.
+- Un grafo $G_0 = (V_0, E_0)$ è una componente fortemente connessa di G $\Leftrightarrow$ G_0 è un sottografo connesso e massimale di G.
 
 ```Java
 int[] scc(Graph G)
 ```
 
-```Ruby
+```Coffee
 Stack S = topSort(G) # First visit
 GT = transpose(G) # Graph transposal
 return cc(GT, S)
@@ -1576,7 +1579,7 @@ Definiamo come **grafo trasposto** un grafo orientato i cui archi sono stati inv
 int[] transpose(Graph G)
 ```
 
-```Ruby
+```Coffee
 Graph GT = Graph()
 for u in G.V() do
     GT.insertNode(u)
@@ -1592,8 +1595,8 @@ Per quanto riguarda la visita delle componenti connesse del grafo trasposto, inv
 cc(Graph G, Stack S)
 ```
 
-```Ruby
-int[] id = new int[1...G.size()]
+```Coffee
+int [] id = new int[1...G.size()]
 for u in G.V() do
     id[u] = 0
 int counter = 0
@@ -1608,7 +1611,7 @@ return id
 ccdfs(Graph G, int counter, Node u, int[] id)
 ```
 
-```Ruby
+```Coffee
 id[u] = counter
 for v in G.adj(u) do
     if id[v] == 0 then
@@ -1653,7 +1656,9 @@ Nella realtà la distribuzione esatta non sarà mai completamente nota, andremo 
 
 #### Funzione di estrazione
 
-Poniamo $m := 2^p$ e $h(k) = int(b)$, dove b è un sottoinsieme di $p$ bit presi da $bin(k)$. $int(), bin()$ sono due funzioni che trasformano rispettivamente un numero binario in intero e un carattere alfabetico in binario.
+Poniamo $m := 2^p$ e $h(k) = int(b)$, dove b è un sottoinsieme di $p$ bit presi da $bin(k)$.
+
+$int(), bin()$ sono due funzioni che trasformano rispettivamente un numero binario in intero e un carattere alfabetico in binario utilizzando la codifica ASCII.
 
 Questo approccio genera diversi problemi: infatti, a seconda del sottoinsieme scelto, la probabilità di collisioni è estremamente alta.
 
@@ -1698,7 +1703,7 @@ La situazione ideale prende il nome di **hashing uniforme**, dove ogni chiave ha
 Vale:
 
 $$
-H(k, i) = (H_1(k) + h \cdot i) mod m
+H(k, i) = (H_1(k) + h \cdot i) \mod m
 $$
 
 Grazie all'operazione modulo, avremo massimo $m$ sequenze di ispezione distinte.
@@ -1710,7 +1715,7 @@ Con questo metodo andremo a ottenere la cosìddetta **agglomerazione primaria**,
 Vale:
 
 $$
-H(k, i) = (H_1(k) + h \cdot i^2) mod m
+H(k, i) = (H_1(k) + h \cdot i^2) \mod m
 $$
 
 A differenza della precedente, dopo l'inserimento del primo elemento le ispezioni successive hanno un offset quadratico e non lineare. La sequenza non sarà quindi una permutazione ma sarà sparsa nel vettore.
@@ -1720,7 +1725,7 @@ A differenza della precedente, dopo l'inserimento del primo elemento le ispezion
 Vale:
 
 $$
-H(k, i) = (H_1(k) + i \cdot H_2(k)) mod m
+H(k, i) = (H_1(k) + i \cdot H_2(k)) \mod m
 $$
 
 Abbiamo due funzioni ausiliarie, $H_1$ che va a fornire la prima ispezione e $H_2$ l'offset delle successive ispezioni. Per garantire una permutazione completa, $H_2(k)$ deve essere coprimo con $m$.
@@ -1772,7 +1777,7 @@ Esempio di algoritmo divide-et-impera (potenzialmente inutile con complessità $
 minrec(int[] A, int i, int j)
 ```
 
-```Ruby
+```Coffee
 if i == j then
     return A[i]
 else
@@ -1782,13 +1787,13 @@ else
 
 In generale, l'uso di algoritmi divide-et-impera è consigliato se e solo se migliorano la complessità rispetto alla corrispondente versione iterativa. Sono facilmente parallelizzabili e sfruttano in maniera ottimale la cache, andando ad accedere su aree contingue di memoria.
 
-### Torre di Hanoi
+### Torre di Hanoi - `hanoi`
 
 ```Java
 hanoi(int n, int src, int dest, int middle)
 ```
 
-```Ruby
+```Coffee
 if n == 1 then
     print(src -> dest)
 else
@@ -1799,7 +1804,7 @@ else
 
 Questo algoritmo ha complessità $\Theta(2^n)$ ma si può dimostrare che è ottimo.
 
-### Quicksort
+### Quicksort - `quicksort`
 
 Quicksort è un algoritmo di ordinamento divide-et-impera. Nel caso medio ha complessità $O(n\log n)$, nel caso pessimo $O(n^2)$; tuttavia ha il vantaggio di avere fattori moltiplicativi minori rispetto a MergeSort e ha un basso impatto sulla memoria.
 
@@ -1813,7 +1818,7 @@ L'algoritmo prende in input un vettore di $n$ elementi e:
 int pivot(Item[] A, int start, int end)
 ```
 
-```Ruby
+```Coffee
 Item p = A[start]
 int j = start
 for i in range(start + 1, end) do
@@ -1829,7 +1834,7 @@ return j
 QuickSort(Item[] A, int start, int end)
 ```
 
-```Ruby
+```Coffee
 int j = pivot(A, start, end)
 QuickSort(A, start, j-1)
 QuickSort(A, j, end)
@@ -1837,12 +1842,12 @@ QuickSort(A, j, end)
 
 Il costo di `pivot` è $\Theta(n)$, mentre `QuickSort` dal partizionamento:
 
-- Se il vettore di dimensione n viene diviso in sottoproblemi di dimensione 0 e n - 1, generando una complessità pari a $\Theta(n^2)$.
+- Se il vettore di dimensione n viene diviso in sottoproblemi di dimensione 0 e n - 1, generando una complessità pari a $\Theta(n^2)$ (ovvero quando sono circa tutti ordinati).
 - Se il vettore viene invece diviso in due sottoproblemi pari a n / 2, la complessità sarà pari a $\Theta(n \log n)$.
 
 Per analizzare il caso medio, bisognerebbe eseguire uno studio probabilistico per verificare il comportamento dell'algoritmo dato un certo input.
 
-### Moltiplicazione di matrici
+### Moltiplicazione di matrici - `strassen`
 
 Date due matrici $A, B$ moltiplicabili riga per colonna (il nimero di righe della prima è pari al numero di colonne della seconda), calcoliamo $A \times B$.
 

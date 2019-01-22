@@ -1,6 +1,11 @@
 .vscode-body pre code {
   font-family: "Fira Code";
   font-feature-settings: "calt" 1;
+  color: black;
+}
+
+pre code {
+  color: black;
 }
 
 .vscode-body code {
@@ -8,6 +13,33 @@
   font-feature-settings: "calt" 1;
     
   font-size: 14px;
+}
+
+.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula {
+  color: rgb(0, 0, 146);
+}
+
+.hljs-number, .hljs-class {
+  color: #587573
+}
+
+blockquote {
+  border-radius: 3px;
+}
+
+pre:not(.hljs), pre.hljs code > div {
+  border-radius: 6px;
+  background-color: #EFEFEF;
+  margin: 2px;
+  padding: 8px;
+  width: 50%;
+}
+
+.pre {
+  border-radius: 6px;
+  background-color: #EFEFEF;
+  margin: 2px;
+  padding: 8px;
 }
 
 code {
