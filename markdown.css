@@ -20,7 +20,7 @@ pre code {
 }
 
 .hljs-number, .hljs-class {
-  color: #587573
+  color: #587573 !important;
 }
 
 blockquote {
@@ -29,15 +29,17 @@ blockquote {
 
 pre:not(.hljs), pre.hljs code > div {
   border-radius: 6px;
-  background-color: #EFEFEF;
+  background-image: url("bg.png");
+  background-repeat: repeat;
   margin: 2px;
   padding: 8px;
-  width: 50%;
+  width: 75%;
 }
 
 .pre {
   border-radius: 6px;
-  background-color: #EFEFEF;
+  background-image: url("bg.png");
+  background-repeat: repeat;
   margin: 2px;
   padding: 8px;
 }
@@ -49,6 +51,8 @@ code {
   /*font-variant-ligatures: normal;*/
   font-size: 14px;
   line-height: 19px;
+  color: rgb(34, 71, 105);
+  font-style: bold;
 }
 
 .hljs {

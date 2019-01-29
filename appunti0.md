@@ -5,7 +5,7 @@
     - [Sottovettore di somma massimale - `maxsum`](#sottovettore-di-somma-massimale---maxsum)
       - [Versione $O(n^3)$](#versione-on3)
       - [Versione $O(n^2)$](#versione-on2)
-      - [Versione $O(n\ logn)$](#versione-on-logn)
+      - [Versione $O(n\log(n))$](#versione-onlogn)
       - [Versione $O(n)$](#versione-on)
   - [18/09/2018](#18092018)
     - [Problemi computazionali](#problemi-computazionali)
@@ -124,15 +124,13 @@
     - [Quicksort - `quicksort`](#quicksort---quicksort)
     - [Moltiplicazione di matrici - `strassen`](#moltiplicazione-di-matrici---strassen)
     - [Gap](#gap)
-  - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
+    - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
   - [11/12/2018](#11122018)
   - [13/12/2018](#13122018)
   - [18/12/2018](#18122018)
     - [Bloom Filter](#bloom-filter)
 
 ## 13/09/2018
-
-(....) aggiungere introduzione
 
 ### Sottovettore di somma massimale - `maxsum`
 
@@ -167,7 +165,7 @@ def maxsum2(a):
 
 Vedi slide per versione con libreria `accumulate`.
 
-#### Versione $O(n\ logn)$
+#### Versione $O(n\log(n))$
 
 ```python
 def maxsum_rec(A,i,j):
@@ -1859,7 +1857,7 @@ Dato un vettore $V$ con almeno due elementi, un **gap** è un indice i tale che 
 
 Abbiamo che se $n \ge 2$ e $V[1] < V[n]$, $V$ contiene almeno un gap. Vedi slide per implementazione dell'algoritmo.
 
-## Insiemi e dizionari (cont.)
+### Insiemi e dizionari (cont.)
 
 - **Bitset**: struttura dati speciale, formata da un vettore di booleani, che viene usata come sottostruttura per i dizionari.
 - **Albero bilanciato**: struttura vista in precedenza con accesso e ricerca pari a $O(n \log n)$ e iterazione pari a O(n).
