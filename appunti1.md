@@ -1,3 +1,5 @@
+<br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div><br>
+
 # Appunti di Algoritmi e Strutture Dati
 
 - [Appunti di Algoritmi e Strutture Dati](#appunti-di-algoritmi-e-strutture-dati)
@@ -8,9 +10,14 @@
       - [Hateville](#hateville)
       - [Knapsack](#knapsack)
   - [20/02/2019](#20022019)
-    - [Programmazione dinamica (continua)](#programmazione-dinamica-continua)
+    - [Programmazione dinamica (parte 2)](#programmazione-dinamica-parte-2)
       - [Knapsack (continua)](#knapsack-continua)
       - [Sottosequenza comune massimale (LCS)](#sottosequenza-comune-massimale-lcs)
+  - [25/02/2019](#25022019)
+    - [Programmazione dinamica (parte 3)](#programmazione-dinamica-parte-3)
+      - [String matching approssimato](#string-matching-approssimato)
+      - [Prodotto di catena di matrici](#prodotto-di-catena-di-matrici)
+      - [Insieme indipendente di intervalli pesati](#insieme-indipendente-di-intervalli-pesati)
 
 ## 18/02/2019
 
@@ -62,8 +69,7 @@ I dati in input sono un vettore $w$ che dichiara i pesi degli oggetti e un vetto
 
 Per risolvere il problema, utilizziamo una matrice $DP$ dove $DP[i][c]$ è il massimo profitto ottenibile dai primi $i$ oggetti con una capacità occupata pari a $c$. Considerando l'oggetto $i$, avremo che se non lo prendiamo la capacità non cambia, se lo prendiamo allora andremo a memorizzare il nuovo profitto, pari alla somma del profitto dell'oggetto preso più il profitto ottenibile da uno zaino con un oggetto in meno e il suo peso in meno. Per effettuare la decisione chiaramente prenderemo il massimo. La formula per $DP[i][c]$ sarà pari a $\max(DP[i−1][c −w[i]] + p[i], DP[i − 1][c])$ (tralasciando i casi base.)
 
-
-$$DP[i]] = \left\{
+$$DP[i] = \left\{
 \begin{array}{lc}
     0 & i = 0 or c = 0  \\
     - \infty & c < 0 \\
@@ -72,7 +78,7 @@ $$DP[i]] = \left\{
 
 ## 20/02/2019
 
-### Programmazione dinamica (continua)
+### Programmazione dinamica (parte 2)
 
 #### Knapsack (continua)
 
@@ -96,3 +102,51 @@ Utilizzando un approccio di "forza bruta", otterremmo una complessità almeno es
 - Altrimenti, prendo la sottosequenza più lunga tra $T(i - 1), U(j)$ oppure $T(i), U(j - 1)$ (essenzialmente facendo due casi scartando alternativamente l'ultimo carattere)
 
 Possiamo quindi andare ad applicare questa logica ad una matrice $DP[i][j]$, dove $i, j$ sono gli indici del prefisso delle due sequenze e $DP[n][m]$ è la LCS cercata. Questo algoritmo ha una complessità pari a $O(mn)$ in quanto la tabella va necessariamente riempita per intero.
+
+## 25/02/2019
+
+### Programmazione dinamica (parte 3)
+
+#### String matching approssimato
+
+Un’occorrenza k-approssimata di P in T, dove P e T sono stringhe dette _pattern_ e _testo_, con $m \le n$, è una copia di P in T in cui sono ammessi k "errori" (o differenze) tra caratteri di P e caratteri di T, ovvero sostituzioni, inserimenti o cancellazioni (fino a k volte) di caratteri.
+
+Utilizziamo una matrice $DP[i][j]$ che rappresenta il minimo valore k tale per cui esiste un occorrenza k-approssimata di P(i) in T(j). Abbiamo quattro possibilità: avanzare su entrambi i caratteri (uguali o diversi che siano, commettendo 0 oppure 1 errori), avanzare sul pattern (inserimento) oppure avanzare sul testo (cancellazione). Una volta completata la tabella il risultato cercato sarà nell'ultima riga, e sarà corrispondente al valore minimo di quella riga.
+
+#### Prodotto di catena di matrici
+
+Andiamo ad affrontare il problema della _parentesizzazione_ ottima, ovvero nel posizionamento ottimo delle parentesi affinché il prodotto di una catena di matrici abbia il minor numero di moltiplicazioni scalari richieste per essere completata.
+
+Per risolvere il problema della parentesizzazione, possiamo considerare $P(n)$ come il numero di parentesizzazioni per $n$ matrici, che può essere diviso in due sottoproblemi, la ricerca delle parentesizzazioni per $P(k)$ e $P(n-k)$ una volta fissato k. Il numero totale sarà pari alla sommatoria di tutte le combinazioni. Questo indice k è detto l'indice dell'ultimo prodotto.
+
+Sia $DP[i][j]$ il minimo numero di moltiplicazioni scalari necessarie per calcolare il prodotto $A[i . . . j]$. Vale:
+
+$$
+DP[i][j] = DP[i][k] + DP[k + 1][j] + c_{i−1} \cdot c_{k} \cdot c_{j}
+$$
+
+$c_{i−1} \cdot c_{k} \cdot c_{j}$ è il costo per moltiplicare la matrice $Ai \cdot...\cdot Ak: c_{i−1}$ righe, $c_k$ colonne e la matrice $Ak \cdot...\cdot Aj: c_k$ righe, $c_j$ colonne.
+
+Possiamo ipotizzare due versioni, una top-down (con complessità $O(n^n)$) e una bottom-up (vedi slide per codici)
+
+Nella versione ricorsiva top-down, calcoliamo tutte le possibili combinazioni per ogni singola cella considerando tutti gli ultimi prodotti, aggiornando eventualmente il minimo. Chiaramente sarà richiesta una quantità almeno esponenziale di passi, rendendola inutile rispetto all'approccio a forza bruta.
+
+La versione bottom-up, oltre alla matrice $DP$ che contiene il numero di moltiplicazioni, usiamo una matrice $last$ che useremo per ricostruire la soluzione, contenente il valore dell'ultimo prodotto che minimizza il costo.
+
+Nell'algoritmo, usiamo un doppio ciclo $O(n^2)$ per riempire tutte le celle: ogni riempimento richiederà $n$, in quanto andremo a valutare tutte le combinazioni già salvate per i singoli ultimi prodotti. Otteniamo quindi una complessità pari a $O(n^3)$.
+
+#### Insieme indipendente di intervalli pesati
+
+Siano dati n intervalli distinti $[a_1, b_1[, ... , [a_n, b_n[$ della retta reale, aperti a destra, dove all’intervallo i è associato un profitto $w_i, 1 \le i \le n$. Dobbiamo trovare un insieme indipendente di peso massimo, ovvero un sottoinsieme di intervalli disgiunti tra loro tale che la somma dei loro profitti sia la più grande possibile.
+
+Innanzitutto ordiniamo gli intervalli per estremi finali crescenti. Per ogni singolo intervallo, andremo a calcolare il suo _predecessore_, ovvero il massimo indice per cui inizia un segmento che finisce prima del segmento corrente.
+
+$$DP[i] = \left\{
+\begin{array}{lc}
+    0 & i = 0 \\
+    max(DP[i − 1], DP[pred[i]] + w_i) & i > 0
+\end{array}\right.$$
+
+Con questa formula possiamo andare a scrivere due algoritmi, uno $O(n^2)$ e uno $O(n \log(n))$ (vedi slide, scriverò il codice in seguito).
+
+<br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
