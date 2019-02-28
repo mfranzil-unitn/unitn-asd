@@ -20,8 +20,8 @@ This repo contains material about the following course:
 
 You can find the following material in the repo:
 
-* appunti.md - Notes taken during class, written in Github-Flavored Markdown with LateX support.
-* appunti.html - Not-so-often updated HTML version of said notes.
+* index.md, index2.md - Notes taken during class, written in Github-Flavored Markdown with LateX support. _index_ refers to the first part of the course, _index2_ to the second.
+* appunti.html - HTML version of said notes, available publicly [here](https://mfranzil.github.io/ASDUniTN/).
 * markdown.css - File used to style the appunti.md file.
 * Codici/ - Code for algorithms seen in class.
 * Laboratorio/ - Code written during labs, including projects made in the first and second semester.
