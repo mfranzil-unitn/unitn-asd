@@ -18,6 +18,16 @@
       - [String matching approssimato](#string-matching-approssimato)
       - [Prodotto di catena di matrici](#prodotto-di-catena-di-matrici)
       - [Insieme indipendente di intervalli pesati](#insieme-indipendente-di-intervalli-pesati)
+  - [11/03/2019](#11032019)
+    - [Code con priorità](#code-con-priorit%C3%A0)
+    - [Heap](#heap)
+    - [HeapSort](#heapsort)
+      - [MaxHeapRestore](#maxheaprestore)
+      - [HeapBuild](#heapbuild)
+      - [Terminazione](#terminazione)
+    - [Codice delle code con priorità](#codice-delle-code-con-priorit%C3%A0)
+    - [Insiemi disgiunti](#insiemi-disgiunti)
+      - [Tecniche euristiche](#tecniche-euristiche)
 
 ## 18/02/2019
 
@@ -148,5 +158,73 @@ $$DP[i] = \left\{
 \end{array}\right.$$
 
 Con questa formula possiamo andare a scrivere due algoritmi, uno $O(n^2)$ e uno $O(n \log(n))$ (vedi slide, scriverò il codice in seguito).
+
+## 11/03/2019
+
+### Code con priorità
+
+Una __coda con priorità__ è una struttura dati speciale nella quale ogni elemento inserito ha una _priorità_, e i valori vengono estratti dal più alto o dal più basso valore di priorità.
+
+Sono permessi l'inserimento e l'estrazione dell'elemento in cima alla coda, nonché la diminuzione della priorità di un oggetto in coda.
+
+Esistono varie implementazioni delle code con priorità, e le più efficienti utilizzano gli alberi RB (con tutte le operazioni in $O(\log{n})$) e gli __heap__ (che sfruttano i vantaggi degli alberi con la memorizzazione efficiente di un vettore)
+
+### Heap
+
+Un __min-heap__ è una struttura dati speciale, composta da un _albero binario completo_ (dove tutti i nodi sono al limite accatastati a sinistra, evitando sbilanciamenti) nella quale ogni valore di ogni nodo è minore del valore dei figli.
+
+Un albero heap non impone una relazione di _ordinamento totale_ bensì _parziale_: mantiene infatti le proprietà di riflessività, simmetria e antisimmetria.
+
+Memorizziamo gli alberi heap in un __vettore heap__, dove $A[1]$ contiene la radice, il padre di un nodo $i$ occupa la posizione $\floor{i/2}$, e i suoi figli occupano le posizioni $2i, 2i + 1$.
+
+Tutte le operazioni per i min-heap sono equivalentemente applicabili ai max-heap invertendo tutti i maggiori e minori.
+
+### HeapSort
+
+Questo algoritmo ordina in tempo $O(n \log{n})$ un vettore. Vediamo uno per uno i metodi necessari alla creazione dell'algoritmo.
+
+#### MaxHeapRestore
+
+Dato un vettore heap $A$ e un indice $i$ tale per cui i suoi sottoalberi figli destri e sinistri sono già maxheap, cerchiamo di ripristinare la proprietà max-heap nell'intero sottoalbero radicato in $i$.
+
+A ogni iterazione della funzione, consideriamo il padre $i$ e i suoi due figli, ed effettuiamo uno scambio tale che il maggiore tra i tre vada nella posizione del padre. A questo punto uno dei due sottoalberi figli sono stati privati della proprietà, e andranno corretti in maniera ricorsiva.
+
+#### HeapBuild
+
+Sia $A$ un vettore da ordinare di dimensione $n$. Questa procedura attraversa in maniera inversa l'albero heap corrispondente al vettore, a partire dalle foglie, eseguendo `maxHeapRestore()` su ognuno di essi (per ogni posizione da $\floor{n/2}$ a $1$).
+
+#### Terminazione
+
+Per completare l'algoritmo, eseguo `heapBuild()` sul vettore ottenendo un heap (con complessità $O(n)$); rimuovo la radice dell'albero e la posiziono in fondo al vettore, scambiandola con l'ultimo. Eseguo `maxHeapRestore()` per ripristinare la proprietà di heap e continuo finché il vettore non è completamente ordinato.
+
+### Codice delle code con priorità
+
+Vedi slide per implementazione su codice delle code con priorità.
+
+Tutte le operazioni che modificano gli heap sistemano la proprietà heap lungo un cammino radice-foglia (`deleteMin()`) oppure lungo un cammino nodo-radice (`insert()`, `decrease()`); poichè l’altezza è $\log{n}$, il costo di tali operazioni è $O(\log{n})$.
+
+### Insiemi disgiunti
+
+Consideriamo ora una collezione di __insiemi disgiunti__, ciascuno composto da un unico elemento. In un certo insieme consideriamo il _rappresentante_ (che nel caso unitario è pari all'unico elemento), un'invariante nel caso di ricerca e confronti tra insiemi, che è un qualsiasi elemento di un dato insieme.
+
+La funzionalità principale è l'unione di due `MFS`, che causerà la scelta di un nuovo rappresentante dell'unione risultante, e la ricerca dell'insieme di appartenenza di un insieme.
+
+Questa struttura dati può trovare uso all'interno di __componenti connesse__ di un grafo non orientato dinamico: si inizia con componenti connesse unitarie che vengono via via unite. Al termine dell'algoritmo i vari insiemi rappresentaranno le componenti connesse.
+
+Ogni insieme viene rappresnetato da una lista concatenata: il primo oggetto della lista è il rappresentante, e ogni oggetto della lista possiede un puntatore al suddetto rappresentante (compreso il rappresentante stesso) e al successivo. L'operazione `find(x)` che cerca il rappresentante di un insieme che contiene `x` sarà quindi con complessità pari a $O(1)$, mentre l'operazione `merge(x, y)` richiederà lo spostamento di tutti i puntatori di y ottenendo un costo ammortizzato pari a $O(n)$.
+
+Un'implementazione alternativa utilizza alberi non binari; ciò rende la complessità pari a $O(1)$ per l'unione e la ricerca del rappresentante, mentre la ricerca richiederà $O(n)$ (in quanto bisogna esplorare l'intero albero).
+
+#### Tecniche euristiche
+
+Come possiamo migliorare alcune operazioni sugli insiemi disgiunti?
+
+Ad esempio, possiamo migliorare la velocità di `merge()` attaccando la lista più corta a quella più breve (è infatti indifferente il rappresentante finale!).
+
+Alternativamente, nel caso degli alberi, possiamo migliorare `find()` cercando di mantenere l'altezza degli alberi bassa mantenendo informazioni sul rango (ovvero la quantità di figli) dell'albero e al momento dell'unione si attacca l'albero più basso a quello più alto.
+
+Possiamo infine "appiattire" un certo albero attaccando sottoalberi di una certa lunghezza direttamente alla radice (aumentandone la larghezza).
+
+Vedi slide per implementazione del codice degli `MFset`.
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
