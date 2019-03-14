@@ -28,7 +28,7 @@ You can find the following material in the repo:
 
 ## Contribute
 
-Feel free to contribute to the lecture notes to fix or add new content. Submit a pull request, editing the correct Markdown file and then compiling it to HTML using a compiler of your choice ([https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one](Markdown All-In-One) is recommended, but [https://github.com/markdown-it/markdown-it](markdown-it) does the job too). Make sure that the `styles.css` file is correctly interpreted.
+Feel free to contribute to the lecture notes to fix or add new content. Submit a pull request, editing the correct Markdown file and then compiling it to HTML using a compiler of your choice ([Markdown All-In-One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) is recommended, but [markdown-it](https://github.com/markdown-it/markdown-it) does the job too). Make sure that the `styles.css` file is correctly interpreted.
 
 ## Authors
 
