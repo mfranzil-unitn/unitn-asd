@@ -28,6 +28,15 @@
     - [Codice delle code con priorità](#codice-delle-code-con-priorit%C3%A0)
     - [Insiemi disgiunti](#insiemi-disgiunti)
       - [Tecniche euristiche](#tecniche-euristiche)
+  - [25/03/2019](#25032019)
+    - [Cammini minimi](#cammini-minimi)
+      - [Teorema di Bellman](#teorema-di-bellman)
+      - [Schema generico](#schema-generico)
+      - [Dijkstra - `dijkstra`](#dijkstra---dijkstra)
+      - [Bellman-Ford](#bellman-ford)
+      - [Cammini minimi su DAG](#cammini-minimi-su-dag)
+    - [Cammini minimi per multipla sorgente](#cammini-minimi-per-multipla-sorgente)
+      - [Floyd-Warshall](#floyd-warshall)
 
 ## 18/02/2019
 
@@ -226,5 +235,140 @@ Alternativamente, nel caso degli alberi, possiamo migliorare `find()` cercando d
 Possiamo infine "appiattire" un certo albero attaccando sottoalberi di una certa lunghezza direttamente alla radice (aumentandone la larghezza).
 
 Vedi slide per implementazione del codice degli `MFset`.
+
+## 25/03/2019
+
+### Cammini minimi
+
+Dato un grafo orientato $G=(V, E)$ alla quale è associata una __funzione di peso__ $w : E \rightarrow \mathbb{R}$, troviamo un cammino da un nodo sorgente $s$ a ogni altro nodo $u \in V$ il cui costo sia minimo, ovvero $\le$ di ogni altro cammino tra $s$ e $u$. Alcune variazioni sono cammini minimi tra coppie di nodi arbitrarie, che richiedono l'uso della programmazione dinamica (per tutte le coppie) e comunque la soluzione del primo problema.
+
+Particolare attenzione va data al concetto di peso: algoritmi diversi possono funzionare o meno a seconda che la funzione peso abbia codominio in $\mathbb{R}$ oppure solo in $\mathbb{R}^+$; (ad esempio peso negativo quando si ha una perdita di profitto).
+
+Questo problema ha sottostruttura ottima, rappresentata dall'albero dei cammini minimi: un albero di copertura radicato in $s$ che contiene tutti i cammini minimi da $s$ agli altri nodi raggiungibili.
+
+Una soluzione ammissibile può essere descritta da un albero di copertura $T$ radicato in $s$ e da un vettore di distanza $d$, i cui valori $d[u]$ rappresentano il costo del cammino da $s$ a $u$ in T.
+
+Per rappresentare l'albero, utilizziamo la rappresentazione basata sul vettore dei padri.
+
+#### Teorema di Bellman
+
+Una soluzione ammissibile è anche ottima se e solo se per ogni arco $(u, v)$ selezionato per la soluzione, la distanza da $s$ a $v$ passando per $u$ è uguale al peso dell'arco $(u, v)$ sommato alla distanza da $s$ a $u$.
+
+#### Schema generico
+
+Possiamo ora rappresentare un algoritmo che fornisce una soluzione ottima, facendo uso di una struttura dati generica. Marchiamo 4 righe che andremo di volta in volta a modificare a seconda della struttura dati scelta.
+
+```Java
+(int[],int[]) shortestPath(Graph G, Node s)
+```
+
+```Coffee
+int[] d = new int[1...G.size()] # d[u] è la distanza da s a u
+int[] T = new int[1...G.size()] # T[u] è il padre di u nell’albero T
+boolean[] b = new boolean[1...G.size()] # b[u] è true se u ∈ S
+
+foreach u ∈ G.V()−{s} do
+    T[u] = nil
+    d[u] = +∞
+    b[u] = false
+
+T[s] = NULL
+d[s] = 0
+b[s] = true
+
+DataStructure S = DataStructure() # Riga 1
+S.add(s)
+
+while not S.isEmpty() do
+    int u = S.extract() # Riga 2
+    b[u] = false
+    for v in G.adj(u) do
+        if d[u] + G.w(u,v) < d[v] then
+            if not b[v] then
+                S.add(v) # Riga 3
+                b[v] = true
+            else
+                # Azione da svolgere nel caso v sia già presente in S; Riga 4
+            T[v] = u
+            d[v] = d[u] + G.w(u,v)
+
+return (T,d)
+```
+
+#### Dijkstra - `dijkstra`
+
+Nella versione originale, veniva utilizzato per la ricerca di un cammino minimo tra due nodi. Funziona solo con pesi positive, e essendo stato proposto prima dell'invenzione dello heap, utilizzava una semplice rappresentazione tramite vettore per la struttura dati.
+
+In questa implementazione, si crea una coda a priorità basata su vettore, nella quale la posizione $i$-esima rappresenta la priorità del nodo $i$-esimo. Di volta in volta si va a cercare il minimo e lo si estrae (cancellandolo): per ogni oggetto, non presente o meno nella struttura dati, si aggiorna la priorità con l'equazione di Bellman.
+
+```Coffee
+PriorityQueue Q = PriorityQueue() # Riga 1
+u = Q.deleteMin() # Riga 2
+Q.insert(v, d[u] + G.w(u, v)) # Riga 3
+Q.decrease(v, d[u] + G.w(u, v)) # Riga 4
+```
+
+La complessità totale dell'algoritmo è $O(n^2)$ a causa dell'inefficiente ricerca del minimo nella rappresentazione con vettore.
+
+Questa versione, ipotizzata nel 1959, è stata poi upgradata nel 1977 da Johnson facendo uso dell'heap binario introdotto pochi anni prima: grazie all'accesso logaritmico, la complessità scende a $O(m\log{n})$; grazie all'heap di Fibonacci nel 1987 viene ulteriormente modificata arrivando a $O(m + n\log{n})$.
+
+#### Bellman-Ford
+
+Questo algoritmo è computazionalmente più pesante di Dijkstra, ma funziona anche con pesi negativi.
+
+```Coffee
+Queue Q = Queue() # Riga 1
+u = Q.dequeue() # Riga 2
+Q.enqueue(v) # Riga 3
+# Sezione non necessaria; Riga 4
+```
+
+La complessità è pari a $O(nm)$.
+
+#### Cammini minimi su DAG
+
+Nel caso in cui si ha a che fare con un _DAG_, è possibile rilassare il grafo tramite `topSort` e inserendolo tutto in una volta in una pila. Il resto dell'algoritmo è analogo a una semplice BFS e ha complessità $O(n + m)$.
+
+### Cammini minimi per multipla sorgente
+
+| Input                       | Complessità                | Approccio                                           |
+| --------------------------- | -------------------------- | --------------------------------------------------- |
+| Pesi positivi, grafo denso  | $O(n\cdot n^2)$            | Applicazione ripetuta dell’algoritmo di Dijkstra   |
+| Pesi positivi, grafo sparso | $O(n·(m\log{n}))$          | Applicazione ripetuta dell’algoritmo di Johnson    |
+| Pesi negativi               | $O(n\cdot n \cdot m)$      | Applicazione ripetuta di Bellman-Ford, sconsigliata |
+| Pesi negativi, grafo denso  | $O(n^3)$                   | Algoritmo di Floyd e Warshall                       |
+| Pesi negativi, grafo sparso | $O(n\cdot m\cdot \log{n})$ | Algoritmo di Johnson per sorgente multipla          |
+
+#### Floyd-Warshall
+
+Sia $k \in [0 ... n]$. Diciamo che un cammino $p_k^{xy}$ è un cammino minimo k-vincolato fra $x$ e $y$ se esso ha il costo minimo fra tutti i cammini fra $x$ e $y$ che non passano per nessun vertice in $v_k+1,...,v_n$ ($x$ e $y$ sono esclusi dal vincolo).
+
+Questo concetto può essere sintetizzato con la seguente formula ricorsiva: Denotando con $d^k[x][y]$ il costo totale del cammino minimo k-vincolato fra x e y, se esiste, varrà che $d^k[x][y]$ sarà pari al peso tra x e y se $k = 0$ (caso base), altrimenti al $\min{(d^{k-1}[x][y], d^{k-1}[x][k] + d^{k-1}[k][y])}$
+
+```Java
+(int[][],int[][]) floydWarshall(Graph G)
+```
+
+```Coffee
+int[][] d = new int[1...n][1...n]
+int[][] T = new int[1...n][1...n]
+
+for u, v in G.V() do
+    d[u][v] = +∞
+    T[u][v] = nil
+
+for u in G.V() do
+    for v in G.adj(u) do
+        d[u][v] = G.w(u,v)
+        T[u][v] = u
+
+for k = 1 to G.size() do
+    for u in G.V() do
+        for v in G.V() do
+            if d[u][k] + d[k][v] < d[u][v] then
+                d[u][v] = d[u][k] + d[k][v]
+                T[u][v] = T[k][v]
+return d
+```
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>

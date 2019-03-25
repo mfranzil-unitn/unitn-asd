@@ -1,3 +1,5 @@
+<br><div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -></a></div>
+
 # Appunti di Algoritmi e Strutture Dati
 
 - [Appunti di Algoritmi e Strutture Dati](#appunti-di-algoritmi-e-strutture-dati)
@@ -41,7 +43,6 @@
       - [Metodo dell'albero di ricorsione / per livelli (cont.)](#metodo-dellalbero-di-ricorsione--per-livelli-cont)
     - [Metodo di sostituzione / per tentativi](#metodo-di-sostituzione--per-tentativi)
       - [Esempio completo](#esempio-completo)
-  - [02/10/2018](#02102018)
   - [04/10/2018](#04102018)
     - [Metodo dell'esperto / delle ricorrenze comuni](#metodo-dellesperto--delle-ricorrenze-comuni)
       - [Master Theorem - versione base](#master-theorem---versione-base)
@@ -56,9 +57,6 @@
     - [Strutture dati elementari](#strutture-dati-elementari)
       - [Lista](#lista)
       - [Pile e code](#pile-e-code)
-  - [09/10/2018](#09102018)
-  - [11/10/2018](#11102018)
-  - [16/10/2018](#16102018)
   - [18/10/2018](#18102018)
     - [Alberi](#alberi)
       - [Albero radicato](#albero-radicato)
@@ -72,7 +70,6 @@
     - [Analisi ammortizzata](#analisi-ammortizzata)
       - [Contatore binario](#contatore-binario)
       - [Vettori dinamici](#vettori-dinamici)
-  - [23/10/2018](#23102018)
   - [25/10/2018](#25102018)
     - [Alberi binari di ricerca](#alberi-binari-di-ricerca)
       - [Funzioni degli alberi binari di ricerca](#funzioni-degli-alberi-binari-di-ricerca)
@@ -81,9 +78,6 @@
     - [Alberi Red-Black](#alberi-red-black)
       - [Rotazioni - `rotateLeft`](#rotazioni---rotateleft)
       - [Inserimento con condizioni negli alberi RB - `balanceInsert`](#inserimento-con-condizioni-negli-alberi-rb---balanceinsert)
-  - [30/10/2018](#30102018)
-  - [01/11/2018](#01112018)
-  - [06/11/2018](#06112018)
   - [08/11/2018](#08112018)
     - [Grafi](#grafi)
     - [Implementazione dei grafi](#implementazione-dei-grafi)
@@ -97,8 +91,6 @@
       - [Grafi con cicli - `hasCycle`](#grafi-con-cicli---hascycle)
       - [Ordinamento topologico - `topSort`](#ordinamento-topologico---topsort)
       - [Componenti fortemente connesse - `scc`, `transpose`](#componenti-fortemente-connesse---scc-transpose)
-  - [15/11/2018](#15112018)
-  - [20/11/2018](#20112018)
   - [22/11/2018](#22112018)
     - [Hashing](#hashing)
       - [Tabelle ad accesso diretto](#tabelle-ad-accesso-diretto)
@@ -114,9 +106,6 @@
         - [Ispezione quadratica](#ispezione-quadratica)
         - [Doppio hashing](#doppio-hashing)
       - [Complessità](#complessit%C3%A0)
-  - [27/11/2018](#27112018)
-  - [29/11/2018](#29112018)
-  - [4/12/2018](#4122018)
   - [6/12/2018](#6122018)
     - [Risoluzione di problemi generali](#risoluzione-di-problemi-generali)
     - [Divide et impera](#divide-et-impera)
@@ -125,8 +114,6 @@
     - [Moltiplicazione di matrici - `strassen`](#moltiplicazione-di-matrici---strassen)
     - [Gap](#gap)
     - [Insiemi e dizionari (cont.)](#insiemi-e-dizionari-cont)
-  - [11/12/2018](#11122018)
-  - [13/12/2018](#13122018)
   - [18/12/2018](#18122018)
     - [Bloom Filter](#bloom-filter)
 
@@ -654,10 +641,6 @@ T(n) = 9T(\lfloor n/3\rfloor) + n \\
 **Passo base**:
 $T(1)$ risulta falso, si prosegue fino a $T(5)$.
 
-## 02/10/2018
-
-Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
 ## 04/10/2018
 
 ### Metodo dell'esperto / delle ricorrenze comuni
@@ -792,23 +775,11 @@ Una __coda__ è simile alla __pila__ ma implementa invece la politica __FIFO__ (
 
 Entrambi i tipi di dato possono essere implementati tramite liste bidirezionali o vettori circolari.
 
-## 09/10/2018
-
-Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato. Riferire alle slide apposite.
-
-## 11/10/2018
-
-Lezione cancellata per pausa lauree.
-
-## 16/10/2018
-
-Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
 ## 18/10/2018
 
 ### Alberi
 
-Come visto nella lezione precedente, un'albero è un grafo con $n - 1$ nodi e senza cicli. 
+Come visto nella lezione precedente, un'albero è un grafo con $n - 1$ nodi e senza cicli.
 
 Possiamo trovare all'interno di ambiti informatici o meno tantissimi esempi di alberi; ad esempio, l'albero genealogico, così come la struttura di una pagina HTML può essere rappresentata con un albero. In questo corso ci concentreremo soprattutto sugli alberi radicati e binari.
 
@@ -960,10 +931,6 @@ In Java si ha l'opzione, una volta terminato lo spazio di un `vector`, di raddop
 Nel caso del raddoppio, possiamo definire il costo effettivo dell'aggiunta di un oggetto in fondo al vettore come $1$ nel caso normale oppure $i := 2^k + 1$ quando abbiamo sforato le dimensioni del vettore. Il costo effettivo di $n$ operazioni sarà pari a $O(3n - 1) = O(n)$, ma il costo ammortizzato sarà pari a $O(1)$.
 
 Nel caso dell'incremento, avremo che il costo effettivo di $n$ operazioni sarà pari a $O(n^2)$, ma il costo ammortizzato sarà pari a $O(n)$.
-
-## 23/10/2018
-
-Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
 
 ## 25/10/2018
 
@@ -1226,27 +1193,15 @@ while t != nil do
 Questo algoritmo ha complessità totale $O(n \log n)$. Per quanto riguarda la cancellazione, potremmo andare a implementare `balanceDelete` per ripristinare la proprietà Red-Black in caso di cancellazione. In particolare:
 
 - Se il nodo “cancellato” è rosso
-    - Altezza nera invariata
-    - Non sono stati creati nodi rossi consecutivi
-    - La radice resta nera
+  - Altezza nera invariata
+  - Non sono stati creati nodi rossi consecutivi
+  - La radice resta nera
 - Se il nodo “cancellato” è nero
-    - Possiamo violare il vincolo 1: la radice può essere un nodo rosso
-    - Possiamo violare il vincolo 3: se il padre e uno dei figli del nodo cancellato erano rossi
-    - Abbiamo violato il vincolo 4: altezza nera cambiata
+  - Possiamo violare il vincolo 1: la radice può essere un nodo rosso
+  - Possiamo violare il vincolo 3: se il padre e uno dei figli del nodo cancellato erano rossi
+  - Abbiamo violato il vincolo 4: altezza nera cambiata
 
 Vedi file in /Codici per implementazione.
-
-## 30/10/2018
-
-Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
-## 01/11/2018
-
-Lezione annullata per festività nazionale.
-
-## 06/11/2018
-
-Lezione annullata per giornate di Dipartimento dedicate alle prove parziali.
 
 ## 08/11/2018
 
@@ -1618,14 +1573,6 @@ for v in G.adj(u) do
 
 L'algoritmo in totale avrà costo computazionale pari a $O(n + m)$.
 
-## 15/11/2018
-
-Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
-
-## 20/11/2018
-
-Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
 ## 22/11/2018
 
 ### Hashing
@@ -1733,18 +1680,6 @@ In tutti i casi non possiamo cancellare una chave sostituendola con un nil, in q
 #### Complessità
 
 Abbiamo infine che le liste di trabocco sono le più efficienti dal punto di vista della complessità (crescono infatti linearmente). In generale per ovviare alla crescita della complessità con il passare del tempo, superata una soglia per $\alpha$ prefissata (generalmente tra 0.5 e 0.75) si alloca una tabella grande il doppio e si reinseriscono tutte le chiavi, dimezzando il fattore di carico e rimuovendo eventuali elementi deleted. La ristrutturazione avrà costo $O(m)$ ma costo ammortizzato costante.
-
-## 27/11/2018
-
-Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
-## 29/11/2018
-
-Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
-
-## 4/12/2018
-
-Lezione di Laboratorio svolta in Aula A101, con introduzione al progetto del semestre. Nessun nuovo argomento di teoria trattato.
 
 ## 6/12/2018
 
@@ -1865,14 +1800,6 @@ Abbiamo che se $n \ge 2$ e $V[1] < V[n]$, $V$ contiene almeno un gap. Vedi slide
 
 Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguaggi.
 
-## 11/12/2018
-
-Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.
-
-## 13/12/2018
-
-Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.
-
 ## 18/12/2018
 
 ### Bloom Filter
@@ -1897,3 +1824,5 @@ I valori ottimali per $k$ e $m$ sono invece:
 $$
 k = \frac{m}{n} \ln{2}\qquad m = \frac{-n\ln{\epsilon}}{(\ln{2})^2}
 $$
+
+<br><div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -></a></div>
