@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 MD041 -->
+
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div><br>
 
 # Appunti di Algoritmi e Strutture Dati
@@ -37,6 +39,13 @@
       - [Cammini minimi su DAG](#cammini-minimi-su-dag)
     - [Cammini minimi per multipla sorgente](#cammini-minimi-per-multipla-sorgente)
       - [Floyd-Warshall](#floyd-warshall)
+  - [27/03/2019](#27032019)
+    - [Algoritmi greedy](#algoritmi-greedy)
+      - [Insieme indipendente di intervalli](#insieme-indipendente-di-intervalli)
+      - [Resto](#resto)
+      - [Scheduling - Shortest Job First](#scheduling---shortest-job-first)
+      - [Zaino frazionario](#zaino-frazionario)
+      - [Compressione di Huffman](#compressione-di-huffman)
 
 ## 18/02/2019
 
@@ -369,6 +378,115 @@ for k = 1 to G.size() do
                 d[u][v] = d[u][k] + d[k][v]
                 T[u][v] = T[k][v]
 return d
+```
+
+## 27/03/2019
+
+### Algoritmi greedy
+
+Nell'ambito dei problemi di ottimizzazione, quando andiamo a effettuare una sequenza di decisioni la tecnica greedy preferisce selezionare l'ottimo locale piuttosto che valutare tutte le decisioni possibili. Bisogna tuttavia dimostrare che applicando questa tecnica si ottiene l'ottimo globale, oltre a dimostrare che il problema gode di sottostruttura ottima (_"fatta tale scelta, resta un sottoproblema con la stessa struttura del problema principale"_).
+
+In generale, è possibile agire in due modi: trovare una forma ricorsiva del problema e scrivere una soluzione con programmazione dinamica, poi procedere con un miglioramento della soluzione passando a una scelta greedy; oppure, procedere direttamente con greedy:
+
+- Evidenziare i "passi di decisione"; trasformare il problema di ottimizzazione in un problema di "scelte" successive
+- Evidenziare una possibile scelta ingorda; dimostrare che tale scelta rispetto il "principio della scelta ingorda"
+- Evidenziare la sottostruttura ottima; dimostrare che la soluzione ottima del problema "residuo" dopo la scelta ingorda può essere unito a tale scelta
+- Scrittura codice: top-down, anche in maniera iterativa
+
+#### Insieme indipendente di intervalli
+
+Riprendiamo il problema visto in programmazione dinamica ([vedi qui](#insieme-indipendente-di-intervalli-pesati)).
+
+Iniziamo con programmazione dinamica: troviamo una forma ricorsiva del problema e scriviamo una versione iterativa. Scopriamo tuttavia presto che questo approccio non è ideale, in quanto si ottiene un algoritmo $O(n^3)$, ancora peggio di quanto visto prima.
+
+Proviamo allora ad applicare la tecnica greedy. Dato $S[i, j]$ sottoproblema non vuoto, troviamo un intervallo $m$ tale che abbia il minor tempo di fine. Avremo che il sottoproblema $S[i, m]$ sarà vuoto e $m$ sarà contenuto in qualche soluzione ottima.
+
+```Java
+Set independentSet(int[] a, int[] b)
+```
+
+```Coffee
+# { ordina a e b in modo che b[1] <= b[2] <= ... <= b[n] }
+Set S = Set()
+S.insert(1)
+int last = 1 # Ultimo intervallo inserito
+for i = 2 to n do
+    if a[i] ≥ b[last] then
+        # Controllo indipendenza
+        S.insert(i)
+        last = i
+return S
+```
+
+#### Resto
+
+Dato un insieme di "tagli" di monete e un intero, rappresentante il resto da dare, trovare il più piccolo numero di monete necessarie a fornire il resto. Assumiamo di avere infinite monete per ogni taglio.
+
+Un approccio greedy potrebbe essere selezionare la moneta j più grande tale per cui $t[j] \le R$, e poi risolvere il problema $S(R−t[j])$. E' necessario tuttavia dimostrare che non tutti i tagli di monete sono adatti a questo tipo di soluzione.
+
+```Java
+void resto(int[] t, int n, int R, int[] x)
+```
+
+```Coffee
+{ Ordina le monete in modo decrescente }
+for i = 1 to n do
+    x[i] = floor(R/t[i])
+    R = R− x[i] * t[i]
+```
+
+#### Scheduling - Shortest Job First
+
+Vediamo ora l'implementazione dell'algoritmo di scheduling __Shortest Job First__, che permette di ottenere un tempo di completamento medio ottimo rispetto a qualunque altro algoritmo.
+
+Esiste una soluzione ottima A in cui il job con minor tempo di ﬁne m si trova in prima posizione ($A[1] = m$).
+
+Sia A una soluzione ottima di un problema con n job, in cui il job con minor tempo di ﬁne m si trova in prima posizione. La permutazione dei seguenti $n−1$ job in A è una soluzione ottima al sottoproblema in cui il job $m$ non viene considerato.
+
+#### Zaino frazionario
+
+Consideriamo il problema dello zaino; ora è possibile prelevare parzialmente degli oggetti (con $f: 0 < f < 1$).
+
+Possiamo ipotizzare true approcci greedy:
+
+- Riempire per profitto decrescente (eventualmente frazionando l'ultimo oggetto)
+- Riempire per peso crescente
+- Riempire per profitto specifico $\frac{p_i}{w_i}$
+
+Il terzo approccio risulta vincente. Andando infatti ad ordinare gli oggetti per profitto specifico possiamo infine adottare un algoritmo simile a quello del resto, che restituirà un vettore $x$ rappresentante le frazioni degli oggetti che andremo a prendere.
+
+#### Compressione di Huffman
+
+Affrontiamo il problema della codifica dei dati in maniera efficiente: dobbiamo risparmiare bit e rendere il trasferimento veloce. Quale è il numero minimo di bit per rappresentare un testo, opportunamente compresso.
+
+Utilizziamo una funzione di codifica $f : f(c) = x$ dove $c$ è un carattere e $x$ una rappresentazione binaria.
+
+Sia un _codice a prefisso_ un codice output di una funzione di codice che non è mai prefisso di nessun'altro output della stessa funzione. Il funzionamento è analogo all'allocazione classful degli indirizzi IP.
+
+Per la decodifica utilizziamo un _albero binario di decodifica_ contenente caratteri dell'alfabeto sulle foglie e dei tag $<0, 1>$ sui figli: 0 a sinistra, 1 a destra. Ogni volta che si legge un bit si compie una decisione sull'albero fino ad arrivare a una foglia.
+
+Per completare, ci serve un file F composto da caratteri nell’alfabeto $\Sigma$. Avremo che se dT(c) è la profondità della foglia che rappresenta c nell'albero, allora la dimensione della codifica sarà pari alla somma del prodotto delle profondità per le frequenze $f[c]$ di ogni carattere $c$.
+
+L'algoritmo consiste nel comporre un vettore contenente i caratteri $c$ e la loro frequenza relativa $f$. Si prelevano i due caratteri con frequenza minore e si compone un albero avente come figli destri e sinistri i due caratteri e lo si reinserisce nel vettore.
+
+```Java
+Tree huffman(int[] c, int[] f, int n)
+```
+
+```Coffee
+PriorityQueue Q = MinPriorityQueue()
+for i = 1 to n do
+    Q.insert(f[i], Tree(f[i],c[i]))
+
+for i = 1 to n−1 do
+    z1 = Q.deleteMin()
+    z2 = Q.deleteMin()
+    z = Tree(z1.f + z2.f,nil)
+    z.left = z1
+    z.right = z2
+    Q.insert(z.f,z)
+
+return Q.deleteMin()
 ```
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>

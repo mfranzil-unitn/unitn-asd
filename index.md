@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 MD041 -->
+
 <br><div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -></a></div>
 
 # Appunti di Algoritmi e Strutture Dati
