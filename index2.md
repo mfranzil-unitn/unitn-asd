@@ -40,12 +40,17 @@
     - [Cammini minimi per multipla sorgente](#cammini-minimi-per-multipla-sorgente)
       - [Floyd-Warshall](#floyd-warshall)
   - [27/03/2019](#27032019)
-    - [Algoritmi greedy](#algoritmi-greedy)
+    - [Algoritmi greedy (parte 1)](#algoritmi-greedy-parte-1)
       - [Insieme indipendente di intervalli](#insieme-indipendente-di-intervalli)
       - [Resto](#resto)
       - [Scheduling - Shortest Job First](#scheduling---shortest-job-first)
       - [Zaino frazionario](#zaino-frazionario)
       - [Compressione di Huffman](#compressione-di-huffman)
+  - [01/04/2019](#01042019)
+    - [Algoritmi greedy (parte 2)](#algoritmi-greedy-parte-2)
+      - [ALbero di copertura di peso minimo](#albero-di-copertura-di-peso-minimo)
+      - [Algoritmo di Kruskal](#algoritmo-di-kruskal)
+      - [Algoritmo di Prim](#algoritmo-di-prim)
 
 ## 18/02/2019
 
@@ -382,7 +387,7 @@ return d
 
 ## 27/03/2019
 
-### Algoritmi greedy
+### Algoritmi greedy (parte 1)
 
 Nell'ambito dei problemi di ottimizzazione, quando andiamo a effettuare una sequenza di decisioni la tecnica greedy preferisce selezionare l'ottimo locale piuttosto che valutare tutte le decisioni possibili. Bisogna tuttavia dimostrare che applicando questa tecnica si ottiene l'ottimo globale, oltre a dimostrare che il problema gode di sottostruttura ottima (_"fatta tale scelta, resta un sottoproblema con la stessa struttura del problema principale"_).
 
@@ -488,5 +493,75 @@ for i = 1 to n−1 do
 
 return Q.deleteMin()
 ```
+
+## 01/04/2019
+
+### Algoritmi greedy (parte 2)
+
+#### ALbero di copertura di peso minimo
+
+Dato un grafo pesato, determiniamo come connettere tutti i nodi con un albero di copertura il cui peso degli archi sia minimo.
+
+Sia $G$ un grafo non orientato e connesso, $w$ una funzione di peso per gli archi. Dobbiamo trovare l'albero di copertura di peso minimo, ovvero dove $w(T) = \sum_{[u, v] \in E_T} w(u, v)$. L'idea è partire con un sottinsieme $A$ di archi, che a ogni iterazione viene aumentato a patto che rimanga sempre sottoinsieme di qualche albero di copertura minimo.
+
+Definiamo _arco sicuro_ un arco $[u, v]$ che se unito al sottoinsieme $A$ non ne modifica la proprietà definita in precedenza.
+
+Definiamo __taglio__ di un grafo orientato è una divisione dei suoi nodi in due sottoinsiemi disgiunti tale per cui $S, V - S$ è una partizione dei nodi. Un arco attraversa il taglio se dati $u, v, u \in S$ e $v \in V - s$, e verrà detto _leggero nel taglio_ se il suo peso è minimo tra i pesi degli archi che attraversano un taglio. Avremo che se un arco che attraversa il taglio è leggero, e il taglio rispetta il sottoinsieme $A$, allora è un arco sicuro.
+
+#### Algoritmo di Kruskal
+
+Partiamo da una foresta composta da alberi unitari. A ogni passo, individuiamo un arco leggero che connette due alberi nella foresta e lo aggiungiamo all'insieme degli archi che compongono il nostro minimum spanning tree. Per questa implementazione utilizziamo un merge-find set.
+
+```Java
+Set kruskal(Edge[] A, int n, int m)
+```
+
+```Coffee
+Set T = Set()
+Mfset M = Mfset(n)
+# { ordina A[1,...,m] in modo che A[1].weight ≤···≤ A[m].weight }
+int count = 0
+int i = 1
+# Termina quando l’albero ha n−1 archi o non ci sono più archi
+while count < n − 1 and i ≤ m do
+    if M.find(A[i].u) != M.find(A[i].v) then
+        M.merge(A[i].u, A[i].v)
+        T.insert(A[i])
+        count = count + 1
+    i = i + 1
+return T
+```
+
+La complessità è $O(m \log{n})$.
+
+#### Algoritmo di Prim
+
+Prim funziona in maniera totalmente opposta. Parte da un vertice arbitrario $r$$ e a ogni passo aggiunge un arco leggero che connette l'albero $A$ a un vertice non presente nell'albero. Per l'intera durata dell'algoritmo viene mantenuto un singolo albero.
+
+Utilizziamo una coda con priorità che registra i vertici non ancora nell'albero, con priorità pari al peso minimo di un arco che connette tale vertice a qualunque vertice nell'albero (oppure $+\infty$ se non esiste). Ogni nodo mantiene un puntatore al padre tramite il vettore dei padri.
+
+```Java
+prim(Graph G, Node r, int[ ] p)
+```
+
+```Coffee
+PriorityQueue Q = MinPriorityQueue()
+PriorityItem[ ] pos = new PriorityItem[1 . . . G.n]
+foreach u ∈ G.V() − {r} do
+    pos[u] = Q.insert(u, +∞)
+
+pos[r] = Q.insert(r, 0)
+p[r] = 0
+
+while not Q.isEmpty() do
+    Node u = Q.deleteMin()
+    pos[u] = nil
+    for v ∈ G.adj(u) do
+        if pos[v] != nil and w(u, v) < pos[v].priority then
+            Q.decrease(pos[v], w(u, v))
+            p[v] = u
+```
+
+La complessità è pari a $O(m \log{n})$.
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
