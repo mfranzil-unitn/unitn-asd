@@ -51,6 +51,16 @@
       - [ALbero di copertura di peso minimo](#albero-di-copertura-di-peso-minimo)
       - [Algoritmo di Kruskal](#algoritmo-di-kruskal)
       - [Algoritmo di Prim](#algoritmo-di-prim)
+  - [08/04/2019](#08042019)
+    - [Backtrack](#backtrack)
+      - [Enumerazioni](#enumerazioni)
+      - [Problema delle otto regine](#problema-delle-otto-regine)
+      - [Euristica del minimo conflitto](#euristica-del-minimo-conflitto)
+      - [Giro di cavallo](#giro-di-cavallo)
+      - [Sudoku, Labirinto, Tetramini](#sudoku-labirinto-tetramini)
+      - [Inviluppo convesso](#inviluppo-convesso)
+        - [Algoritmo di Jarvis](#algoritmo-di-jarvis)
+        - [Algoritmo di Graham](#algoritmo-di-graham)
 
 ## 18/02/2019
 
@@ -563,5 +573,143 @@ while not Q.isEmpty() do
 ```
 
 La complessità è pari a $O(m \log{n})$.
+
+## 08/04/2019
+
+### Backtrack
+
+Consideriamo una classe di problemi la cui definizione è basata sul concetto di _soluzione ammissibile_, ovvero che soddisfa certe regole.
+
+Partiamo dal concetto di _enumerazione_: ovvero dato uno spazio di ricerca, elencarne algoritmicamente tutte le soluzioni. Lo esploriamo come se fosse un grafo oppure un albero, con tecniche BFS e/o DFS, e appena trova una soluzione termina l'esecuzione. Alternativamente le andiamo a contare tramite una formula analitica.
+
+Un approccio per costruire tutte le soluzioni tipico è quello di __brute-force__, ovvero l'esaminazione intera dello spazio delle soluzioni, che spesso è l'unico modo (a meno di uso di tecniche alternative). Grazie alla potenza di calcolo delle CPU moderne, spesso non richede tempi irragionevoli.
+
+Rappresentiamo una soluzione come un insieme di scelte, che verranno memorizzate in un vettore. Ad ogni passo, costruiamo una soluzione parziale e cerchiamo di prendere una decisione. Se, arrivati in fondo, non si riescono a effettuare ulteriori scelte (sia per mancanza di scelte sia per incoerenza della soluzione) allora si torna indietro (_backtrack_) e si effettua una scelta alternativa.
+
+Possiamo rappresentare visivamente questa sequenza di decisioni con un _albero delle decisioni_, dove i nodi interni rappresentano le soluzioni parziali e le foglie le soluzioni ammissibili. Quest'albero può essere _potato_ a partire da certi nodi interni che sicuramente non portano a soluzioni ammissibili, riducendone i fattori moltiplicativi (la complessità rimane comunque esponenziale).
+
+Gli approcci di esplorazione dell'albero possono essere sia iterativi sia ricorsivi.
+
+#### Enumerazioni
+
+Elenchiamo tutti i sottoinsiemi dell'insieme ${1,...,n}$.
+
+```Java
+subsets(int[] S, int n, int i)
+```
+
+```Coffee
+if i == n + 1 then
+    processSolution(S,n)
+else
+    for c in {0,1} do
+        S[i] = c
+        subsets(S,n,i + 1)
+```
+
+Elenchiamo tutti i sottoinsiemi di $k$ elementi di un insieme ${1, ... , n}$.
+
+```Java
+subsets(int[] S, int n, int k, int i, int count)
+```
+
+```Coffee
+Set C = iif(count < k and count + (n − i + 1) >= k, {0,1}, ∅)
+for c in C do
+    S[i] = c
+    count = count + S[i]
+    if count = k then
+        processSolution(S,i)
+    else
+        subsets(S,n,k,i + 1,count)
+    count = count−S[i]  # Backtracking
+```
+
+Specializzando questo secondo algoritmo, otteniamo una versione molto efficiente per $k$ molto piccoli e molto grandi (solo una microscopica frazione dell'albero viene esplorata!), che comunque rimane buona anche per $k$ vicini a $n/2$ (circa il 50% dell'albero esplorato).
+
+Stampiamo infine tutte le permutazioni di un dato insieme $A$.
+
+```Java
+permutations(Set A, int n, Item[] S, int i)
+```
+
+```Coffee
+for c in A do
+    S[i] = c
+    A.remove(c)
+    if A.isEmpty() then
+        processSolution(S,n)
+    else
+        permutations(A,n,S,i + 1)
+    A.insert(c)
+```
+
+#### Problema delle otto regine
+
+Vogliamo posizionare $n$ regine in una scacchiera $n \times n$ in modo che nessuna regina minacchi nessun'altra.
+
+Abbiamo quindi $n^2$ caselle dove piazzarne una. Possiamo o utilizzare un array binario con $n^2$ spazi (in maniera simile a prima), ma l'albero di soluzioni avrà una grandezza pari a $2^64 \approx 1.84 \cdot 10^19$, decisamente troppo per qualunque calcolatore; utilizziamo allora un vettore lungo $n$ che mappa le posizioni delle $n$ regine sulle coordinate $n^2$. Possiamo migliorare ancora di più evitando di posizionare regine in caselle già visitate, e considerando che in ogni riga e in ogni colonna può stazionare una e una sola regina (altrimenti si minaccerebbero a vicenda). Otteniamo quindi uno spazio di soluzioni pari a $n! = 8! = 40320$, andando a potare opportunamente l'albero eliminando le diagonali minacciate da una certa regina e utilizzando una permutazione di ${1...n}$ sulle coordinate delle regine.
+
+#### Euristica del minimo conflitto
+
+L'approccio visto in precedent utilizza la cosìddetta _minimum-conflicts heuristics_, ovvero si parte da una soluzione iniziale "ragionevolmente buona", e si muove il pezzo con il più grande numero di conﬂitti nella casella della stessa colonna che genera il numero minimo di conﬂitti. Si ripete ﬁno a quando non ci sono più pezzi da muovere.
+
+Questo algoritmo riduce di molto lo spazio delle soluzioni, ma non garantisce che la soluzione ottenuta alla fine sia esatta. In questo caso si riparte, provando soluzioni alternative (avvicinandosi al concetto di algoritmo probabilistico).
+
+#### Giro di cavallo
+
+SI consideri ancora una scacchiera $n \times n$: dobbiamo trovare un ciclo hamiltoniano visitabile da un cavallo. Usiamo una matrice equivalente dove il contenuto $k, j$ - esimo indica se la cella è stata visitata al passo $i$-esimo.
+
+```Java
+boolean cavallo(int[][] S, int i, int x, int y)
+```
+
+```Coffee
+Set C = mosse(S, x, y)
+for c in C do
+    S[x][y] = i
+    if i = 64 then
+        processSolution(S)
+        return true
+    else if cavallo(S, i + 1, x + mx[c], y + my[c]) then
+        return true
+    S[x,y] = 0
+return false
+```
+
+```Java
+Set mosse(int[][] S, int x, int y)
+```
+
+```Coffee
+Set C = Set()
+for int i = 1 to 8 do
+    nx = x + mx[i]
+    ny = y + my[i]
+    if 1 <= nx <=> 8 and 1 <= ny <= 8 and S[nx][ny] == 0 then
+        C.insert(i)
+return C
+```
+
+#### Sudoku, Labirinto, Tetramini
+
+Vedi slide per:
+
+- il codice di un algoritmo che, tramite forza brutta, esegue tutte le possibili mosse per risolvere una griglia $9 \times 9$ di Sudoku
+- esempi di un algoritmo risolutivo per costruzione e risoluzione di labirinti
+- esempi di un algoritmo risolutivo che data una scacchiera $n \times n$ con una cella vuota, la riempie di _triomini_ di 3 celle a forma di "L".
+
+#### Inviluppo convesso
+
+Dati $n$ punti nel piano (almeno 3), un _inviluppo convesso_ è  il più piccolo poligono convesso che li contiene tutti.
+
+##### Algoritmo di Jarvis
+
+Si considera il punto $p_0$ più basso, e si seleziona il punto $p_{i+1}$ tale che l'angolo $\theta$ definito tra la retta passante per i due punti e l'asse delle ascisse (per il primo passo) oppure la retta precedente (per quelli successivi).
+
+##### Algoritmo di Graham
+
+Vedi slide per codici dell'algoritmo di Graham. Esso si basa intorno all'ordinamento dei punti rispetto alla loro coordinata $y$.
+
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
