@@ -61,6 +61,11 @@
       - [Inviluppo convesso](#inviluppo-convesso)
         - [Algoritmo di Jarvis](#algoritmo-di-jarvis)
         - [Algoritmo di Graham](#algoritmo-di-graham)
+  - [16/04/2019](#16042019)
+    - [Ricerca locale](#ricerca-locale)
+      - [Flusso massimo](#flusso-massimo)
+      - [Metodo di Ford-Fulkerson](#metodo-di-ford-fulkerson)
+      - [Taglio minimo](#taglio-minimo)
 
 ## 18/02/2019
 
@@ -454,9 +459,9 @@ for i = 1 to n do
 
 Vediamo ora l'implementazione dell'algoritmo di scheduling __Shortest Job First__, che permette di ottenere un tempo di completamento medio ottimo rispetto a qualunque altro algoritmo.
 
-Esiste una soluzione ottima A in cui il job con minor tempo di ﬁne m si trova in prima posizione ($A[1] = m$).
+Esiste una soluzione ottima A in cui il job con minor tempo di fine m si trova in prima posizione ($A[1] = m$).
 
-Sia A una soluzione ottima di un problema con n job, in cui il job con minor tempo di ﬁne m si trova in prima posizione. La permutazione dei seguenti $n−1$ job in A è una soluzione ottima al sottoproblema in cui il job $m$ non viene considerato.
+Sia A una soluzione ottima di un problema con n job, in cui il job con minor tempo di fine m si trova in prima posizione. La permutazione dei seguenti $n−1$ job in A è una soluzione ottima al sottoproblema in cui il job $m$ non viene considerato.
 
 #### Zaino frazionario
 
@@ -652,7 +657,7 @@ Abbiamo quindi $n^2$ caselle dove piazzarne una. Possiamo o utilizzare un array 
 
 #### Euristica del minimo conflitto
 
-L'approccio visto in precedent utilizza la cosìddetta _minimum-conflicts heuristics_, ovvero si parte da una soluzione iniziale "ragionevolmente buona", e si muove il pezzo con il più grande numero di conﬂitti nella casella della stessa colonna che genera il numero minimo di conﬂitti. Si ripete ﬁno a quando non ci sono più pezzi da muovere.
+L'approccio visto in precedent utilizza la cosìddetta _minimum-conflicts heuristics_, ovvero si parte da una soluzione iniziale "ragionevolmente buona", e si muove il pezzo con il più grande numero di conﬂitti nella casella della stessa colonna che genera il numero minimo di conﬂitti. Si ripete fino a quando non ci sono più pezzi da muovere.
 
 Questo algoritmo riduce di molto lo spazio delle soluzioni, ma non garantisce che la soluzione ottenuta alla fine sia esatta. In questo caso si riparte, provando soluzioni alternative (avvicinandosi al concetto di algoritmo probabilistico).
 
@@ -711,5 +716,42 @@ Si considera il punto $p_0$ più basso, e si seleziona il punto $p_{i+1}$ tale c
 
 Vedi slide per codici dell'algoritmo di Graham. Esso si basa intorno all'ordinamento dei punti rispetto alla loro coordinata $y$.
 
+## 16/04/2019
+
+### Ricerca locale
+
+Se si conosce una soluzione ammissibile (non necessariamente ottima) ad un problema di ottimizzazione, si può cercare di trovare una soluzione migliore nelle "vicinanze" di quella precedente. Si continua in questo modo fino a quando non si è più in grado di migliorare.
+
+Questo approccio è puramente deterministico, ma in certi casi non garantisce il raggiungimento di un ottimo globale (ad esempio, nell'ipotesi di uno spazio delle soluzioni mappabile su $\mathbb{R}$, questo comportamento è paragonabile alla ricerca di un massimo arrestandosi su uno locale, ignari dell'esistenza di un massimo globale altrove). Quando ciò accade, è opportuno far ripartire l'algoritmo e riprovare.
+
+In questo corso, ci concentreremo su uno specifico problema della ricerca locale per la quale è dimostrabile che l'output del problema sarà sempre ottimo.
+
+#### Flusso massimo
+
+Sia $G = (V, E, s, t, c)$ una __rete di flusso__, composta da un grafo orientato, due nodi detti sorgente e pozzo, e una funzione di capacità $c: V \times V \rightarrow \mathbb{R} \cup \{0\}$. Assumiamo che il grafo sia orientato e che per ogni nodo esiste un cammino passante per il nodo stesso che connette sorgente e pozzo.
+
+Definiamo _flusso_ in $G$ una funzione $f: V \times V \rightarrow \mathbb{R}$ che soddisfa le proprietà di _vincolo sulla capacità_ (ovvero che non eccede la capacità di un dato arco), _antisimmetria_ (ovvero che un flusso in una verso è equivalente a un flusso con verso opposto) e _conservazione_ (ovvero che la sommatoria dei flussi entranti sui nodi interni è nulla). Il _valore del flusso_ è definito come la somma dei flussi uscenti dalla sorgente. Definiamo infine _flusso massimo_ come $|f^*| = \max{\{|f|\}}$.
+
+Per costruire il nostro algoritmo utilizziamo il modello delle reti residue: a ogni iterazione dell'algoritmo si sottrae un flusso corrente dalla rete, ottenendo una rete residua, fino a quando ciò non è più possibile.
+
+Definiamo _capacità residua_ di un flusso $f$ in una rete una funzione $c_f: V \times V \rightarrow \mathbb{R} \cup \{0\}$ tale che $c_f(u, v) = c(u, v) - f(u, v)$. Per questa definizione vengono a crearsi degli archi all'indietro nel grafo.
+
+#### Metodo di Ford-Fulkerson
+
+Tramite questo algoritmo, si usa una BFS o una DFS per individuare un cammino $C$ che connette sorgente e pozzo nella rete (residua). Si identifica la _capacità del cammino_, pari al collo di bottiglia del cammino stesso, e si crea un flusso addizionale $g$ pari al collo di bottiglia per ogni arco $g(v_{i-1}, v_i)$ (ovvero per gli archi direzionati verso il pozzo), e di verso opposto per gli archi nella direzione opposta.
+
+L'algoritmo ha limite superiore della complessità pari a $O((V + E)|f^*|)$ o $O(V^2|f^*|)$ per liste e matrici rispettivamente; Edmonds e Karp suggerirono invece un limite superiore di $O(V E^2)$ nel caso pessimo.
+
+#### Taglio minimo
+
+Visualizziamo ora il problema da un punto di vista alternativo. Sia un _taglio_ $(S, T)$ della rete di flusso una partizione di $V$ in modo che $s \in S$ e $t \in T$. Attraverso il taglio vi è una certa capacità (pari alla somma delle capacità dei canali) ed è attraversato da un certo flusso (pari sempre a $|f|$).
+
+Abbiamo che il flusso massimo è limitato superiormente dalla capacità del _taglio minimo_, ovvero quello con minor capacità.
+
+Le seguenti tre affermazioni sono quindi equivalenti:
+
+- $f$ è un flusso massimo
+- non esiste nessun cammino aumentante per $G$
+- esiste un taglio minimo $(S,T)$ tale che $c(S,T) = |f|$
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
