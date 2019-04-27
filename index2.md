@@ -48,7 +48,7 @@
       - [Compressione di Huffman](#compressione-di-huffman)
   - [01/04/2019](#01042019)
     - [Algoritmi greedy (parte 2)](#algoritmi-greedy-parte-2)
-      - [ALbero di copertura di peso minimo](#albero-di-copertura-di-peso-minimo)
+      - [Albero di copertura di peso minimo](#albero-di-copertura-di-peso-minimo)
       - [Algoritmo di Kruskal](#algoritmo-di-kruskal)
       - [Algoritmo di Prim](#algoritmo-di-prim)
   - [08/04/2019](#08042019)
@@ -66,6 +66,17 @@
       - [Flusso massimo](#flusso-massimo)
       - [Metodo di Ford-Fulkerson](#metodo-di-ford-fulkerson)
       - [Taglio minimo](#taglio-minimo)
+  - [17/04/2019](#17042019)
+    - [Problemi intrattabili](#problemi-intrattabili)
+    - [Riduzione di problemi](#riduzione-di-problemi)
+    - [SAT](#sat)
+    - [Classi di complessità](#classi-di-complessit%C3%A0)
+    - [Classe NP](#classe-np)
+    - [Tecniche risolutive](#tecniche-risolutive)
+    - [Problemi fortemente e debolmente NP-completi](#problemi-fortemente-e-debolmente-np-completi)
+    - [Algoritmi di approssimazione](#algoritmi-di-approssimazione)
+      - [Approssimazione First-Fit](#approssimazione-first-fit)
+    - [Commesso viaggiatore](#commesso-viaggiatore)
 
 ## 18/02/2019
 
@@ -513,7 +524,7 @@ return Q.deleteMin()
 
 ### Algoritmi greedy (parte 2)
 
-#### ALbero di copertura di peso minimo
+#### Albero di copertura di peso minimo
 
 Dato un grafo pesato, determiniamo come connettere tutti i nodi con un albero di copertura il cui peso degli archi sia minimo.
 
@@ -755,3 +766,88 @@ Le seguenti tre affermazioni sono quindi equivalenti:
 - esiste un taglio minimo $(S,T)$ tale che $c(S,T) = |f|$
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div>
+
+## 17/04/2019
+
+### Problemi intrattabili
+
+Finora nel corso, a parte casi isolati, abbiamo affrontato problemi il cui tempo di esecuzione è $O(n^k)$ per qualche $k$, ovvero in tempo polinomiale. Esistono tuttavia problemi che per essere risolti hanno bisogno di tempo almeno esponenziale (come i problemi di tipo Backtrack) e quelli senza soluzione.
+
+Discuteremo ora una classe di problemi per la quale ancora non si sa se possono essere risolti in tempo polinomiale da una macchina di Turing deterministica.
+
+Un _problema astratto_ è una relazione binaria $R \subseteq I \times S$ tra un insieme di istanze del problema e un insieme di soluzioni.
+
+I problemi che affronteremo sono divisibili in problemi di _ottimizzazione_, problemi di _ricerca_ e problemi di _decisione_. Focalizzeremo la nostra attenzione sui problemi di decisione: infatti, vale la relazione: $\text{Prob. di decisione risolvibile effic.} \Longrightarrow \text{Prob. di ottimizzzaione risolvibile effic.}$
+
+### Riduzione di problemi
+
+Dati due problemi decisionali $R_1, R_2$, $R_1 \le_p R_2$ (ovvero è riducibile polinomialmente a $R_2$) se esiste una funzione calcolabile in tempo polinomiale che mappa istanze $(x, s) \in R_1 \leftrightarrow (f(x), s) \in R_2$.
+
+Un'esempio di questo dualismo di ottimizzazione e decisionale può essere il problema della colorazione dei grafi: dato un grafo non orientato e un insieme di colori, restituire una colorazione del grafo (ovvero un assegnamento tale per cui nessuna coppia di nodi adiacenti ha lo stesso colore) che necessita del numero minimo di colori (versione di ottimizzazione) e determinare se esiste una colorazione di G con $k$ colori (versione decisionale).
+
+Molti problemi possono essere anch'essi ridotti al problema decisionale della colorazione, come ad esempio il problema del Sudoku.
+
+Alcuni problemi, invece, possono essere riducibili a vicenda (e quindi equivalenti). Un'esempio è il problema della copertura dei vertici (ovvero trovare un sottoinsieme di vertici di un grafo tale per cui ogni arco ha almeno un estremo nel sottoinsieme) e degli insiemi indipendenti (overo trovare un sottoinsieme di vertici tale per cui nessun arco unisce due nodi in S).
+
+### SAT
+
+Data un’espressione in forma normale congiuntiva, il problema della soddisfacibilità consiste nel decidere se esiste una assegnazione di
+valori di verità alle variabili che rende l’espressione vera. Data una espressione, consideriamo il caso in cui le clausole hanno esattamente 3 letterali. E' possibile dimostrare che il problema 3-SAT è riducibile polinomialmente al problema degli insiemi indipendenti.
+
+### Classi di complessità
+
+Dato un problema $R$ e un algoritmo che lavora con una certa complessità temporale e spaziale, diciamo che l'algoritmo risolve il problema se $A$ restituisce $s$ e $(x, s) \in R$. Chiameremo $\mathbb{TIME}(f(n))$ l'insieme dei problemi risolvibili da un algoritmo con complessità temporale $f(n)$, e $\mathbb{SPACE}(f(n))$ l'insieme dei problemi risolvibili con complessità spaziele $f(n)$.
+
+Un esempio di classi sono $\mathbb{P}$ e $\mathbb{PSPACE}$.
+
+### Classe NP
+
+Dato un problema decisionale e un'istanza di input tale per cui $(x, \mathbf{TRUE}) \in R$, un _certificato_ è un'insieme di informazioni che permette di verificare l'effettiva appartenenza di $(x, \mathbf{TRUE})$ a $R$. Esempi possono essere un'assegnamento per SAT, un sottoinsieme per il problema degli insiemi, etc...
+
+Tutti questi certificati possono essere verificati in tempo polinomiali. Definiamo quindi la classe $\mathbb{NP}$ come l'insieme di tutti i problemi con certificato verificabile in tempo polinomiale.
+
+Una definizione alternativa, invece, pone la classe $\mathbb{NP}$ come l'insieme di problemi decisionali che possono essere risolvt da una macchina di Turing non deterministica in tempo polinomiale.
+
+Un problema si dice $\mathbb{NP}$-hard se ogni problema in $\mathbb{NP}$ è riducibile polinomialmente al problema stesso. Un problema si dice $\mathbb{NP}$-completo se appartiene a $\mathbb{NP}$ ed è $\mathbb{NP}$-hard. Un quesito tutt'ora aperto nell'informatica consiste nello stabilire se le classi $\mathbb{NP}$ e $\mathbb{P}$ sono equivalenti.
+
+Un'esempio di problema $\mathbb{NP}$-completo è SAT, così come tutta la catena di problemi visti finora (a causa della transitività della proprietà di riduzione).
+
+Altri problemi $\mathbb{NP}$-completi classici comprendono _Cricca_ (ricerca di nodi mutualmente adiacenti in un grafo), _commesso viaggiatore_, e _programmazione lineare_. Vedi slide per ulteriori informazioni e altri esempi.
+
+### Tecniche risolutive
+
+Vediamo ora alcune tecniche per affrontare problemi $\mathbb{NP}$-completi visti prima. Per iniziare, bisogna sottolineare come inevitabilmente bisognerà rinunciare a qualcosa: vedremo infatti algoritmi _pseudo-polinomiali_ che funzionano solo in casi particolari, algoritmi di _approssimazione_, algoritmi _branch and bound_ che limitano lo spazio di ricerca, e algoritmi _euristici_ che limitano la formalità.
+
+### Problemi fortemente e debolmente NP-completi
+
+Consideriamo il problema della _somma di sottoinsieme_: dato un insieme $A$ di interi positivi e un intero positivo $k$, esiste un sottoinsieme di indici tali che $\sum_{i \in S} a_i = k$?
+
+Questo problema può essere risolto con programmazione dinamica: avremo una tabella booleana $DP[i...n][r...k]$ che avrà true soltanto se esiste un sottoinsieme dei primi $i$ valori la cui somma è pari a $r$.
+
+Essendo un problema decisionale possiamo semplificarla utilizzando $\Theta (k)$ spazio con complessità $\Theta (nk)$. Da notare che la complessità in realtà dipende dai valori contenuti nell'insieme: se $k = O(2^n)$, allora la complessità sale a $O(n 2^n)$ in quanto avremo necessità di un numero maggiore di bit per gestire i valori in ingresso. Questi algoritmi vengono detti _pseudo-polinomiali_.
+
+Definiamo quindi un problema _fortemente_ $\mathbb{NP}$-completo$: se un problema $R$ viene ristretto ai dati d'ingresso il cui valore massimo è limitato superiormente da $p(d)$ (funzione polinomiale in $d$, la lunghezza della stringa che codifica il problema), è detto fortemente $\mathbb{NP}$-completo$ se il sottoproblema $R_p$ in questione è $\mathbb{NP}$-completo$. I problemi che non rientrano in questa categoria vengono detti debolmente $\mathbb{NP}$-completi$.
+
+### Algoritmi di approssimazione
+
+Per gli algoritmi di ottimizzazione $\mathbb{NP}$-completi$, non sono noti algoritmi polinomiali. Tuttavia possiamo formalizzare algoritmi polinomiali con soluzioni ammissibili circa vicine a quella ottima.
+
+Dato un problema di ottimizzazione, un algoritmo si dice di $\alpha(n)$-ottimizzazione se fornisce una soluzione il cui costo non si discosta dal costo della soluzione ottima per più di un fattore $\alpha(n)$, a prescindere dalla dimensione dell'input.
+
+#### Approssimazione First-Fit
+
+Consideriamo il problema del _bin packing_: dati un vettore $A$ di interi positivi e un intero positivo $k$, trovare una partizione del vettore nel minimo numero di insiemi disgiunti, tale per cui la somma di ogni sottoinsieme sia minore di $k$.
+
+Un'algoritmo possibile usa la tecnica greedy (ovvero assegna il primo oggetto alla prima scatola che lo può contenere). In questo caso $\alpha(n) < 2$ (vedi calcoli sulle slide).
+
+### Commesso viaggiatore
+
+Consideriamo il problema classico del _commesso viaggiatore_ (considerando le disuguaglianze triangolari $\Delta\text{\small{-TSP}}$). Chiaramente esso può essere considerato alla stregua del problema del _circuito hamiltoniano_. Dimostriamo che quest'ultimo può essere ridotto polinomialmente al precedente.
+
+Interpretiamo $\Delta\text{\small{-TSP}}$ come il problema di trovare un circuito hamiltoniano di peso minimo su un grafo completo. Vale sicuramente che il costo di un circuito hamiltoniano è superiore al costo di un albero di copertura di peso minimo.
+
+Si potrebbe quindi ipotizzare la ricerca di un _mst_ e percorrerne due volte gli archi, con distanza $2 \cdot mst$. Questo, tuttavia, non è un circuito hamiltoniano. Per renderlo tale è necessario evitare le città visitate. Per la disuguaglianza triangolare il costo sarà necessariamente inferiore; otteniamo quindi un $\alpha(n) < 2$.
+
+Non esiste alcun algoritmo di approssimazione assoluta per questo problema (a meno che $\mathbb{P} = \mathbb{NP}$).
+
+Vedi slide per il resto del programma svolto durante la lezione.
