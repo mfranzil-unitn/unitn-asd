@@ -77,6 +77,8 @@
     - [Algoritmi di approssimazione](#algoritmi-di-approssimazione)
       - [Approssimazione First-Fit](#approssimazione-first-fit)
     - [Commesso viaggiatore](#commesso-viaggiatore)
+    - [Branch and bound](#branch-and-bound)
+    - [Algoritmi euristici](#algoritmi-euristici)
 
 ## 18/02/2019
 
@@ -848,6 +850,28 @@ Interpretiamo $\Delta\text{\small{-TSP}}$ come il problema di trovare un circuit
 
 Si potrebbe quindi ipotizzare la ricerca di un _mst_ e percorrerne due volte gli archi, con distanza $2 \cdot mst$. Questo, tuttavia, non è un circuito hamiltoniano. Per renderlo tale è necessario evitare le città visitate. Per la disuguaglianza triangolare il costo sarà necessariamente inferiore; otteniamo quindi un $\alpha(n) < 2$.
 
+La complessità totale dell'algoritmo rimane $O(n^2 \log{n})$.
+
 Non esiste alcun algoritmo di approssimazione assoluta per questo problema (a meno che $\mathbb{P} = \mathbb{NP}$).
 
-Vedi slide per il resto del programma svolto durante la lezione.
+### Branch and bound
+
+Per risolvere un problema di ottimizzazione NP-arduo, si può far ricorso al Backtrack e potare sequenze di scelte che sicuramente non porteranno alla soluzione ottima.
+
+Modifichiamo la procedura `enumeration()`: durante l'enumerazione, mantengo informazioni sulla miglior soluzione ammissibile ($minSol$ e il suo costo $minCost$). Il costo costituisce un limite superiore per il costo della soluzione minima.
+
+Supponiamo di avere una funzione lower bound che data una sequenza di scelte garantisce che tutte le soluzioni ammissibili a partire dalla scelta successiva $i$ hanno costo maggiore o uguale a un certo valore: allora il ramo della scelta $i$ sarà tranquillamente potabile.
+
+La complessità rimane superpolinomiale, ma il tempo d'esecuzione viene migliorato. Tutto dipende dalla funzione, che deve essere sufficientemente vicina al costo della soluzione ottima.
+
+Per il problema del commesso viaggiatore, possiamo assegnare a $minCost$ una permutazione a caso di un qualsiasi ciclo Hamiltoniano ammissibile partendo da un nodo fissato. Nella maggior parte dei casi è possibile potare gran parte delle scelte.
+
+### Algoritmi euristici
+
+Un algoritmo "euristico" è un algoritmo che fornisce una soluzione che pur non essendo nè ottima nè approssimata è ammissibile. Possiamo usare sia la tecnica greedy sia di ricerca locale.
+
+Per il commesso viaggiatore, usando la metodologia greedy, ordiniamo gli archi per pesi non decrescenti e a ogni step dell'algoritmo aggiungiamo archi alle soluzioni verificando che non invalidino quanto ottenuto. La catena Hamiltoniana si chiude aggiungendo l'arco tra i due nodi estremi della catena.
+
+Un approccio opposto (ma sempre con greedy) è quello del nearest neighbor: a partire da una città si seleziona come prossima quella raggiungibile con costo minimo, evitando città visitate, finché non si torna alla città di partenza.
+
+Le soluzione ottenute così (che hanno complessità polinomiale) possono essere usate come base di partenza per branch and bound oppure migliorate tramite ricerca locale.
