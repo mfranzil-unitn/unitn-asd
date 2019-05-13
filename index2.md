@@ -79,6 +79,10 @@
     - [Commesso viaggiatore](#commesso-viaggiatore)
     - [Branch and bound](#branch-and-bound)
     - [Algoritmi euristici](#algoritmi-euristici)
+  - [13/05/2019](#13052019)
+    - [Algoritmi probabilistici](#algoritmi-probabilistici)
+      - [Algoritmi Montecarlo](#algoritmi-montecarlo)
+      - [Algoritmi Las Vegas](#algoritmi-las-vegas)
 
 ## 18/02/2019
 
@@ -875,3 +879,37 @@ Per il commesso viaggiatore, usando la metodologia greedy, ordiniamo gli archi p
 Un approccio opposto (ma sempre con greedy) è quello del nearest neighbor: a partire da una città si seleziona come prossima quella raggiungibile con costo minimo, evitando città visitate, finché non si torna alla città di partenza.
 
 Le soluzione ottenute così (che hanno complessità polinomiale) possono essere usate come base di partenza per branch and bound oppure migliorate tramite ricerca locale.
+
+## 13/05/2019
+
+### Algoritmi probabilistici
+
+Quando non si ha idea di che scelta prendere, se ne fa una casuale. Alcuni casi in cui ciò può risultare una buona tattica è per il calcolo degli hash e l'analisi del caso medio.
+
+Invece di applicare la probabilità dei dati in input, applichiamo la probabilità all'output: alcuni hanno durata probabilistica (_Montecarlo_), altri hanno correttezza probabilistica (_Las Vegas_).
+
+#### Algoritmi Montecarlo
+
+Consideriamo alcuni algoritmi probabilistici per il test di primalità.
+
+Alcuni esempi sono il test di primalità di Fermat, che preso un intero $n$ calcola un intero $b$ compreso tra $2$ e $n -1$, e applica il Piccolo teorema di Fermat (che dice che $b^{n - 1} \mod n = 1$ se $n$ è primo). Se il test non passa allora $n$ è sicuramente composto, ma se passa è probabilmente primo. Questo test si può effettuare fino a $k$ volte (non si ha comunque garanzia sul fatto che sia primo; inoltre esistono numeri non primi che comunque rispettano l'assunzione).
+
+Consideriamo invece il test di Miller-Rabin. Esprimiamo $n - 1$ come $m2^v, m \mod 2 \ne 0$.Se un numero è primo allora il massimo comune divisore tra $n$ e $b$ compreso tra tra $1$ e $n -1$ e $b^m \mod n = 1$ oppure $\exists i, 0 \le i \le v - 1 : b^{2^{i}m} \mod n = -1$. Se invece è composto almeno una è falsa. E' dimostrabile che se $n$ è composto, allora il test di compostezza sarà corretto per almeno $3/4$ dei casi (in realtà non sarà corretto per $\frac{1}{4^k}$ con $k$ il numero di tentativi).
+
+Dal 2002 esiste un algoritmo deterministico con complessità migliore ma con fattori moltiplicativi alti, che quindi viene ignorato in favore di Miller-Rabin.
+
+Consideriamo invece il test di nullità polinomiale: data un'espressione polinomiale a $n$ variabili, controllare se è identicamente nulla.
+
+Si genera una n-pla di valori $v_1,...,v_n$, e si calcola $x = p(v1,...,vn)$ Se $x \ne 0$, $p$ non è identicamente nulla; se $x = 0$, $p$ potrebbe essere identicamente nulla. Se ogni $v_i$ è un valore intero compreso casuale fra $1$ e $2d$, dove $d$ è il grado del polinomio, allora la probabilità di errore non supera $1/2$. Si ripete $k volte, riducendo la probabilità di errore a $(1/2)^k$.
+
+#### Algoritmi Las Vegas
+
+Consideriamo, in ambito statistico, la selezione e la mediana.
+
+Dato un array, trovare l'elemento che occuperebbe la posizione $k$-esima se fosse ordinato. Il problema della mediana è un sottoproblema con $k = n/2$. Per piccoli valori di $k$, possiamo costruire uno heap e cancellare $k- 1$ volte il minimo.
+
+Possiamo invece usare un approccio divide-et-impera simile al Quicksort, controllando di volta in volta nella partizione più opportuna. La complessità varia quindi dal caso ottimo del pivot centrale ($O(n)$) al caso pessimo del pivot iniziale ($O(n^2)$) al caso medio (assumendo che tutte le posizioni del pivot siano equiprobabili, $O(n)$).
+
+Consideriamo invece una soluzione deterministica: avendo un algoritmo "a scatola nera", che ritorna un valore che dista al massimo $\frac{3}{10} n$ dal mediano. Possiamo utilizzarlo per ottimizzare il problema della selezione, suddividendo i valori del vettore in gruppi di 5, identificando il mediano di ciascun gruppo, poi il mediano dei mediani. Questa mediana viene usata come perno e si continua ricorsivamente come prima. Questo algoritmo è $O(n)$ deterministico.
+
+<br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div><br>
