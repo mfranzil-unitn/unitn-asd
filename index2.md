@@ -83,6 +83,14 @@
     - [Algoritmi probabilistici](#algoritmi-probabilistici)
       - [Algoritmi Montecarlo](#algoritmi-montecarlo)
       - [Algoritmi Las Vegas](#algoritmi-las-vegas)
+  - [20/05/2019](#20052019)
+    - [Algoritmi di ordinamento](#algoritmi-di-ordinamento)
+    - [Algoritmi non basati su confronti](#algoritmi-non-basati-su-confronti)
+      - [SpaghettiSort](#spaghettisort)
+      - [CountingSort](#countingsort)
+      - [PigeonholeSort](#pigeonholesort)
+      - [BucketSort](#bucketsort)
+    - [Algoritmi stabili](#algoritmi-stabili)
 
 ## 18/02/2019
 
@@ -379,8 +387,8 @@ Nel caso in cui si ha a che fare con un _DAG_, è possibile rilassare il grafo t
 
 | Input                       | Complessità                | Approccio                                           |
 | --------------------------- | -------------------------- | --------------------------------------------------- |
-| Pesi positivi, grafo denso  | $O(n\cdot n^2)$            | Applicazione ripetuta dell’algoritmo di Dijkstra   |
-| Pesi positivi, grafo sparso | $O(n·(m\log{n}))$          | Applicazione ripetuta dell’algoritmo di Johnson    |
+| Pesi positivi, grafo denso  | $O(n\cdot n^2)$            | Applicazione ripetuta dell’algoritmo di Dijkstra    |
+| Pesi positivi, grafo sparso | $O(n·(m\log{n}))$          | Applicazione ripetuta dell’algoritmo di Johnson     |
 | Pesi negativi               | $O(n\cdot n \cdot m)$      | Applicazione ripetuta di Bellman-Ford, sconsigliata |
 | Pesi negativi, grafo denso  | $O(n^3)$                   | Algoritmo di Floyd e Warshall                       |
 | Pesi negativi, grafo sparso | $O(n\cdot m\cdot \log{n})$ | Algoritmo di Johnson per sorgente multipla          |
@@ -911,5 +919,46 @@ Dato un array, trovare l'elemento che occuperebbe la posizione $k$-esima se foss
 Possiamo invece usare un approccio divide-et-impera simile al Quicksort, controllando di volta in volta nella partizione più opportuna. La complessità varia quindi dal caso ottimo del pivot centrale ($O(n)$) al caso pessimo del pivot iniziale ($O(n^2)$) al caso medio (assumendo che tutte le posizioni del pivot siano equiprobabili, $O(n)$).
 
 Consideriamo invece una soluzione deterministica: avendo un algoritmo "a scatola nera", che ritorna un valore che dista al massimo $\frac{3}{10} n$ dal mediano. Possiamo utilizzarlo per ottimizzare il problema della selezione, suddividendo i valori del vettore in gruppi di 5, identificando il mediano di ciascun gruppo, poi il mediano dei mediani. Questa mediana viene usata come perno e si continua ricorsivamente come prima. Questo algoritmo è $O(n)$ deterministico.
+
+## 20/05/2019
+
+### Algoritmi di ordinamento
+
+E' possibile dimostrare che qualunque algoritmo basato su _confronti_ ha complessità $\Theta(n \log{n})$. Tutti gli algoritmi visti finora, infatti, sono basati su confronti e rispettano questo lemma:
+
+- SelectionSort - $\Theta(n^2)$
+- InsertionSort - $\Omega(n), O(n^2)$
+- ShellSort - $\Omega(n), O(n^{3/2})$
+- MergeSort - $\Theta(n \log{n})$
+- HeapSort - $\Theta(n \log{n})$
+- QuickSort - $\Omega(n \log{n}), O(n^2)$
+
+In generale, questi algoritmi che operano su $n$ valori sviluppano un albero di decisione con altezza almeno $\log{k}$, dove $k$ è il numero delle sue foglie (ovvero almeno $n!$).
+
+### Algoritmi non basati su confronti
+
+#### SpaghettiSort
+
+Prendiamo $n$ spaghetti e tagliamo lo spaghetto $i$-esimo proporzionalmente all'elemento i-esimo. In tempo $O(n)$, afferriamo gli $n$ spaghetti e verifichiamo quale è il più lungo, lo rimuoviamo e lo mettiamo in coda al vettore.
+
+#### CountingSort
+
+Siano i numeri da ordinare compresi in un intervallo da $1$ a $k$.
+
+Costruiamo un vettore $B$ di appoggio che conta il numero di occorrenze del valore $i$-esimo per ogni $i$. Ricolloca quindi i valori così ottenuti in A.
+
+La complessità così ottenuta è $O(n + k)$. A seconda dei valori degli input, potrebbe essere peggiore di qualunque altro algoritmo.
+
+#### PigeonholeSort
+
+Se i valori da ordinare non sono numeri interi, ma record, si può adattare CountingSort utilizzando liste concatenate al posto di vettori.
+
+#### BucketSort
+
+Se consideriamo che l'input è composto da valori reali uniformemente distribuiti su un certo range (eventualmente normalizzabile sull'intervallo $[0, 1)$), dividiamo l'intervallo in $n$ intervalli di dimensione $\frac{1}{n}$ e distribuiamo i valori nei bucket. A questo punto si ordinano i bucket con InsertionSort.
+
+### Algoritmi stabili
+
+Un algoritmo di ordinamento è detto stabile se preserva l'ordine iniziale di due elementi con la stessa chiave. Qualunque algoritmo può essere reso stabile ordinando per coppia valore, indice.
 
 <br><div style="text-align: center; font-size: 20px"><a href="index.html"><- Appunti del primo semestre</a></div><br>
