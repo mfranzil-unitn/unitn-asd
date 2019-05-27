@@ -1,7 +1,7 @@
 #include "got.h"
 #include <fstream>
 #include <vector>
-
+#include <queue>
 #include <chrono>
 #include <thread>
 
@@ -19,6 +19,10 @@ vector<vector<int>> mask;
 
 vector<pair<int, int>> removed;
 
+struct posix : pair<int, int> {
+    int j;
+    int i;
+};
 //vector<vector<pair<int, int>>> castles;
 
 void divide();
@@ -58,7 +62,57 @@ int main() {
 }
 
 void divide() {
+    priority_queue<pair<int, posix>> tmps;
     for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            int item = map.at(i).at(j);
+            if (item != 0 && mask.at(i).at(j) == 0) {
+                //int size = 1;
+                //bool dir[4] = {1, 1, 1, 1};
+                mask.at(i).at(j) = item;
+                //get_size(i, j, size, dir);
+                posix tmp_el;
+                tmp_el.i = i;
+                tmp_el.j = j;
+                tmps.push(make_pair(-item, tmp_el));
+                //int tries = 0;
+                //expand(i, j, size, item, tries);
+                //if (size < item) {
+                //  printf("Warning: i=%d, j=%d does not respect\n", i, j);
+                //}
+                //printf("%d, %d: %d\n", i, j, size);
+                //print();
+            }
+        }
+    }
+
+    while (!tmps.empty()) {
+        pair<int, posix> current = tmps.top();
+        tmps.pop();
+        int item = -(current).first;
+        int i = current.second.i;
+        int j = current.second.j;
+
+        removed.clear();
+        int size = 1;
+        bool dir[4] = {1, 1, 1, 1};
+        
+        mask.at(i).at(j) = item;
+        get_size(i, j, size, dir);
+        int tries = 0;
+        expand(i, j, size, item, tries);
+        if (size < item) {
+            printf("Rado al suolo %d,%d (valore: %d, dim %d)\n", i, j, item, size);
+            for (pair<int, int>& item : removed) {
+                map.at(item.first).at(item.second) = 0;
+                mask.at(item.first).at(item.second) = 0;
+            }
+        }
+        //printf("%d, %d: %d\n", i, j, size);
+        print();
+    }
+
+    /*  for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             int item = map.at(i).at(j);
             if (item != 0 && mask.at(i).at(j) == 0) {
@@ -81,17 +135,17 @@ void divide() {
                 print();
             }
         }
-    }
+    }*/
 }
 
 void expand(int i, int j, int& size, int item, int& tries) {
-   /* if (map.at(i - 1).at(j) == item ||
+    /* if (map.at(i - 1).at(j) == item ||
         map.at(i + 1).at(j) == item ||
         map.at(i).at(j + 1) == item ||
         map.at(i).at(j - 1) == item) {
         return;
     }*/
-    
+
     map.at(i).at(j) = item;
     mask.at(i).at(j) = item;
     removed.push_back(make_pair(i, j));
