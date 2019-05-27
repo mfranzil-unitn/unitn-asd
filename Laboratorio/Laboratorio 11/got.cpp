@@ -144,12 +144,12 @@ void expand(int i, int j, int& size, int item, int& tries) {
             }; break;
         }
     }
-
+/*
     if (size < item) {
         map.at(i).at(j) = 0;
         mask.at(i).at(j) = 0;
     }
-
+*/
     //if (tries >= 200000) {
     //map.at(i).at(j) = 0;
     //mask.at(i).at(j) = -1;
