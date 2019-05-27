@@ -2,10 +2,13 @@
 #include <fstream>
 #include <vector>
 
+#include <chrono>
+#include <thread>
+
 #define UP 1
-#define DOWN 2
-#define LEFT 3
-#define RIGHT 4
+#define LEFT 2
+#define RIGHT 3
+#define DOWN 4
 
 ifstream in("input.txt");
 ofstream out("output.txt");
@@ -13,7 +16,10 @@ ofstream out("output.txt");
 int N, M;
 vector<vector<int>> map;
 vector<vector<int>> mask;
-vector<int> castles;
+
+vector<pair<int, int>> removed;
+
+//vector<vector<pair<int, int>>> castles;
 
 void divide();
 void print();
@@ -25,7 +31,7 @@ int main() {
 
     map.resize(N);
     mask.resize(N);
-    castles.resize(N * M);
+    // castles.resize(N * M);
 
     for (int i = 0; i < N; i++) {
         map.at(i).resize(M);
@@ -39,17 +45,12 @@ int main() {
             mask.at(i).at(j) = 0;
 
             if (tmp != 0) {
-                castles.at(tmp)++;
+                //castles.at(tmp).push_back(make_pair(i, j));
             }
         }
     }
-    srand(time(NULL));
+    //srand(time(NULL));
     divide();
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-        }
-    }
     /* printf("Castles:\n");
     for (int i = 0; i < M * N; i++) {
         printf("%d ", castles.at(i));
@@ -61,15 +62,20 @@ void divide() {
         for (int j = 0; j < M; j++) {
             int item = map.at(i).at(j);
             if (item != 0 && mask.at(i).at(j) == 0) {
+                removed.clear();
                 int size = 1;
                 bool dir[4] = {1, 1, 1, 1};
-                mask.at(i).at(j) = item;
-                //get_size(i, j, size, dir);
+                mask.at(i).at(j) = -item;
+                get_size(i, j, size, dir);
 
                 int tries = 0;
                 expand(i, j, size, item, tries);
                 if (size < item) {
-                    //  printf("Warning: i=%d, j=%d does not respect\n", i, j);
+                    printf("Rado al suolo %d,%d (valore: %d, dim %d)\n", i, j, item, size);
+                    for (pair<int, int>& item : removed) {
+                        map.at(item.first).at(item.second) = 0;
+                        mask.at(item.first).at(item.second) = 0;
+                    }  //  printf("Warning: i=%d, j=%d does not respect\n", i, j);
                 }
                 //printf("%d, %d: %d\n", i, j, size);
                 print();
@@ -79,17 +85,27 @@ void divide() {
 }
 
 void expand(int i, int j, int& size, int item, int& tries) {
+   /* if (map.at(i - 1).at(j) == item ||
+        map.at(i + 1).at(j) == item ||
+        map.at(i).at(j + 1) == item ||
+        map.at(i).at(j - 1) == item) {
+        return;
+    }*/
+    
+    map.at(i).at(j) = item;
+    mask.at(i).at(j) = item;
+    removed.push_back(make_pair(i, j));
+
     for (int k = 1; k <= 4; k++) {  // rendere randomico?
         if (tries >= 200000 || size >= item) {
             break;
         }
+        // for (int n = 0; n < i*kj; n++) printf(" ");
         printf("expand(DIR=%d, i=%d, j=%d, size=%d, item=%d, tries=%d)\n", k, i, j, size, item, tries);
 
         switch (k) {
             case UP: {
                 if (i > 0 && map.at(i - 1).at(j) == 0) {
-                    map.at(i - 1).at(j) = item;
-                    mask.at(i - 1).at(j) = item;
                     expand(i - 1, j, ++size, item, ++tries);
                 } /*else if (i > 0 && map.at(i - 1).at(j) == map.at(i).at(j)) {
                     map.at(i).at(j) = 0;
@@ -102,8 +118,6 @@ void expand(int i, int j, int& size, int item, int& tries) {
             }; break;
             case DOWN: {
                 if (i < N - 1 && map.at(i + 1).at(j) == 0) {
-                    map.at(i + 1).at(j) = item;
-                    mask.at(i + 1).at(j) = item;
                     expand(i + 1, j, ++size, item, ++tries);
                 } /*else if (i > 0 && map.at(i + 1).at(j) == map.at(i).at(j)) {
                     map.at(i).at(j) = 0;
@@ -116,8 +130,6 @@ void expand(int i, int j, int& size, int item, int& tries) {
             }; break;
             case LEFT: {
                 if (j > 0 && map.at(i).at(j - 1) == 0) {
-                    map.at(i).at(j - 1) = item;
-                    mask.at(i).at(j - 1) = item;
                     expand(i, j - 1, ++size, item, ++tries);
                 } /*else if (i > 0 && map.at(i).at(j - 1) == map.at(i).at(j)) {
                     map.at(i).at(j) = 0;
@@ -130,8 +142,6 @@ void expand(int i, int j, int& size, int item, int& tries) {
             }; break;
             case RIGHT: {
                 if (j < M - 1 && map.at(i).at(j + 1) == 0) {
-                    map.at(i).at(j + 1) = item;
-                    mask.at(i).at(j + 1) = item;
                     expand(i, j + 1, ++size, item, ++tries);
                 } /*else if (i > 0 && map.at(i).at(j + 1) == map.at(i).at(j)) {
                     map.at(i).at(j) = 0;
@@ -144,7 +154,7 @@ void expand(int i, int j, int& size, int item, int& tries) {
             }; break;
         }
     }
-/*
+    /*
     if (size < item) {
         map.at(i).at(j) = 0;
         mask.at(i).at(j) = 0;
@@ -157,6 +167,7 @@ void expand(int i, int j, int& size, int item, int& tries) {
 }
 
 void get_size(int i, int j, int& size, bool dir[]) {
+    removed.push_back(make_pair(i, j));
     printf("get_size(i=%d, j=%d, size=%d)\n", i, j, size);
     for (int k = 1; k <= 4; k++) {
         if (dir[k - 1] == 0) {
@@ -167,7 +178,6 @@ void get_size(int i, int j, int& size, bool dir[]) {
                 if (i > 0 && map.at(i - 1).at(j) == map.at(i).at(j) && mask.at(i - 1).at(j) == 0) {
                     bool dir[4] = {1, 0, 1, 1};
                     mask.at(i - 1).at(j) = map.at(i).at(j);
-
                     get_size(i - 1, j, ++size, dir);
                 } else {
                     continue;
