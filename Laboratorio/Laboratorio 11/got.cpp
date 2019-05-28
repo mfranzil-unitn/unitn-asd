@@ -78,8 +78,8 @@ int main() {
         in.close();
         out.close();
 
-        map.clear();
-       // mask.clear();
+        //map.clear();
+        // mask.clear();
 
         if (rasi_al_suolo <= 0) {
             break;
@@ -152,8 +152,12 @@ int divide(vector<pair<int, int>> tmps) {
             res++;
             //printf("..%d", res);
             for (const pair<int, int> item : removed) {
+                if (item.first == i && item.second == j) {
+                    map[item.first][item.second] = -1;
+                } else {
+                    map[item.first][item.second] = 0;  // non toccarmi
+                }
                 //printf(" (i=%d, j=%d),", item.first, item.second);
-                map[item.first][item.second] = -1;  // non toccarmi
                 mask[item.first][item.second] = 0;
             }
             //printf(" (valore: %d, dim %d)\n", item, size);
