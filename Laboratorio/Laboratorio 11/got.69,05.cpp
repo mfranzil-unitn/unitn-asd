@@ -25,9 +25,9 @@ set<pair<int, int>> removed;
 
 //vector<vector<pair<int, int>>> castles;
 
-int divide(queue<pair<int, int>> tmps);
+int divide(vector<pair<int, int>> tmps);
 void print();
-void get_size(int i, int j, int& size);
+void get_size(int i, int j, int& size, bool dir[]);
 void expand(int i, int j, int& size, int item, int& tries);
 
 int main() {
@@ -38,7 +38,7 @@ int main() {
     for (int p = 0; true; p++) {
         in.open("input.txt");
         out.open("output.txt", std::ofstream::out | std::ofstream::app);
-        queue<pair<int, int>> tmps;
+        vector<pair<int, int>> tmps;
 
         in >> N >> M;
 
@@ -58,11 +58,13 @@ int main() {
                 //mask[i][j] = 0;
 
                 if (tmp != 0) {
-                    tmps.push(make_pair(i, j));
+                    tmps.push_back(make_pair(i, j));
                     //castles.at(tmp).insert(make_pair(i, j));
                 }
             }
         }
+
+        shuffle(tmps.begin(), tmps.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
         int rasi_al_suolo = divide(tmps);
         if (rasi_al_suolo < min_so_far) {
@@ -98,7 +100,7 @@ int main() {
     return 0;
 }
 
-int divide(queue<pair<int, int>> tmps) {
+int divide(vector<pair<int, int>> tmps) {
     int res = 0;
     /* for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
@@ -107,7 +109,7 @@ int divide(queue<pair<int, int>> tmps) {
                 //int size = 1;
                 //bool dir[4] = {1, 1, 1, 1};
                 //mask[i][j] = item;
-                //get_size(i, j, size);
+                //get_size(i, j, size, dir);
                 //int tries = 0;
                 //expand(i, j, size, item, tries);
                 //if (size < item) {
@@ -120,8 +122,8 @@ int divide(queue<pair<int, int>> tmps) {
     }
 */
     while (!tmps.empty()) {
-        pair<int, int> current = tmps.front();
-        tmps.pop();
+        pair<int, int> current = tmps.back();
+        tmps.pop_back();
         int i = current.first;
         int j = current.second;
 
@@ -132,9 +134,10 @@ int divide(queue<pair<int, int>> tmps) {
 
         removed.clear();
         int size = 1;
+        bool dir[4] = {1, 1, 1, 1};
 
         mask[i][j] = item;
-        get_size(i, j, size);
+        get_size(i, j, size, dir);
 
         if (size > item) {
             continue;
@@ -169,7 +172,7 @@ int divide(queue<pair<int, int>> tmps) {
                 int size = 1;
                 bool dir[4] = {1, 1, 1, 1};
                 mask[i][j] = -item;
-                get_size(i, j, size);
+                get_size(i, j, size, dir);
 
                 int tries = 0;
                 expand(i, j, size, item, tries);
@@ -282,39 +285,47 @@ void expand(int i, int j, int& size, int item, int& tries) {
     //}
 }
 
-void get_size(int i, int j, int& size) {
+void get_size(int i, int j, int& size, bool dir[]) {
     removed.insert(make_pair(i, j));
     //printf("get_size(i=%d, j=%d, size=%d)\n", i, j, size);
     for (int k = 1; k <= 4; k++) {
+        if (dir[k - 1] == 0) {
+            continue;
+        }
         switch (k) {
             case UP: {
                 if (i > 0 && map[i - 1][j] == map[i][j] && mask[i - 1][j] == 0) {
+                    bool dir[4] = {1, 0, 1, 1};
                     mask[i - 1][j] = map[i][j];
-                    get_size(i - 1, j, ++size);
+                    get_size(i - 1, j, ++size, dir);
                 } else {
                     continue;
                 }
             }; break;
             case DOWN: {
                 if (i < N - 1 && map[i + 1][j] == map[i][j] && mask[i + 1][j] == 0) {
+                    bool dir[4] = {0, 1, 1, 1};
                     mask[i + 1][j] = map[i][j];
-                    get_size(i + 1, j, ++size);
+                    get_size(i + 1, j, ++size, dir);
                 } else {
                     continue;
                 }
             }; break;
             case LEFT: {
                 if (j > 0 && map[i][j - 1] == map[i][j] && mask[i][j - 1] == 0) {
+                    bool dir[4] = {1, 1, 1, 0};
                     mask[i][j - 1] = map[i][j];
-                    get_size(i, j - 1, ++size);
+                    get_size(i, j - 1, ++size, dir);
                 } else {
                     continue;
                 }
             }; break;
             case RIGHT: {
                 if (j < M - 1 && map[i][j + 1] == map[i][j] && mask[i][j + 1] == 0) {
+                    bool dir[4] = {1, 1, 0, 1};
                     mask[i][j + 1] = map[i][j];
-                    get_size(i, j + 1, ++size);
+
+                    get_size(i, j + 1, ++size, dir);
                 } else {
                     continue;
                 }
