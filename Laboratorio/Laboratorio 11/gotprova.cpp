@@ -17,12 +17,13 @@
 ifstream in;
 ofstream out;
 
-int min_so_far = INT32_MAX;
-int N, M, p;
-
+int N, M;
 vector<vector<int>> map;
 vector<vector<int>> mask;
+
 set<pair<int, int>> removed;
+
+//vector<vector<pair<int, int>>> castles;
 
 int divide(vector<pair<int, int>> tmps);
 void print();
@@ -30,11 +31,13 @@ void get_size(int i, int j, int& size, bool dir[]);
 void expand(int i, int j, int& size, int item, int& tries);
 
 int main() {
+    int min_so_far = INT32_MAX;
     out.open("output.txt");
     out.close();
 
-    for (p = 0; true; p++) {
+    for (int p = 0; true; p++) {
         in.open("input.txt");
+        out.open("output.txt", std::ofstream::out | std::ofstream::app);
         vector<pair<int, int>> tmps;
 
         in >> N >> M;
@@ -48,9 +51,7 @@ int main() {
             mask.at(i).resize(M);
             for (int j = 0; j < M; j++) {
                 int tmp;
-
                 in >> tmp;
-
                 map[i][j] = tmp;
                 //mask[i][j] = 0;
 
@@ -65,22 +66,22 @@ int main() {
                 }
             }
         }
-        in.close();
 
-        if (p > 10) {
-            shuffle(tmps.begin(), tmps.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
-        }
+        shuffle(tmps.begin(), tmps.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
+
         int rasi_al_suolo = divide(tmps);
         if (rasi_al_suolo < min_so_far) {
             printf("Rasi al suolo: %d\n", rasi_al_suolo);
             min_so_far = rasi_al_suolo;
-
-            out.open("output.txt", std::ofstream::out | std::ofstream::app);
             print();
-            out.close();
         }
+        in.close();
+        out.close();
 
-        if (rasi_al_suolo == 0) {
+        //map.clear();
+        // mask.clear();
+
+        if (rasi_al_suolo <= 0) {
             break;
         }
     } /*
@@ -150,14 +151,15 @@ int divide(vector<pair<int, int>> tmps) {
         if (size < item) {
             res++;
             //printf("..%d", res);
-            for (const pair<int, int> item : removed) {
+            for (const pair<int, int> it : removed) {
+                if (map[it.first][it.second] < 0) {
+                    map[it.first][it.second] = -1;
+                    mask[it.first][it.second] = -1;
+                } else {
+                    map[it.first][it.second] = 0;  // non toccarmi
+                    mask[it.first][it.second] = 0;
+                }
                 //printf(" (i=%d, j=%d),", item.first, item.second);
-                map[item.first][item.second] = -1;  // non toccarmi
-                mask[item.first][item.second] = 0;
-            }
-
-            if (res >= min_so_far) {
-                return res;
             }
             //printf(" (valore: %d, dim %d)\n", item, size);
         }
@@ -197,6 +199,12 @@ int divide(vector<pair<int, int>> tmps) {
 }
 
 void expand(int i, int j, int& size, int item, int& tries) {
+    /* if (map[i - 1][j] == item ||
+        map[i + 1][j] == item ||
+        map[i][j + 1] == item ||
+        map[i][j - 1] == item) {
+        return;*/
+
     if ((i > 0 && map[i - 1][j] == item && !removed.count(make_pair(i - 1, j))) ||
         (i < N - 1 && map[i + 1][j] == item && !removed.count(make_pair(i + 1, j))) ||
         (j > 0 && map[i][j - 1] == item && !removed.count(make_pair(i, j - 1))) ||
@@ -209,17 +217,14 @@ void expand(int i, int j, int& size, int item, int& tries) {
     map[i][j] = item;
     mask[i][j] = item;
     removed.insert(make_pair(i, j));
+    //printf("expand(DIR, i=%d, j=%d, size=%d, item=%d, tries=%d)\n", i, j, size, item, tries);
 
-    //  }
-
-    array<int, 4> choices{UP, LEFT, RIGHT, DOWN};
-    if (p > 0) {
-        shuffle(choices.begin(), choices.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
-    }  //   printf("expand(DIR, i=%d, j=%d, size=%d, item=%d, tries=%d)\n", i, j, size, item, tries);
+    array<int, 4> choices{UP, DOWN, LEFT, RIGHT};
+    shuffle(choices.begin(), choices.end(), default_random_engine(chrono::system_clock::now().time_since_epoch().count()));
 
     for (int o = 0; o < 4; o++) {  // rendere randomico?
         int k = choices[o];
-        if (tries >= 200 || size >= item) {
+        if (tries >= 20000000 || size >= item) {
             break;
         }
         // for (int n = 0; n < i*kj; n++) //printf(" ");
@@ -289,6 +294,7 @@ void expand(int i, int j, int& size, int item, int& tries) {
 
 void get_size(int i, int j, int& size, bool dir[]) {
     removed.insert(make_pair(i, j));
+    map[i][j] = -map[i][j];
     //printf("get_size(i=%d, j=%d, size=%d)\n", i, j, size);
     for (int k = 1; k <= 4; k++) {
         if (dir[k - 1] == 0) {
