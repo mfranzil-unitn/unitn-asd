@@ -24,7 +24,7 @@
     </style>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
             font-size: 14px;
             line-height: 1.6;
         }
@@ -56,7 +56,6 @@
 
         .hljs-number,
         .hljs-class {
-            -webkit-print-color-adjust: exact;
             color: #587573 !important;
         }
 
@@ -66,7 +65,6 @@
 
         pre:not(.hljs),
         pre.hljs code>div {
-            -webkit-print-color-adjust: exact;
             border-radius: 6px;
             background-image: url("bg.png");
             background-repeat: repeat;
@@ -77,7 +75,6 @@
 
         .pre {
             border-radius: 6px;
-            -webkit-print-color-adjust: exact;
             background-image: url("bg.png");
             background-repeat: repeat;
             margin: 2px;
@@ -103,8 +100,11 @@
 </head>
 
 <body>
-    <br>
-    <div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -></a></div><br>
+    <!-- markdownlint-disable MD033 MD041 -->
+    <p><br>
+        <div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -&gt;</a>
+        </div>
+    </p>
     <h1 id="appunti-di-algoritmi-e-strutture-dati">Appunti di Algoritmi e Strutture Dati</h1>
     <ul>
         <li><a href="#appunti-di-algoritmi-e-strutture-dati">Appunti di Algoritmi e Strutture Dati</a>
@@ -330,7 +330,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#02102018">02/10/2018</a></li>
                 <li><a href="#04102018">04/10/2018</a>
                     <ul>
                         <li><a href="#metodo-dellesperto--delle-ricorrenze-comuni">Metodo dell'esperto / delle
@@ -360,9 +359,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#09102018">09/10/2018</a></li>
-                <li><a href="#11102018">11/10/2018</a></li>
-                <li><a href="#16102018">16/10/2018</a></li>
                 <li><a href="#18102018">18/10/2018</a>
                     <ul>
                         <li><a href="#alberi">Alberi</a>
@@ -393,7 +389,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#23102018">23/10/2018</a></li>
                 <li><a href="#25102018">25/10/2018</a>
                     <ul>
                         <li><a href="#alberi-binari-di-ricerca">Alberi binari di ricerca</a>
@@ -414,9 +409,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#30102018">30/10/2018</a></li>
-                <li><a href="#01112018">01/11/2018</a></li>
-                <li><a href="#06112018">06/11/2018</a></li>
                 <li><a href="#08112018">08/11/2018</a>
                     <ul>
                         <li><a href="#grafi">Grafi</a></li>
@@ -449,8 +441,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#15112018">15/11/2018</a></li>
-                <li><a href="#20112018">20/11/2018</a></li>
                 <li><a href="#22112018">22/11/2018</a>
                     <ul>
                         <li><a href="#hashing">Hashing</a>
@@ -478,9 +468,6 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#27112018">27/11/2018</a></li>
-                <li><a href="#29112018">29/11/2018</a></li>
-                <li><a href="#4122018">4/12/2018</a></li>
                 <li><a href="#6122018">6/12/2018</a>
                     <ul>
                         <li><a href="#risoluzione-di-problemi-generali">Risoluzione di problemi generali</a></li>
@@ -493,8 +480,6 @@
                         <li><a href="#insiemi-e-dizionari-cont">Insiemi e dizionari (cont.)</a></li>
                     </ul>
                 </li>
-                <li><a href="#11122018">11/12/2018</a></li>
-                <li><a href="#13122018">13/12/2018</a></li>
                 <li><a href="#18122018">18/12/2018</a>
                     <ul>
                         <li><a href="#bloom-filter">Bloom Filter</a></li>
@@ -4664,8 +4649,6 @@ j = last
                         style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault"
                         style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span
                         class="mord">5</span><span class="mclose">)</span></span></span></span>.</p>
-    <h2 id="02102018">02/10/2018</h2>
-    <p>Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="04102018">04/10/2018</h2>
     <h3 id="metodo-dellesperto--delle-ricorrenze-comuni">Metodo dell'esperto / delle ricorrenze comuni</h3>
     <h4 id="master-theorem---versione-base">Master Theorem - versione base</h4>
@@ -6929,13 +6912,6 @@ j = last
     <p>Una <strong>coda</strong> è simile alla <strong>pila</strong> ma implementa invece la politica
         <strong>FIFO</strong> (First In, First Out).</p>
     <p>Entrambi i tipi di dato possono essere implementati tramite liste bidirezionali o vettori circolari.</p>
-    <h2 id="09102018">09/10/2018</h2>
-    <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato. Riferire alle slide
-        apposite.</p>
-    <h2 id="11102018">11/10/2018</h2>
-    <p>Lezione cancellata per pausa lauree.</p>
-    <h2 id="16102018">16/10/2018</h2>
-    <p>Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="18102018">18/10/2018</h2>
     <h3 id="alberi">Alberi</h3>
     <p>Come visto nella lezione precedente, un'albero è un grafo con <span class="katex"><span
@@ -7618,8 +7594,6 @@ Q.enqueue(t)
                         style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault"
                         style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
                         class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>.</p>
-    <h2 id="23102018">23/10/2018</h2>
-    <p>Esercitazione svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="25102018">25/10/2018</h2>
     <h3 id="alberi-binari-di-ricerca">Alberi binari di ricerca</h3>
     <p>Andiamo ora ad approfondire l'implementazione di un albero binario di ricerca tramite un dizionario. L'idea è
@@ -8219,12 +8193,6 @@ y.parent = p <span class="hljs-comment"># y diventa figlio di p</span>
         </li>
     </ul>
     <p>Vedi file in /Codici per implementazione.</p>
-    <h2 id="30102018">30/10/2018</h2>
-    <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
-    <h2 id="01112018">01/11/2018</h2>
-    <p>Lezione annullata per festività nazionale.</p>
-    <h2 id="06112018">06/11/2018</h2>
-    <p>Lezione annullata per giornate di Dipartimento dedicate alle prove parziali.</p>
     <h2 id="08112018">08/11/2018</h2>
     <h3 id="grafi">Grafi</h3>
     <p>Un grafo è un insieme di nodi collegati da archi. Gli archi e i nodi possono essere etichettati e gli archi
@@ -9449,10 +9417,6 @@ int counter = <span class="hljs-number">0</span>
                         class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span
                         class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
                         class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>.</p>
-    <h2 id="15112018">15/11/2018</h2>
-    <p>Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.</p>
-    <h2 id="20112018">20/11/2018</h2>
-    <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="22112018">22/11/2018</h2>
     <h3 id="hashing">Hashing</h3>
     <p>Vediamo ora le implementazioni di dizionari tramite le cosìddette <strong>tabelle hash</strong>, ovvero delle
@@ -10729,13 +10693,6 @@ int counter = <span class="hljs-number">0</span>
                         style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span
                         class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span> ma costo
         ammortizzato costante.</p>
-    <h2 id="27112018">27/11/2018</h2>
-    <p>Lezione di Laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
-    <h2 id="29112018">29/11/2018</h2>
-    <p>Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.</p>
-    <h2 id="4122018">4/12/2018</h2>
-    <p>Lezione di Laboratorio svolta in Aula A101, con introduzione al progetto del semestre. Nessun nuovo argomento di
-        teoria trattato.</p>
     <h2 id="6122018">6/12/2018</h2>
     <h3 id="risoluzione-di-problemi-generali">Risoluzione di problemi generali</h3>
     <p>Dato un problema, non ci sono ricette generali per risolverlo in modo efficiente ma possiamo evidenziare:</p>
@@ -11267,10 +11224,6 @@ QuickSort(A, j, end)
                             class="mord mathdefault">m</span><span class="mclose">)</span></span></span></span>.</li>
     </ul>
     <p>Vedi slide per sintesi su metodi e costo delle varie implementazioni nei linguaggi.</p>
-    <h2 id="11122018">11/12/2018</h2>
-    <p>Lezione di laboratorio svolta in Aula A101. Nessun nuovo argomento di teoria trattato.</p>
-    <h2 id="13122018">13/12/2018</h2>
-    <p>Esercitazione svolta in Aula B107. Nessun nuovo argomento di teoria trattato.</p>
     <h2 id="18122018">18/12/2018</h2>
     <h3 id="bloom-filter">Bloom Filter</h3>
     <p>I <strong>Bloom Filter</strong> sono delle strutture dati dinamiche che combinano il basso uso di memoria dei
@@ -11597,9 +11550,11 @@ QuickSort(A, j, end)
                                             class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"
                                             style="height:0.936em;"><span></span></span></span></span></span><span
                                 class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+    <p><br>
+        <div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -&gt;</a>
+        </div>
+    </p>
 
-    <div style="text-align: center; font-size: 20px"><a href="index2.html">Appunti del secondo semestre -></a></div><br>
-    <br>
 </body>
 
 </html>
