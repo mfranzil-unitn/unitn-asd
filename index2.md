@@ -313,7 +313,7 @@ Una soluzione ammissibile è anche ottima se e solo se per ogni arco $(u, v)$ se
 Possiamo ora rappresentare un algoritmo che fornisce una soluzione ottima, facendo uso di una struttura dati generica. Marchiamo 4 righe che andremo di volta in volta a modificare a seconda della struttura dati scelta.
 
 ```Java
-(int[],int[]) shortestPath(Graph G, Node s)
+Pair<int[], int[]> shortestPath(Graph G, Node s)
 ```
 
 ```Coffee
@@ -581,7 +581,7 @@ Prim funziona in maniera totalmente opposta. Parte da un vertice arbitrario $r$$
 Utilizziamo una coda con priorità che registra i vertici non ancora nell'albero, con priorità pari al peso minimo di un arco che connette tale vertice a qualunque vertice nell'albero (oppure $+\infty$ se non esiste). Ogni nodo mantiene un puntatore al padre tramite il vettore dei padri.
 
 ```Java
-prim(Graph G, Node r, int[ ] p)
+void prim(Graph G, Node r, int[ ] p)
 ```
 
 ```Coffee
@@ -625,7 +625,7 @@ Gli approcci di esplorazione dell'albero possono essere sia iterativi sia ricors
 Elenchiamo tutti i sottoinsiemi dell'insieme ${1,...,n}$.
 
 ```Java
-subsets(int[] S, int n, int i)
+void subsets(int[] S, int n, int i)
 ```
 
 ```Coffee
@@ -640,7 +640,7 @@ else
 Elenchiamo tutti i sottoinsiemi di $k$ elementi di un insieme ${1, ... , n}$.
 
 ```Java
-subsets(int[] S, int n, int k, int i, int count)
+void subsets(int[] S, int n, int k, int i, int count)
 ```
 
 ```Coffee
@@ -660,7 +660,7 @@ Specializzando questo secondo algoritmo, otteniamo una versione molto efficiente
 Stampiamo infine tutte le permutazioni di un dato insieme $A$.
 
 ```Java
-permutations(Set A, int n, Item[] S, int i)
+void permutations(Set A, int n, Item[] S, int i)
 ```
 
 ```Coffee

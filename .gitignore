@@ -1,14 +1,16 @@
 # File personali
 .vscode/
-Materiale/
-Libri PDF/
-Esercizi/
+Altro materiale/
+Appunti/
 Esami/
-Slide/
-Vecchio materiale/
+Esercitazioni/
+Esercizi/
+Libri PDF/
+Lucidi/
+Materiale/
+
 input.txt
 output.txt
-2017.01.25 Domande.txt
 *.pdf
 
 # Prerequisites
