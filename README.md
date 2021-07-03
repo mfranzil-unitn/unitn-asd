@@ -23,8 +23,8 @@ You can find the following material in the repo:
 * index.md, index2.md - Notes taken during class, written in Github-Flavored Markdown with LateX support. `index` refers to the first part of the course, `index2` to the second.
 * index.html, index2.html - HTML version of said notes, available [here](https://mfranzil.github.io/unitn-asd/).
 * markdown.css - File used to style the appunti.md file.
-* Codici/ - Code for algorithms seen in class.
-* Laboratorio/ - Code written during labs, including projects (found in the Laboratorio 5/ and Laboratorio 11/ folders) made in the first and second semester.
+* lab/ - Code written during labs, including projects (found in the Laboratorio 5/ and Laboratorio 11/ folders) made in the first and second semester.
+* lectures/ - Code for algorithms seen in class.
 
 ## Contribute
 

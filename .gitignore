@@ -1,17 +1,9 @@
 # File personali
-.vscode/
-Altro materiale/
-Appunti/
-Esami/
-Esercitazioni/
-Esercizi/
-Libri PDF/
-Lucidi/
-Materiale/
+.vscode
+.idea
 
 input.txt
 output.txt
-*.pdf
 
 # Prerequisites
 *.d
